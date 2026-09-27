@@ -1,0 +1,942 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "bom-ref": "pkg:cargo/bitflags@2.13.1?identity=8acf5e77b071b0fb",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/bitflags/bitflags"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "bitflags",
+      "type": "library",
+      "version": "2.13.1"
+    },
+    {
+      "bom-ref": "pkg:cargo/block-buffer@0.10.4?identity=a22a7264eee5b64b",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/RustCrypto/utils"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "block-buffer",
+      "type": "library",
+      "version": "0.10.4"
+    },
+    {
+      "bom-ref": "pkg:cargo/cfg-if@1.0.4?identity=a0dc1d80545b8db2",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/rust-lang/cfg-if"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "cfg-if",
+      "type": "library",
+      "version": "1.0.4"
+    },
+    {
+      "bom-ref": "pkg:cargo/cpufeatures@0.2.17?identity=f8e9086b0099db2a",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/RustCrypto/utils"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "cpufeatures",
+      "type": "library",
+      "version": "0.2.17"
+    },
+    {
+      "bom-ref": "pkg:cargo/crypto-common@0.1.7?identity=0bdcc96609675027",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/RustCrypto/traits"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "crypto-common",
+      "type": "library",
+      "version": "0.1.7"
+    },
+    {
+      "bom-ref": "pkg:cargo/digest@0.10.7?identity=82570fad7eba9e64",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/RustCrypto/traits"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "digest",
+      "type": "library",
+      "version": "0.10.7"
+    },
+    {
+      "bom-ref": "pkg:cargo/equivalent@1.0.2?identity=78f4107daa1a3eed",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/indexmap-rs/equivalent"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Apache-2.0 OR MIT"
+        }
+      ],
+      "name": "equivalent",
+      "type": "library",
+      "version": "1.0.2"
+    },
+    {
+      "bom-ref": "pkg:cargo/generic-array@0.14.7?identity=5d950316e8fd0e1f",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/fizyk20/generic-array.git"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "name": "generic-array",
+      "type": "library",
+      "version": "0.14.7"
+    },
+    {
+      "bom-ref": "pkg:cargo/godot_api@0.9.3?identity=ba47fa0894301053",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/godothub/godot-rust"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "name": "godot_api",
+      "type": "library",
+      "version": "0.9.3"
+    },
+    {
+      "bom-ref": "pkg:cargo/godot_build@0.9.3?identity=bcd8f4fc624f7e41",
+      "name": "godot_build",
+      "type": "library",
+      "version": "0.9.3"
+    },
+    {
+      "bom-ref": "pkg:cargo/godot_host@0.9.3?identity=1ff3f9783b9c6ecf",
+      "name": "godot_host",
+      "type": "library",
+      "version": "0.9.3"
+    },
+    {
+      "bom-ref": "pkg:cargo/hashbrown@0.17.1?identity=87822203fc34ee42",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/rust-lang/hashbrown"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "hashbrown",
+      "type": "library",
+      "version": "0.17.1"
+    },
+    {
+      "bom-ref": "pkg:cargo/indexmap@2.14.0?identity=bb18d851067f2954",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/indexmap-rs/indexmap"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Apache-2.0 OR MIT"
+        }
+      ],
+      "name": "indexmap",
+      "type": "library",
+      "version": "2.14.0"
+    },
+    {
+      "bom-ref": "pkg:cargo/itoa@1.0.18?identity=e6903fc9df77a26d",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dtolnay/itoa"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "itoa",
+      "type": "library",
+      "version": "1.0.18"
+    },
+    {
+      "bom-ref": "pkg:cargo/libc@0.2.189?identity=f632594dd3e69c25",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/rust-lang/libc"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "libc",
+      "type": "library",
+      "version": "0.2.189"
+    },
+    {
+      "bom-ref": "pkg:cargo/libloading@0.8.9?identity=f2b47224b1c56455",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/nagisa/rust_libloading/"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "ISC"
+        }
+      ],
+      "name": "libloading",
+      "type": "library",
+      "version": "0.8.9"
+    },
+    {
+      "bom-ref": "pkg:cargo/memchr@2.8.3?identity=751c354f14cb4999",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/BurntSushi/memchr"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Unlicense OR MIT"
+        }
+      ],
+      "name": "memchr",
+      "type": "library",
+      "version": "2.8.3"
+    },
+    {
+      "bom-ref": "pkg:cargo/object@0.37.3?identity=a0f6b7f507d81b1f",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/gimli-rs/object"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Apache-2.0 OR MIT"
+        }
+      ],
+      "name": "object",
+      "type": "library",
+      "version": "0.37.3"
+    },
+    {
+      "bom-ref": "pkg:cargo/proc-macro2@1.0.107?identity=74c9a199457e6437",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dtolnay/proc-macro2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "proc-macro2",
+      "type": "library",
+      "version": "1.0.107"
+    },
+    {
+      "bom-ref": "pkg:cargo/quote@1.0.47?identity=d3f301af9b4026a8",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dtolnay/quote"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "quote",
+      "type": "library",
+      "version": "1.0.47"
+    },
+    {
+      "bom-ref": "pkg:cargo/serde@1.0.229?identity=0a2cb244bd139225",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/serde-rs/serde"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "serde",
+      "type": "library",
+      "version": "1.0.229"
+    },
+    {
+      "bom-ref": "pkg:cargo/serde_core@1.0.229?identity=0a85aa9cb510e34c",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/serde-rs/serde"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "serde_core",
+      "type": "library",
+      "version": "1.0.229"
+    },
+    {
+      "bom-ref": "pkg:cargo/serde_derive@1.0.229?identity=3099159b5daa6804",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/serde-rs/serde"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "serde_derive",
+      "type": "library",
+      "version": "1.0.229"
+    },
+    {
+      "bom-ref": "pkg:cargo/serde_json@1.0.151?identity=d48a09560098e541",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/serde-rs/json"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "serde_json",
+      "type": "library",
+      "version": "1.0.151"
+    },
+    {
+      "bom-ref": "pkg:cargo/serde_spanned@1.1.1?identity=5ce250f579a4a564",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/toml-rs/toml"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "serde_spanned",
+      "type": "library",
+      "version": "1.1.1"
+    },
+    {
+      "bom-ref": "pkg:cargo/sha2@0.10.9?identity=0c4476d53ffd035e",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/RustCrypto/hashes"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "sha2",
+      "type": "library",
+      "version": "0.10.9"
+    },
+    {
+      "bom-ref": "pkg:cargo/syn@2.0.119?identity=4036c8f3926cf8c3",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dtolnay/syn"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "syn",
+      "type": "library",
+      "version": "2.0.119"
+    },
+    {
+      "bom-ref": "pkg:cargo/syn@3.0.3?identity=bdbf084e9223a912",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dtolnay/syn"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "syn",
+      "type": "library",
+      "version": "3.0.3"
+    },
+    {
+      "bom-ref": "pkg:cargo/toml@1.1.3+spec-1.1.0?identity=dc97fb12de83c237",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/toml-rs/toml"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "toml",
+      "type": "library",
+      "version": "1.1.3+spec-1.1.0"
+    },
+    {
+      "bom-ref": "pkg:cargo/toml_datetime@1.1.1+spec-1.1.0?identity=15700f944843fe38",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/toml-rs/toml"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "toml_datetime",
+      "type": "library",
+      "version": "1.1.1+spec-1.1.0"
+    },
+    {
+      "bom-ref": "pkg:cargo/toml_edit@0.25.13+spec-1.1.0?identity=d99d344a1b1091d6",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/toml-rs/toml"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "toml_edit",
+      "type": "library",
+      "version": "0.25.13+spec-1.1.0"
+    },
+    {
+      "bom-ref": "pkg:cargo/toml_parser@1.1.2+spec-1.1.0?identity=a695d6e48d8560c7",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/toml-rs/toml"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "toml_parser",
+      "type": "library",
+      "version": "1.1.2+spec-1.1.0"
+    },
+    {
+      "bom-ref": "pkg:cargo/toml_writer@1.1.2+spec-1.1.0?identity=dfd61d6fe60d971b",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/toml-rs/toml"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "toml_writer",
+      "type": "library",
+      "version": "1.1.2+spec-1.1.0"
+    },
+    {
+      "bom-ref": "pkg:cargo/typenum@1.20.1?identity=17867cc2081e44e1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/paholg/typenum"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "typenum",
+      "type": "library",
+      "version": "1.20.1"
+    },
+    {
+      "bom-ref": "pkg:cargo/unicode-ident@1.0.24?identity=e6a3324bcab89c9f",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dtolnay/unicode-ident"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "(MIT OR Apache-2.0) AND Unicode-3.0"
+        }
+      ],
+      "name": "unicode-ident",
+      "type": "library",
+      "version": "1.0.24"
+    },
+    {
+      "bom-ref": "pkg:cargo/version_check@0.9.5?identity=0987fcb149859049",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/SergioBenitez/version_check"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT/Apache-2.0"
+        }
+      ],
+      "name": "version_check",
+      "type": "library",
+      "version": "0.9.5"
+    },
+    {
+      "bom-ref": "pkg:cargo/wasmparser@0.236.1?identity=b8173f7d24a64016",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/bytecodealliance/wasm-tools/tree/main/crates/wasmparser"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT"
+        }
+      ],
+      "name": "wasmparser",
+      "type": "library",
+      "version": "0.236.1"
+    },
+    {
+      "bom-ref": "pkg:cargo/windows-link@0.2.1?identity=bde7f86a92762743",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/microsoft/windows-rs"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT OR Apache-2.0"
+        }
+      ],
+      "name": "windows-link",
+      "type": "library",
+      "version": "0.2.1"
+    },
+    {
+      "bom-ref": "pkg:cargo/winnow@1.0.4?identity=d9724acd272747a4",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/winnow-rs/winnow"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "name": "winnow",
+      "type": "library",
+      "version": "1.0.4"
+    },
+    {
+      "bom-ref": "pkg:cargo/zmij@1.0.23?identity=c44fcf5e433592a6",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dtolnay/zmij"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "name": "zmij",
+      "type": "library",
+      "version": "1.0.23"
+    }
+  ],
+  "dependencies": [
+    {
+      "dependsOn": [
+        "pkg:cargo/godot_build@0.9.3?identity=bcd8f4fc624f7e41",
+        "pkg:cargo/godot_host@0.9.3?identity=1ff3f9783b9c6ecf"
+      ],
+      "ref": "pkg:github/godothub/godot-rust@0.9.3"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/serde@1.0.229?identity=0a2cb244bd139225",
+        "pkg:cargo/serde_json@1.0.151?identity=d48a09560098e541",
+        "pkg:cargo/sha2@0.10.9?identity=0c4476d53ffd035e"
+      ],
+      "ref": "pkg:cargo/godot_api@0.9.3?identity=ba47fa0894301053"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/godot_api@0.9.3?identity=ba47fa0894301053",
+        "pkg:cargo/object@0.37.3?identity=a0f6b7f507d81b1f",
+        "pkg:cargo/serde@1.0.229?identity=0a2cb244bd139225",
+        "pkg:cargo/serde_json@1.0.151?identity=d48a09560098e541",
+        "pkg:cargo/sha2@0.10.9?identity=0c4476d53ffd035e",
+        "pkg:cargo/syn@2.0.119?identity=4036c8f3926cf8c3",
+        "pkg:cargo/toml@1.1.3+spec-1.1.0?identity=dc97fb12de83c237",
+        "pkg:cargo/toml_edit@0.25.13+spec-1.1.0?identity=d99d344a1b1091d6"
+      ],
+      "ref": "pkg:cargo/godot_build@0.9.3?identity=bcd8f4fc624f7e41"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/godot_api@0.9.3?identity=ba47fa0894301053",
+        "pkg:cargo/libloading@0.8.9?identity=f2b47224b1c56455",
+        "pkg:cargo/proc-macro2@1.0.107?identity=74c9a199457e6437",
+        "pkg:cargo/serde@1.0.229?identity=0a2cb244bd139225",
+        "pkg:cargo/serde_json@1.0.151?identity=d48a09560098e541",
+        "pkg:cargo/sha2@0.10.9?identity=0c4476d53ffd035e",
+        "pkg:cargo/syn@2.0.119?identity=4036c8f3926cf8c3",
+        "pkg:cargo/unicode-ident@1.0.24?identity=e6a3324bcab89c9f"
+      ],
+      "ref": "pkg:cargo/godot_host@0.9.3?identity=1ff3f9783b9c6ecf"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/bitflags@2.13.1?identity=8acf5e77b071b0fb"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/generic-array@0.14.7?identity=5d950316e8fd0e1f"
+      ],
+      "ref": "pkg:cargo/block-buffer@0.10.4?identity=a22a7264eee5b64b"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/cfg-if@1.0.4?identity=a0dc1d80545b8db2"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/libc@0.2.189?identity=f632594dd3e69c25"
+      ],
+      "ref": "pkg:cargo/cpufeatures@0.2.17?identity=f8e9086b0099db2a"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/generic-array@0.14.7?identity=5d950316e8fd0e1f",
+        "pkg:cargo/typenum@1.20.1?identity=17867cc2081e44e1"
+      ],
+      "ref": "pkg:cargo/crypto-common@0.1.7?identity=0bdcc96609675027"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/block-buffer@0.10.4?identity=a22a7264eee5b64b",
+        "pkg:cargo/crypto-common@0.1.7?identity=0bdcc96609675027"
+      ],
+      "ref": "pkg:cargo/digest@0.10.7?identity=82570fad7eba9e64"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/equivalent@1.0.2?identity=78f4107daa1a3eed"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/typenum@1.20.1?identity=17867cc2081e44e1",
+        "pkg:cargo/version_check@0.9.5?identity=0987fcb149859049"
+      ],
+      "ref": "pkg:cargo/generic-array@0.14.7?identity=5d950316e8fd0e1f"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/hashbrown@0.17.1?identity=87822203fc34ee42"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/equivalent@1.0.2?identity=78f4107daa1a3eed",
+        "pkg:cargo/hashbrown@0.17.1?identity=87822203fc34ee42"
+      ],
+      "ref": "pkg:cargo/indexmap@2.14.0?identity=bb18d851067f2954"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/itoa@1.0.18?identity=e6903fc9df77a26d"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/libc@0.2.189?identity=f632594dd3e69c25"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/cfg-if@1.0.4?identity=a0dc1d80545b8db2",
+        "pkg:cargo/windows-link@0.2.1?identity=bde7f86a92762743"
+      ],
+      "ref": "pkg:cargo/libloading@0.8.9?identity=f2b47224b1c56455"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/memchr@2.8.3?identity=751c354f14cb4999"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/memchr@2.8.3?identity=751c354f14cb4999",
+        "pkg:cargo/wasmparser@0.236.1?identity=b8173f7d24a64016"
+      ],
+      "ref": "pkg:cargo/object@0.37.3?identity=a0f6b7f507d81b1f"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/unicode-ident@1.0.24?identity=e6a3324bcab89c9f"
+      ],
+      "ref": "pkg:cargo/proc-macro2@1.0.107?identity=74c9a199457e6437"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/proc-macro2@1.0.107?identity=74c9a199457e6437"
+      ],
+      "ref": "pkg:cargo/quote@1.0.47?identity=d3f301af9b4026a8"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/serde_core@1.0.229?identity=0a85aa9cb510e34c",
+        "pkg:cargo/serde_derive@1.0.229?identity=3099159b5daa6804"
+      ],
+      "ref": "pkg:cargo/serde@1.0.229?identity=0a2cb244bd139225"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/serde_derive@1.0.229?identity=3099159b5daa6804"
+      ],
+      "ref": "pkg:cargo/serde_core@1.0.229?identity=0a85aa9cb510e34c"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/proc-macro2@1.0.107?identity=74c9a199457e6437",
+        "pkg:cargo/quote@1.0.47?identity=d3f301af9b4026a8",
+        "pkg:cargo/syn@3.0.3?identity=bdbf084e9223a912"
+      ],
+      "ref": "pkg:cargo/serde_derive@1.0.229?identity=3099159b5daa6804"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/itoa@1.0.18?identity=e6903fc9df77a26d",
+        "pkg:cargo/memchr@2.8.3?identity=751c354f14cb4999",
+        "pkg:cargo/serde@1.0.229?identity=0a2cb244bd139225",
+        "pkg:cargo/serde_core@1.0.229?identity=0a85aa9cb510e34c",
+        "pkg:cargo/zmij@1.0.23?identity=c44fcf5e433592a6"
+      ],
+      "ref": "pkg:cargo/serde_json@1.0.151?identity=d48a09560098e541"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/serde_core@1.0.229?identity=0a85aa9cb510e34c"
+      ],
+      "ref": "pkg:cargo/serde_spanned@1.1.1?identity=5ce250f579a4a564"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/cfg-if@1.0.4?identity=a0dc1d80545b8db2",
+        "pkg:cargo/cpufeatures@0.2.17?identity=f8e9086b0099db2a",
+        "pkg:cargo/digest@0.10.7?identity=82570fad7eba9e64"
+      ],
+      "ref": "pkg:cargo/sha2@0.10.9?identity=0c4476d53ffd035e"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/proc-macro2@1.0.107?identity=74c9a199457e6437",
+        "pkg:cargo/quote@1.0.47?identity=d3f301af9b4026a8",
+        "pkg:cargo/unicode-ident@1.0.24?identity=e6a3324bcab89c9f"
+      ],
+      "ref": "pkg:cargo/syn@2.0.119?identity=4036c8f3926cf8c3"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/proc-macro2@1.0.107?identity=74c9a199457e6437",
+        "pkg:cargo/quote@1.0.47?identity=d3f301af9b4026a8",
+        "pkg:cargo/unicode-ident@1.0.24?identity=e6a3324bcab89c9f"
+      ],
+      "ref": "pkg:cargo/syn@3.0.3?identity=bdbf084e9223a912"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/indexmap@2.14.0?identity=bb18d851067f2954",
+        "pkg:cargo/serde_core@1.0.229?identity=0a85aa9cb510e34c",
+        "pkg:cargo/serde_spanned@1.1.1?identity=5ce250f579a4a564",
+        "pkg:cargo/toml_datetime@1.1.1+spec-1.1.0?identity=15700f944843fe38",
+        "pkg:cargo/toml_parser@1.1.2+spec-1.1.0?identity=a695d6e48d8560c7",
+        "pkg:cargo/toml_writer@1.1.2+spec-1.1.0?identity=dfd61d6fe60d971b",
+        "pkg:cargo/winnow@1.0.4?identity=d9724acd272747a4"
+      ],
+      "ref": "pkg:cargo/toml@1.1.3+spec-1.1.0?identity=dc97fb12de83c237"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/serde_core@1.0.229?identity=0a85aa9cb510e34c"
+      ],
+      "ref": "pkg:cargo/toml_datetime@1.1.1+spec-1.1.0?identity=15700f944843fe38"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/indexmap@2.14.0?identity=bb18d851067f2954",
+        "pkg:cargo/toml_datetime@1.1.1+spec-1.1.0?identity=15700f944843fe38",
+        "pkg:cargo/toml_parser@1.1.2+spec-1.1.0?identity=a695d6e48d8560c7",
+        "pkg:cargo/toml_writer@1.1.2+spec-1.1.0?identity=dfd61d6fe60d971b",
+        "pkg:cargo/winnow@1.0.4?identity=d9724acd272747a4"
+      ],
+      "ref": "pkg:cargo/toml_edit@0.25.13+spec-1.1.0?identity=d99d344a1b1091d6"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/winnow@1.0.4?identity=d9724acd272747a4"
+      ],
+      "ref": "pkg:cargo/toml_parser@1.1.2+spec-1.1.0?identity=a695d6e48d8560c7"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/toml_writer@1.1.2+spec-1.1.0?identity=dfd61d6fe60d971b"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/typenum@1.20.1?identity=17867cc2081e44e1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/unicode-ident@1.0.24?identity=e6a3324bcab89c9f"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/version_check@0.9.5?identity=0987fcb149859049"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/bitflags@2.13.1?identity=8acf5e77b071b0fb"
+      ],
+      "ref": "pkg:cargo/wasmparser@0.236.1?identity=b8173f7d24a64016"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/windows-link@0.2.1?identity=bde7f86a92762743"
+    },
+    {
+      "dependsOn": [
+        "pkg:cargo/memchr@2.8.3?identity=751c354f14cb4999"
+      ],
+      "ref": "pkg:cargo/winnow@1.0.4?identity=d9724acd272747a4"
+    },
+    {
+      "dependsOn": [],
+      "ref": "pkg:cargo/zmij@1.0.23?identity=c44fcf5e433592a6"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "bom-ref": "pkg:github/godothub/godot-rust@0.9.3",
+      "name": "godot-rust",
+      "type": "application",
+      "version": "0.9.3"
+    }
+  },
+  "serialNumber": "urn:uuid:6accb8c2-e088-5f90-a743-1d316085985a",
+  "specVersion": "1.5",
+  "version": 1
+}

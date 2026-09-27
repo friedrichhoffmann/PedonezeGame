@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://21s3tbgj1rsj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e0cq4"]
+
+[node name="scene" type="Node2D" unique_id=1284911247]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=2070613346]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1525163550]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1603290239]
+shape = SubResource("CapsuleShape2D_e0cq4")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1087741675]

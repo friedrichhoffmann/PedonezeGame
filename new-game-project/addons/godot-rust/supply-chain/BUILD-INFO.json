@@ -1,0 +1,29 @@
+{
+  "godot_host_api": "4.4",
+  "platforms": [
+    "android-arm32",
+    "android-arm64",
+    "android-x86_32",
+    "android-x86_64",
+    "apple",
+    "linux-arm32",
+    "linux-arm64",
+    "linux-x86_32",
+    "linux-x86_64",
+    "macos-universal",
+    "web-godot-4.4",
+    "web-godot-4.5",
+    "web-godot-4.6",
+    "web-godot-4.7",
+    "windows-arm64",
+    "windows-x86_32",
+    "windows-x86_64"
+  ],
+  "rust_toolchain": "1.85.0",
+  "schema": 1,
+  "source": {
+    "commit": "ff064a96da4519a290ff1a35789dd10b57ee3cbe",
+    "repository": "https://github.com/godothub/godot-rust"
+  },
+  "version": "0.9.3"
+}
