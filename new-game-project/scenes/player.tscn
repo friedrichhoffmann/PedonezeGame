@@ -152,14 +152,19 @@ height = 14.0
 [node name="Player" type="Node2D" unique_id=715561549]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1531687426]
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+platform_floor_layers = 4294967040
+platform_wall_layers = 2
 script = ExtResource("1_g2els")
+speed = 80.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=995154691]
 texture_filter = 1
 texture_repeat = 1
 sprite_frames = SubResource("SpriteFrames_e0cq4")
-animation = &"up_walk"
-frame_progress = 0.15226202
+animation = &"h_walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=756378004]
 shape = SubResource("CapsuleShape2D_quj8a")
