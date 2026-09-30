@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bdwmcgekwk1te" path="res://assets/char/char.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://gihy7g1xpffl" path="res://scripts/character_move.cs" id="1_g2els"]
+[ext_resource type="Script" uid="uid://c8147kff8nhlj" path="res://scripts/following_camera.cs" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -152,11 +153,9 @@ height = 14.0
 [node name="Player" type="Node2D" unique_id=715561549]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1531687426]
-collision_layer = 0
-collision_mask = 0
 motion_mode = 1
 platform_floor_layers = 4294967040
-platform_wall_layers = 2
+platform_wall_layers = 65280
 script = ExtResource("1_g2els")
 speed = 80.0
 
@@ -168,3 +167,10 @@ animation = &"h_walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=756378004]
 shape = SubResource("CapsuleShape2D_quj8a")
+
+[node name="camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1421690382]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("3_qhqgy")
