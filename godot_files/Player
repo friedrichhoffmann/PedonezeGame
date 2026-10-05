@@ -1,0 +1,38 @@
+using System;
+using System.Threading;
+using System.ComponentModel;
+using System.Security.Cryptography;
+using CharacterFile;
+using AllyFile;
+using EnemyFile;
+using AnimalFile;
+
+namespace Game_Development
+{
+    public class Player : Combatant
+    {
+        public int CharacterLevel;
+
+        public int LevelPropertie
+        {
+            get => CharacterLevel;
+            set => CharacterLevel = Math.Clamp(value, 1, 11);
+        }
+
+        public override void CharacterDie(Combatant target)
+        {
+            
+        }
+
+        public override void ChooseWeapon()
+        {
+            
+        }
+
+        public Player(int levelXp, string name, int health, DamageType damage, DamageResistance resistance, int resistanceBonus, int damageBonus, int armor,int iniciativeBonus, int attackBonus, int xp, bool state)
+            : base(name, health, damage, resistance, resistanceBonus, damageBonus, armor, iniciativeBonus, attackBonus, xp, state)
+        {
+            this.CharacterLevel = levelXp;
+        } 
+    }
+}
