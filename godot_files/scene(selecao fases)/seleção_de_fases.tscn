@@ -1,0 +1,275 @@
+[gd_scene format=3 uid="uid://b3iyhgtfxwbh3"]
+
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="2_61ca4"]
+[ext_resource type="Texture2D" uid="uid://b3f70nwcogkuc" path="res://scene(selecao fases)/imagem_fase_roma.png" id="2_tnefv"]
+[ext_resource type="Texture2D" uid="uid://c1yjl83lcg0vm" path="res://scene(menu)/botao.png" id="3_hqfi8"]
+[ext_resource type="FontFile" uid="uid://dcrfr3tb5o3v3" path="res://scene(menu)/PressStart2P-Regular.ttf" id="3_yqn6o"]
+[ext_resource type="Texture2D" uid="uid://bd8ktufy7o5v5" path="res://scene(menu)/botao(pressionadado).png" id="4_k5esp"]
+[ext_resource type="Texture2D" uid="uid://chfq3j3lqpe1v" path="res://scene(menu)/botao(clique).png" id="5_4bvcp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7obk3"]
+
+[node name="seleção de fases" type="Control" unique_id=330450656]
+layout_mode = 3
+anchor_left = 0.041
+anchor_top = 0.18300001
+anchor_right = 0.91800004
+anchor_bottom = 0.80500007
+offset_left = 19.767998
+offset_top = -24.584007
+offset_right = 0.46398926
+offset_bottom = 94.359985
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=926346491]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 26.0
+offset_right = 901.0
+offset_bottom = 460.0
+color = Color(0.043039158, 0.04303915, 0.04303915, 1)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=1926609033]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 30.0
+offset_right = 547.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_yqn6o")
+theme_override_font_sizes/font_size = 35
+text = "Pedoneze Game"
+
+[node name="Panel" type="Panel" parent="ColorRect/Label" unique_id=1769855515]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.8930001
+anchor_bottom = 1.8930001
+offset_left = -93.0
+offset_top = -24.255005
+offset_right = 750.0
+offset_bottom = -22.255005
+theme_override_styles/panel = SubResource("StyleBoxFlat_7obk3")
+
+[node name="Label" type="Label" parent="ColorRect/Label/Panel" unique_id=612345143]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 11.0
+offset_right = 424.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_yqn6o")
+text = "Selecione um capítulo"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=623780674]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 161.0
+offset_right = 829.0
+offset_bottom = 442.0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer" unique_id=299248941]
+custom_minimum_size = Vector2(0, 875)
+custom_maximum_size = Vector2(-1, 875)
+layout_mode = 2
+layout_direction = 2
+theme_override_constants/h_separation = 36
+theme_override_constants/v_separation = 100
+columns = 3
+
+[node name="capitulo1" type="TextureRect" parent="ScrollContainer/GridContainer" unique_id=1201990603]
+custom_minimum_size = Vector2(200, 200)
+custom_maximum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_tnefv")
+
+[node name="TextureButton" type="TextureButton" parent="ScrollContainer/GridContainer/capitulo1" unique_id=1715840798]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 168.0
+offset_right = 196.0
+offset_bottom = 309.0
+texture_normal = ExtResource("3_hqfi8")
+texture_pressed = ExtResource("4_k5esp")
+texture_hover = ExtResource("5_4bvcp")
+stretch_mode = 0
+
+[node name="_entrar_1" type="Label" parent="ScrollContainer/GridContainer/capitulo1/TextureButton" unique_id=1159095386]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 62.0
+offset_right = 153.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_yqn6o")
+theme_override_font_sizes/font_size = 17
+text = "Entrar"
+
+[node name="capitulo2" type="TextureRect" parent="ScrollContainer/GridContainer" unique_id=1207939932]
+custom_minimum_size = Vector2(200, 200)
+custom_maximum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_61ca4")
+
+[node name="TextureButton2" type="TextureButton" parent="ScrollContainer/GridContainer/capitulo2" unique_id=928056658]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 168.0
+offset_right = 196.0
+offset_bottom = 309.0
+texture_normal = ExtResource("3_hqfi8")
+texture_pressed = ExtResource("4_k5esp")
+texture_hover = ExtResource("5_4bvcp")
+stretch_mode = 0
+
+[node name="_entrar_1" type="Label" parent="ScrollContainer/GridContainer/capitulo2/TextureButton2" unique_id=1950554338]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 62.0
+offset_right = 152.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_yqn6o")
+theme_override_font_sizes/font_size = 17
+text = "Entrar"
+
+[node name="capitulo3" type="TextureRect" parent="ScrollContainer/GridContainer" unique_id=138406603]
+custom_minimum_size = Vector2(200, 200)
+custom_maximum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_61ca4")
+
+[node name="TextureButton3" type="TextureButton" parent="ScrollContainer/GridContainer/capitulo3" unique_id=1928384413]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 168.0
+offset_right = 196.0
+offset_bottom = 309.0
+texture_normal = ExtResource("3_hqfi8")
+texture_pressed = ExtResource("4_k5esp")
+texture_hover = ExtResource("5_4bvcp")
+stretch_mode = 0
+
+[node name="_entrar_1" type="Label" parent="ScrollContainer/GridContainer/capitulo3/TextureButton3" unique_id=1006707332]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 62.0
+offset_right = 153.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_yqn6o")
+theme_override_font_sizes/font_size = 17
+text = "Entrar"
+
+[node name="capitulo4" type="TextureRect" parent="ScrollContainer/GridContainer" unique_id=9275763]
+custom_minimum_size = Vector2(200, 200)
+custom_maximum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_61ca4")
+
+[node name="TextureButton4" type="TextureButton" parent="ScrollContainer/GridContainer/capitulo4" unique_id=1388147544]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 168.0
+offset_right = 196.0
+offset_bottom = 309.0
+texture_normal = ExtResource("3_hqfi8")
+texture_pressed = ExtResource("4_k5esp")
+texture_hover = ExtResource("5_4bvcp")
+stretch_mode = 0
+
+[node name="_entrar_1" type="Label" parent="ScrollContainer/GridContainer/capitulo4/TextureButton4" unique_id=824338771]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 62.0
+offset_right = 153.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_yqn6o")
+theme_override_font_sizes/font_size = 17
+text = "Entrar"
+
+[node name="capitulo5" type="TextureRect" parent="ScrollContainer/GridContainer" unique_id=889533403]
+custom_minimum_size = Vector2(200, 200)
+custom_maximum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_61ca4")
+
+[node name="TextureButton5" type="TextureButton" parent="ScrollContainer/GridContainer/capitulo5" unique_id=437705046]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 168.0
+offset_right = 196.0
+offset_bottom = 309.0
+texture_normal = ExtResource("3_hqfi8")
+texture_pressed = ExtResource("4_k5esp")
+texture_hover = ExtResource("5_4bvcp")
+stretch_mode = 0
+
+[node name="_entrar_1" type="Label" parent="ScrollContainer/GridContainer/capitulo5/TextureButton5" unique_id=1439289367]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 62.0
+offset_right = 153.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_yqn6o")
+theme_override_font_sizes/font_size = 17
+text = "Entrar"
+
+[node name="capitulo6" type="TextureRect" parent="ScrollContainer/GridContainer" unique_id=2116089475]
+custom_minimum_size = Vector2(200, 200)
+custom_maximum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_61ca4")
+
+[node name="TextureButton6" type="TextureButton" parent="ScrollContainer/GridContainer/capitulo6" unique_id=107489083]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 168.0
+offset_right = 196.0
+offset_bottom = 309.0
+texture_normal = ExtResource("3_hqfi8")
+texture_pressed = ExtResource("4_k5esp")
+texture_hover = ExtResource("5_4bvcp")
+stretch_mode = 0
+
+[node name="_entrar_1" type="Label" parent="ScrollContainer/GridContainer/capitulo6/TextureButton6" unique_id=1201960863]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 62.0
+offset_right = 153.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_yqn6o")
+theme_override_font_sizes/font_size = 17
+text = "Entrar"
+
+[node name="capitulo7" type="TextureRect" parent="ScrollContainer/GridContainer" unique_id=1661823795]
+custom_minimum_size = Vector2(200, 200)
+custom_maximum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_61ca4")
+
+[node name="TextureButton7" type="TextureButton" parent="ScrollContainer/GridContainer/capitulo7" unique_id=1314914459]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 168.0
+offset_right = 196.0
+offset_bottom = 309.0
+texture_normal = ExtResource("3_hqfi8")
+texture_pressed = ExtResource("4_k5esp")
+texture_hover = ExtResource("5_4bvcp")
+stretch_mode = 0
+
+[node name="_entrar_1" type="Label" parent="ScrollContainer/GridContainer/capitulo7/TextureButton7" unique_id=1746657049]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 62.0
+offset_right = 153.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_yqn6o")
+theme_override_font_sizes/font_size = 17
+text = "Entrar"
