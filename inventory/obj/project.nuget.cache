@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "jNKvxoSciVs=",
+  "success": true,
+  "projectFilePath": "/home/Heitor/PedonezeGame/inventory_sketch/item_object/item_object.csproj",
+  "expectedPackageFiles": [
+    "/home/Heitor/.nuget/packages/tomlyn/2.10.1/tomlyn.2.10.1.nupkg.sha512",
+    "/home/Heitor/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.10/microsoft.aspnetcore.app.ref.10.0.10.nupkg.sha512"
+  ],
+  "logs": []
+}
