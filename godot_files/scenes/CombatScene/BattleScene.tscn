@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dxqcdrkb4ih2w"]
+
+[ext_resource type="Script" uid="uid://cu4gtiqy6prr8" path="res://BattleController.cs" id="1_b278l"]
+[ext_resource type="Texture2D" uid="uid://6il682re8nx5" path="res://bg-floresta (1).png" id="1_ttbo7"]
+[ext_resource type="PackedScene" uid="uid://daoihdphkh6yo" path="res://bandit_1.tscn" id="3_musxc"]
+[ext_resource type="PackedScene" uid="uid://4tcv7s0fwyka" path="res://bandit_2.tscn" id="4_teshm"]
+
+[node name="Node2D" type="Node2D" unique_id=916827364]
+script = ExtResource("1_b278l")
+
+[node name="BattleBackground" type="Sprite2D" parent="." unique_id=1218158407]
+texture_filter = 1
+position = Vector2(256, 128)
+texture = ExtResource("1_ttbo7")
+
+[node name="Bandit1" parent="." unique_id=2111832493 instance=ExtResource("3_musxc")]
+position = Vector2(151, 87)
+
+[node name="Bandit2" parent="." unique_id=1541631606 instance=ExtResource("4_teshm")]
+position = Vector2(376, 88)
