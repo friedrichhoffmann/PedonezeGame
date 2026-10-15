@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6t02twgyxp5g"
-path="res://.godot/imported/Outros_blocos.png-ad5366772818b96a47a212a6431c1121.ctex"
+uid="uid://b77yx844pp18q"
+path="res://.godot/imported/igreja2.png-7d9c383cd2e62dbeb231a4050cda85d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Outros_blocos.png"
-dest_files=["res://.godot/imported/Outros_blocos.png-ad5366772818b96a47a212a6431c1121.ctex"]
+source_file="res://construções(mapa1)/igreja2.png"
+dest_files=["res://.godot/imported/igreja2.png-7d9c383cd2e62dbeb231a4050cda85d7.ctex"]
 
 [params]
 
