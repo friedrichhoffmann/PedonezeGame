@@ -10,33 +10,8 @@ using Godot;
 
 namespace CharacterFile
 {
-    public abstract class Character2D
-    {
-        public string Name;
-        public int Health;
-        public int DropXp;
-        
-        public string NamePropertie
-        {
-            get => Name;
-            set => Name = value;
-        }
 
-        public int HealthProperty
-        {
-            get => Health;
-            set => Health = Math.Clamp(value, 0, 100);
-        }
-
-        public int XpProperty
-        {
-            get => DropXp;
-            set => DropXp = Math.Clamp(value, 1, 100);
-        }
-        public abstract void CharacterDie(Combatant target);
-    }
-
-    public abstract partial class Combatant : Character2D
+    public abstract partial class Combatant
     {
         
         public Random rng = new();
@@ -61,10 +36,14 @@ namespace CharacterFile
         }
     }
 
-    public abstract partial class Combatant : Character2D // Variáveis
+    public abstract partial class Combatant // Variáveis
     {
-        public event Action? EnemyAttacked;
+        public event Action CharacterDied;
+        public event Action EnemyAttacked;
         
+        public string Name;
+        public int Health;
+        public int DropXp;
         public int CharacterLevel;
         public List<StateType> State { get; set; }
         public List<EffectType> Effect { get; set; }
@@ -89,36 +68,8 @@ namespace CharacterFile
         public static List<Combatant> All = new();
     }
 
-    public abstract partial class Combatant : Character2D // Métodos
+    public abstract partial class Combatant // Métodos
     {
-        public abstract void ChooseWeapon();
-
-        public void Stats()
-        {
-            GD.Print($"\n{Name}: {Health} HP, {DamageType} DT, {ResistanceDamageType} RD, {ResistanceBonus} RB, {DamageBonus} DB, {Armor} AC, {IniciativeBonus} IB, {DropXp} XP");
-        }
-        
-        public int RollDice(int numberOne, int numberTwo)
-        {
-            int first = rng.Next(numberOne, numberTwo);
-            int second = rng.Next(numberOne, numberTwo);
-            if (Effect.Contains(EffectType.Disadvantage))
-            {
-                return Math.Min(first, second);
-            }
-            return Math.Max(first, second);
-        }
-
-        public int RollMultipleDice(int timesRolled, int numberOne, int numberTwo)
-        {
-            int result = 0;
-            for (int i = 0; i < timesRolled; i++)
-            {
-                result +=  RollDice(numberOne, numberTwo);
-            }
-            return result;
-        }
-        
         public void HeroTurn() // Turno aliado
         {
             if (this is MainCharacter a)
@@ -206,6 +157,24 @@ namespace CharacterFile
             ChooseWeapon();
             
             GD.Print($"Vez do {Name}");
+
+            if (Health <= 0)
+            {
+                GD.Print("Está morto!");
+                return;
+            }
+            
+            if (State.Contains(StateType.Paralysed))
+            {
+                GD.Print("Não pode tomar ação. Está paralisado.");
+                return;
+            }
+
+            if (Effect.Contains(EffectType.Baned))
+            {
+                GD.Print("Não pode tomar ação. Está sob efeito.");
+                return;
+            }
             
             for (int a = 0; a < Weapons.Count; a++)
             {
@@ -238,127 +207,56 @@ namespace CharacterFile
                 else
                 {
                     int i = rng.Next(0, Hero.Count);
-                    if (Hero[i].Health > 0)
+                    if (Hero[i].Effect.Contains(EffectType.FireShield))
                     {
-                        if (Hero[i].Effect.Contains(EffectType.FireShield))
-                        {
-                            GD.Print($"{Hero[i].Name} possui Escudo de Fogo.");
-                            Health -= RollMultipleDice(2, 1, 9);
-                            return;
-                        }
-                        GD.Print($"\n{Name} escolheu {Hero[i].Name}!");
-                        int rollAttack = RollDice(1, 21) + AttackBonus;
-                        GD.Print($"{Name} tirou {rollAttack} de teste de ataque.");
-                        if (rollAttack >= Hero[i].Armor)
-                        {
-                            EnemyAttack(a, i);
-                        }
-                            
-                        else
-                        {
-                            GD.Print($"\n{Name} errou o golpe contra {Hero[i].Name}!\n");
-                        } 
+                        GD.Print($"{Hero[i].Name} possui Escudo de Fogo.");
+                        Health -= RollMultipleDice(2, 1, 9);
+                        return;
                     }
-                }
-            }
-        }
+                    int rollAttack = RollDice(1, 21) + AttackBonus;
+                    GD.Print($"\n{Name} escolheu {Hero[i].Name}!");
+                    GD.Print($"{Name} tirou {rollAttack} de teste de ataque.");
+                    
+                    if (rollAttack >= Hero[i].Armor)
+                    {
+                        CharacterActionType = Weapons[a];
+                        EnemyAttacked?.Invoke();
+                        int damage = CharacterGiveDamage();
+                        damage = CharacterCalculateResistance(damage, Hero[i]);
+                        Hero[i].Health -= damage + DamageBonus;
 
-        public void EnemyAttack(int a, int i)
-        {
-            CharacterActionType = Weapons[a];
-            EnemyAttacked?.Invoke();
-            int damage = CharacterGiveDamage(0, Hero[i]);
-            damage = CharacterCalculateResistance(damage, Hero[i], this);
-            Hero[i].Health -= damage + DamageBonus;
-
-            Hero[i].Stats();
-        }
-
-        public void RemoveCHaracter()
-        {
-            if (Health == 0) 
-            {
-                if (Hero.Contains(this))
-                {
-                    Hero.Remove(this);
-                }
-                else if (Enemy.Contains(this))
-                {
-                    Enemy.Remove(this);
-                }
-            }
-        }
-
-        public void DealState()
-        {
-            for (int i = 0; i < State.Count - 1; i++)
-            {
-                switch (State[i])
-                {
-                    case StateType.Paralysed:
-                    case StateType.Poisoned: 
-                    case StateType.Incapacitated:
-                        if (StateTurns[i] > 0)
-                        {
-                            StateTurns[i]--;
-                            if (StateTurns[i] == 0)
-                            {
-                                State.RemoveAt(i);
-                                StateTurns.RemoveAt(i);
-                            } 
-                        }
-                        break;
-                } 
-            }
-        }
-        public void DealEffect()
-        {
-            for (int i = 0; i < Effect.Count - 1; i++)
-            {
-                switch (Effect[i])
-                {
-                    case EffectType.Baned:
-                    case EffectType.AllResistance:
-                        if (EffectTurns[i] > 0)
-                        {
-                            EffectTurns[i]--;
-                            if (EffectTurns[i] == 0)
-                            {
-                                Effect.RemoveAt(i);
-                                EffectTurns.RemoveAt(i);
-                            }
-                        } 
-                        break;
-                    case EffectType.Barkskin:
-                        if (EffectTurns[i] > 0)
-                        {
-                            EffectTurns[i]--;
-                            if (EffectTurns[i] == 0)
-                            {
-                                Effect.RemoveAt(i);
-                                EffectTurns.RemoveAt(i);
-                                Armor = ArmorCopy;
-                            }
-                        }
-
-                        break;
-                    case EffectType.FaithShield:
-                        if (this is Player)
-                        {
-                            if (HealthCopy < Health)
-                            {
-                                Effect.RemoveAt(i);
-                                EffectTurns.RemoveAt(i);
-                            }
-                        }
-                        break;
+                        Hero[i].Stats();
+                    }
+                            
+                    else
+                    {
+                        GD.Print($"\n{Name} errou o golpe contra {Hero[i].Name}!\n");
+                    }
                 }
             }
         }
     }
 
-    public abstract partial class Combatant : Character2D // Propriedades
+    public abstract partial class Combatant // Propriedades
     {
+        public string NamePropertie
+        {
+            get => Name;
+            set => Name = value;
+        }
+
+        public int HealthProperty
+        {
+            get => Health;
+            set => Health = Math.Clamp(value, 0, 100);
+        }
+
+        public int XpProperty
+        {
+            get => DropXp;
+            set => DropXp = Math.Clamp(value, 1, 100);
+        }
+        
         public int LevelProperty
         {
             get => CharacterLevel;
@@ -393,18 +291,6 @@ namespace CharacterFile
         {
             get => ResistanceBonus;
             set => ResistanceBonus = Math.Clamp(value, 0, 20);
-        }
-    }
-    
-    public abstract class Npc : Character2D
-    {
-        public abstract void CharacterQuote();
-        public abstract void CharacterRoutine();
-
-        protected Npc(int health, int dropXp)
-        {
-            Health = health;
-            DropXp = dropXp;
         }
     }
 

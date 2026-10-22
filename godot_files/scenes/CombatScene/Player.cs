@@ -24,11 +24,6 @@ namespace PlayerFile
             
         }
 
-        public override void CharacterDie(Combatant target)
-        {
-            
-        }
-
         public override void ChooseWeapon()
         {
             

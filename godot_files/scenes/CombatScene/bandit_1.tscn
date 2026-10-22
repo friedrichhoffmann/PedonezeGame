@@ -1,137 +1,148 @@
 [gd_scene format=3 uid="uid://daoihdphkh6yo"]
 
 [ext_resource type="Script" uid="uid://sn8ncvsl4ttf" path="res://BanditScript.cs" id="1_e5mvu"]
-[ext_resource type="Texture2D" uid="uid://b3elcv2d3vf31" path="res://bandido1.png" id="1_uys87"]
-[ext_resource type="Texture2D" uid="uid://b31n1uk6bat88" path="res://bandido_arco-ezgif.com-gif-to-sprite-converter.png" id="3_svngp"]
+[ext_resource type="Texture2D" uid="uid://c6aoe67008on0" path="res://bandit_crossbow_frame.png" id="2_svngp"]
+[ext_resource type="Texture2D" uid="uid://cht3iyoeef7f1" path="res://bandit_scimitar.png" id="3_enu8i"]
+[ext_resource type="Texture2D" uid="uid://dkhgusgn3hkac" path="res://bandit_crossbow.png" id="3_svngp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_85aeg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_enu8i"]
 atlas = ExtResource("3_svngp")
-region = Rect2(0, 0, 64, 64)
+region = Rect2(0, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5brx7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_61njv"]
 atlas = ExtResource("3_svngp")
-region = Rect2(64, 0, 64, 64)
+region = Rect2(120, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7me0o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sryx"]
 atlas = ExtResource("3_svngp")
-region = Rect2(128, 0, 64, 64)
+region = Rect2(240, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ih14a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_so6w1"]
 atlas = ExtResource("3_svngp")
-region = Rect2(192, 0, 64, 64)
+region = Rect2(360, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kvr7p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtwqj"]
 atlas = ExtResource("3_svngp")
-region = Rect2(256, 0, 64, 64)
+region = Rect2(480, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pb45w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dlsa"]
 atlas = ExtResource("3_svngp")
-region = Rect2(0, 64, 64, 64)
+region = Rect2(600, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1annk"]
-atlas = ExtResource("3_svngp")
-region = Rect2(64, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tusn5"]
+atlas = ExtResource("3_enu8i")
+region = Rect2(0, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lv1fw"]
-atlas = ExtResource("3_svngp")
-region = Rect2(128, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i1mj"]
+atlas = ExtResource("3_enu8i")
+region = Rect2(120, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0l03f"]
-atlas = ExtResource("3_svngp")
-region = Rect2(192, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hubqk"]
+atlas = ExtResource("3_enu8i")
+region = Rect2(240, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qru7n"]
-atlas = ExtResource("3_svngp")
-region = Rect2(256, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_uylal"]
+atlas = ExtResource("3_enu8i")
+region = Rect2(360, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xj0lo"]
-atlas = ExtResource("3_svngp")
-region = Rect2(0, 128, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_owdgw"]
+atlas = ExtResource("3_enu8i")
+region = Rect2(480, 0, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yawst"]
-atlas = ExtResource("3_svngp")
-region = Rect2(64, 128, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_sia85"]
+atlas = ExtResource("3_enu8i")
+region = Rect2(0, 120, 120, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6why0"]
-atlas = ExtResource("3_svngp")
-region = Rect2(128, 128, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo7j8"]
+atlas = ExtResource("3_enu8i")
+region = Rect2(120, 120, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubi8p"]
+atlas = ExtResource("3_enu8i")
+region = Rect2(240, 120, 120, 120)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_enu8i"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_85aeg")
+"texture": SubResource("AtlasTexture_enu8i")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5brx7")
+"texture": SubResource("AtlasTexture_61njv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7me0o")
+"texture": SubResource("AtlasTexture_2sryx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ih14a")
+"texture": SubResource("AtlasTexture_so6w1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kvr7p")
+"texture": SubResource("AtlasTexture_dtwqj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pb45w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1annk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lv1fw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0l03f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qru7n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xj0lo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yawst")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6why0")
+"texture": SubResource("AtlasTexture_6dlsa")
 }],
 "loop": 1,
 "name": &"bandit_crossbow",
-"speed": 12.0
+"speed": 8.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tusn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i1mj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hubqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uylal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owdgw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sia85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fo7j8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubi8p")
+}],
 "loop": 1,
 "name": &"bandit_scimitar",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [node name="Bandit" type="Node2D" unique_id=2111832493]
 script = ExtResource("1_e5mvu")
 TypeOfBandit = 1
 
-[node name="BanditSprite" type="Sprite2D" parent="." unique_id=340136307]
-texture_filter = 1
-scale = Vector2(2, 2)
-texture = ExtResource("1_uys87")
-
 [node name="EnemyButton" type="Button" parent="." unique_id=604942927]
-offset_left = -58.0
-offset_top = -67.0
-offset_right = 63.0
-offset_bottom = 64.0
+offset_left = -48.0
+offset_top = -106.0
+offset_right = 115.0
+offset_bottom = 124.0
 
 [node name="EnemyTextLabel" type="Label" parent="." unique_id=541851849]
-offset_left = -55.0
-offset_top = 64.0
-offset_right = 58.0
-offset_bottom = 87.0
+offset_left = -45.0
+offset_top = 127.0
+offset_right = 113.0
+offset_bottom = 150.0
 
 [node name="EnemyTextBox" type="Sprite2D" parent="." unique_id=333657175]
 
 [node name="EnemyAttack" type="AnimatedSprite2D" parent="." unique_id=2123997171]
+texture_filter = 1
+position = Vector2(-1, 3)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_enu8i")
-animation = &"bandit_crossbow"
+animation = &"bandit_scimitar"
+
+[node name="BanditSprite" type="Sprite2D" parent="." unique_id=340136307]
+texture_filter = 1
+position = Vector2(-3, 2)
+scale = Vector2(2, 2)
+texture = ExtResource("2_svngp")

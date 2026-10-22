@@ -22,11 +22,6 @@ namespace EnemyFile
             }
         }
         
-        public override void CharacterDie(Combatant target)
-        {
-               
-        }
-        
         public Bandit(string name, int health, DamageType damage, DamageResistance resistance, int resistanceBonus, int damageBonus, int armor,int initiativeBonus, int attackBonus, int xp, bool state)
             : base(name, health, damage, resistance, resistanceBonus, damageBonus, armor, initiativeBonus, attackBonus, xp, state) {}
     }
@@ -34,11 +29,6 @@ namespace EnemyFile
     public class Plebeian : Combatant
     {
         public static Plebeian plebeian = new("Plebeu", 4, DamageType.None, DamageResistance.None, 0, 0, 10, 1, 2, 10, false);
-        
-        public override void CharacterDie(Combatant target)
-        {
-            
-        }
 
         public override void ChooseWeapon()
         {
@@ -52,11 +42,6 @@ namespace EnemyFile
     public class TribalWarrior : Combatant
     {
         public static TribalWarrior tribalWarrior = new("Guerreiro Tribal", 11, DamageType.None, DamageResistance.None, 0, 0, 12, 0, 3, 25, false);
-        
-        public override void CharacterDie(Combatant target)
-        {
-            
-        }
 
         public override void ChooseWeapon()
         {
@@ -67,17 +52,14 @@ namespace EnemyFile
         public TribalWarrior(string name, int health, DamageType damage, DamageResistance resistance, int resistanceBonus, int damageBonus, int armor,int initiativeBonus, int attackBonus, int xp, bool state)
             : base(name, health, damage, resistance, resistanceBonus, damageBonus, armor, initiativeBonus, attackBonus, xp, state) {}
     }
-
+    
+    
+    
     public class BanditCaptain : Combatant
     {
         public static BanditCaptain banditCaptain = new("Capitão dos Bandidos", 65, DamageType.None, DamageResistance.None, 0, 2, 15, 3, 3, 450, false);
         
         int weapon;
-        
-        public override void CharacterDie(Combatant target)
-        {
-            
-        }
         
         public override void ChooseWeapon()
         {

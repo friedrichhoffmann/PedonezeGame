@@ -26,11 +26,6 @@ namespace AllyFile
             }
 
         }
-        
-        public override void CharacterDie(Combatant target)
-        {
-            
-        }
 
         public override void ChooseWeapon()
         {
@@ -60,11 +55,6 @@ namespace AllyFile
             {
                 DamageBonus += 4;
             }
-        }
-        
-        public override void CharacterDie(Combatant target)
-        {
-
         }
 
         public override void ChooseWeapon()
@@ -96,11 +86,6 @@ namespace AllyFile
             }
             
             Health =  Level * 4;
-        }
-        
-        public override void CharacterDie(Combatant target)
-        {
-            
         }
 
         public override void ChooseWeapon()

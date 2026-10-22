@@ -1,6 +1,6 @@
 namespace EnumFile
 {
-      public enum ActionType
+    public enum ActionType
     {
         // Magias que ajudam o conjurador
         MageArmor,
@@ -111,13 +111,11 @@ namespace EnumFile
         SecondWind,
         ActionSurge,
     }
-
     public enum ActionResult
     {
         InvalidTarget,
         NoSpellSlot,
     }
-    
     public enum StateType
     {
         Incapacitated, // feito
@@ -125,7 +123,6 @@ namespace EnumFile
         Paralysed, // feito
         Feared
     }
-
     public enum EffectType
     {
         Baned, // feito
@@ -145,7 +142,6 @@ namespace EnumFile
         SlashingDamage,
         BludgeoningDamage
     }
-        
     public enum DamageResistance
     {
         None,
