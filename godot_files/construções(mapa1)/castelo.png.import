@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtjwxg4wlw30p"
-path="res://.godot/imported/Sprite-0001.png-7647bf9f8b536d839277d4b64aee9852.ctex"
+uid="uid://krdiqnek4ogb"
+path="res://.godot/imported/castelo.png-a4dec367b2eb5fd01eda3d17a7281df5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite-0001.png"
-dest_files=["res://.godot/imported/Sprite-0001.png-7647bf9f8b536d839277d4b64aee9852.ctex"]
+source_file="res://construções(mapa1)/castelo.png"
+dest_files=["res://.godot/imported/castelo.png-a4dec367b2eb5fd01eda3d17a7281df5.ctex"]
 
 [params]
 
