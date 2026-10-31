@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxdn55p127jcp"
-path="res://.godot/imported/igreja 3.png-a81c75b6153624df0823aac9ef16b7b4.ctex"
+uid="uid://bbu138xlq2nrn"
+path="res://.godot/imported/castelo32.png-bea40572c844c6a17eb91e6a19deaf3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://construções(mapa1)/igreja 3.png"
-dest_files=["res://.godot/imported/igreja 3.png-a81c75b6153624df0823aac9ef16b7b4.ctex"]
+source_file="res://construções(mapa1)/castelo32.png"
+dest_files=["res://.godot/imported/castelo32.png-bea40572c844c6a17eb91e6a19deaf3d.ctex"]
 
 [params]
 

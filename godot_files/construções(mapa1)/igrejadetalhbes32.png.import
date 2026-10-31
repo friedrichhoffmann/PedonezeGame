@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6t02twgyxp5g"
-path="res://.godot/imported/Outros_blocos.png-96c9d1f65f50c5365dc6e94c5b6a1296.ctex"
+uid="uid://ddliij5spckcw"
+path="res://.godot/imported/igrejadetalhbes32.png-618a1f7d087acd7f83fd7c20d04da4d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://construções(mapa1)/Outros_blocos.png"
-dest_files=["res://.godot/imported/Outros_blocos.png-96c9d1f65f50c5365dc6e94c5b6a1296.ctex"]
+source_file="res://construções(mapa1)/igrejadetalhbes32.png"
+dest_files=["res://.godot/imported/igrejadetalhbes32.png-618a1f7d087acd7f83fd7c20d04da4d6.ctex"]
 
 [params]
 
