@@ -10,10 +10,8 @@ config_version=5
 
 [application]
 
-config/name="PedonezeGame"
-run/main_scene="uid://21s3tbgj1rsj"
-config/features=PackedStringArray("4.7", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+run/main_scene="uid://sjsl24pjwfrw"
+config/features=PackedStringArray("4.7", "C#")
 
 [display]
 
@@ -22,7 +20,7 @@ window/stretch/aspect="expand"
 
 [dotnet]
 
-project/assembly_name="New Game Project"
+project/assembly_name="UnnamedProject"
 
 [physics]
 
