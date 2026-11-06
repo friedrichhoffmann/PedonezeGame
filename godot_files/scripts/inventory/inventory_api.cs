@@ -2,7 +2,6 @@ using Godot;
 using Tomlyn;
 using System.IO;
 using SimpleItems;
-using System.Linq;
 using InventoryFile;
 using System.Collections.Generic;
 
@@ -11,17 +10,9 @@ namespace InventoryAPIFile {
 		private Inventory inventory;
 		public static string InventoryFilePath = ProjectSettings.GlobalizePath("res://scripts/inventory/inventory.toml");
 
-        public void OpenInventory() {
-            inventory = Inventory.LoadTOML(InventoryFilePath);
-        }
-
-		public void CloseInventory() {
-			inventory.UpdateTOML(InventoryFilePath);
-		}
-
-        public List<Item> GetItemsAsList() {
-            return inventory.StoredItems;
-        }
+        public void OpenInventory() => inventory = Inventory.LoadTOML(InventoryFilePath);
+        public void CloseInventory() => inventory.UpdateTOML(InventoryFilePath);
+        public List<Item> GetItemsAsList() => inventory.StoredItems;
 
 
 		public void AddItem(Item toAddItem) {

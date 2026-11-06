@@ -16,11 +16,6 @@ namespace PlayerFile
             xp: 10
         );
 
-        public override void LevelStats()
-        {
-            // Apply level-based stat changes here, when the character levels up.
-        }
-
         public Player(
             int levelXp,
             string name,

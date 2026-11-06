@@ -27,5 +27,29 @@ namespace Dice {
             int greatestRollOfThePair = Math.Max(firstDieOfThePair, secondDieOfThePair);
             return greatestRollOfThePair;
         }
+
+        public static int RollString(string stringDice) {
+            ArgumentNullException.ThrowIfNull(stringDice);
+
+            if (string.IsNullOrWhiteSpace(stringDice))
+            {
+                throw new ArgumentException(
+                        "Dice notation cannot be empty.",
+                        nameof(stringDice));
+            }
+
+            string[] parts = stringDice.Split('d');
+
+            if (parts.Length != 2 ||
+                    !int.TryParse(parts[0], out int dieAmount) ||
+                    !int.TryParse(parts[1], out int dieFaces))
+            {
+                throw new FormatException(
+                        $"Invalid dice notation '{stringDice}'. Expected format: '{{dieAmount}}d{{dieFaces}}'.");
+            }
+
+            return Roll(dieAmount, dieFaces);
+        }
+
     }
 }

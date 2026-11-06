@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using CharacterFile;
 using PlayerFile;
 using AllyFile;
 using EnemyFile;

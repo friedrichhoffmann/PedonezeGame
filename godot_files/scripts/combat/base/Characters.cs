@@ -5,20 +5,21 @@ using System.Collections.Generic;
 
 using PhyAttack;
 using MagicSystem;
-using ResistanceFile;
 
 namespace CharacterFile
 {
     public abstract class Character2D
     {
+        protected int healthMax;
         private int health;
         private int xp;
 
+        public readonly int HealthMax;
         public string Name { get; set; }
         
         public int Health {
             get => health;
-            set => health = Math.Clamp(value, 0, 100);
+            set => health = Math.Clamp(value, 0, healthMax);
         }
 
         public int Xp {
@@ -54,7 +55,6 @@ namespace CharacterFile
         public int Id { get; set; }
         public int PastState { get; set; }
 
-        public int characterLevel;
         public List<int> StateTurns { get; set; }
 
         private int armour;
@@ -124,21 +124,20 @@ namespace CharacterFile
         }
 
         public void AttackTarget(Attack attack, Combatant target) {
-            int targetIndex = All.IndexOf(target);
             attack = attack.ApplyResistance(target);
-            All[targetIndex].Health -= attack.Damage;
+            attack = attack.ApplyBoost(this);
+            target.Health -= attack.Damage;
         }
 
-
         public void AttackTarget(Attack attack) {
-            if (attack.Range == AttackRange.Broad) {
+            if (attack.Range == ActRange.Broad) {
                 foreach (Combatant target in All) {
-                    int targetIndex = All.IndexOf(target);
                     attack = attack.ApplyResistance(target);
-                    All[targetIndex].Health -= attack.Damage;
+                    attack = attack.ApplyBoost(this);
+                    target.Health -= attack.Damage;
                 }
             } else {
-                throw new ArgumentException("You mut provide a target for an attack of range focused", nameof(AttackRange));
+                throw new ArgumentException("You mut provide a target for an attack of range focused", nameof(ActRange));
             }
         }
 

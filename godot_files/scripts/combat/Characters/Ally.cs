@@ -17,12 +17,6 @@ namespace AllyFile
             xp: 0
         );
 
-        public override void LevelStats()
-        {
-            // Level-based stat increases go here
-            // Called when the character actually levels up, not every turn
-        }
-
         public Cleric(
             int levelXp,
             string name,
@@ -64,20 +58,6 @@ namespace AllyFile
             xp: 0
         );
 
-        public override void LevelStats()
-        {
-            // Archer damage scaling
-            if (Level >= 5)
-            {
-                DamageBonus = Math.Max(DamageBonus, 3);
-            }
-
-            if (Level >= 9)
-            {
-                DamageBonus = Math.Max(DamageBonus, 4);
-            }
-        }
-
         public Archer(
             int levelXp,
             string name,
@@ -118,23 +98,6 @@ namespace AllyFile
             attackBonus: 10,
             xp: 0
         );
-
-        public override void LevelStats()
-        {
-            // Wizard scaling: health increases with level
-            Health = Level * 4;
-
-            // Damage scaling at higher levels
-            if (Level >= 5)
-            {
-                DamageBonus = Math.Max(DamageBonus, 3);
-            }
-
-            if (Level >= 9)
-            {
-                DamageBonus = Math.Max(DamageBonus, 4);
-            }
-        }
 
         public Wizard(
             int levelXp,

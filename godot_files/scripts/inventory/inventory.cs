@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using MainCharacterFile;
+using MagicSystem;
 using SimpleItems;
 using System.IO;
 using Tomlyn;
@@ -7,6 +9,8 @@ using Tomlyn;
 namespace InventoryFile {
 	class Inventory {
 		public List<Item> StoredItems { get; set; }
+        public List<MainCharacter> TeamStatus { get; set; }
+        public Dictionary<long, List<Spell>> PlayerSpellSet { get; set; }
 
         internal static readonly TomlSerializerOptions TomlOptions = new() {
 			PolymorphismOptions = new TomlPolymorphismOptions {
@@ -17,6 +21,9 @@ namespace InventoryFile {
                         new(typeof(Item), "StdItem"),
                         new(typeof(Shield), "Shield"),
                         new(typeof(Armour), "Armour"),
+                        new(typeof(Spell), "Spell"),
+                        new(typeof(Effect), "Effect"),
+                        new(typeof(MainCharacter), "MainCharacter"),
                     ]
                 }
 			}

@@ -1,54 +1,47 @@
-using ResistanceFile;
 using CharacterFile;
 using System.Linq;
-using SimpleItems;
 using System;
+using MagicSystem;
 
 namespace PhyAttack {
     public enum DamageKind {
         Piercing,
         Slashing,
-        Bludgeoning
+        Bludgeoning,
+        Magic
     }
 
-    public enum AttackRange {
-        Broad,
-        Focused,
-    }
-
-    public class Attack {
-        public int Damage { get; set; }
-        public DamageKind Kind { get; set; }
-        public AttackRange Range { get; set; }
+    public class Attack(
+        int dam,
+        DamageKind kind,
+        ActRange ran
+    ) {
+        public int Damage { get; set; } = dam;
+        public DamageKind Kind { get; set; } = kind;
+        public ActRange Range { get; set; } = ran;
 
         public bool VerifyArmourClass(Combatant target) {
             return Damage >= target.Armour;
         }
 
-        public Attack ApplyResistance(Combatant target) {
-            var resistances = target.Resistances;
-            bool resistsToThis = resistances.Any(res => res.Kind == ToResistanceKind());
-
-            // i know i could use Where and Select but i fount it to be more verbose this way
-            if (resistsToThis) { 
-                foreach (Resistance res in resistances) {
-                    if (res.Kind == ToResistanceKind()) {
-                        Damage -= res.Degree;
-                    }
-                }
-            }
-            
-            return this;
+        public void ApplyResistance(Combatant target) {
+            foreach (Effect eff in target.ActiveEffects)
+                if (eff is Resistance res)
+                    if (res.ResKind.Contains(this.Kind))
+                         this.Damage -= (int)res.Power();
         }
 
-        private ResistanceKind ToResistanceKind() {
-            return Kind switch {
-                DamageKind.Bludgeoning => ResistanceKind.Bludgeoning,
-                DamageKind.Piercing    => ResistanceKind.Piercing,
-                DamageKind.Slashing    => ResistanceKind.Slashing,
-                _ => throw new ArgumentOutOfRangeException(nameof(Kind), Kind, null),
-            };
-        } 
+        public void ApplyThorns(Combatant target, Combatant attacker) {
+            if (target.ActiveEffects.Any(eff => eff.Kind == EffectKind.Thorns)) {
+                target.CastSpell(PreMadeSpells.GlobalMagic.THORNS_BASE_DAMAGE, attacker);
+            }
+        }
+
+        public void ApplyBoost(Combatant attacker) {
+            foreach (Effect eff in attacker.ActiveEffects)
+                if (eff.Kind == EffectKind.DamageBoost)
+                    this.Damage += (int)eff.Power();
+        }
     }
 }
 

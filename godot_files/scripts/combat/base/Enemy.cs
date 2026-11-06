@@ -78,10 +78,10 @@ namespace GenericEnemy {
                         if (!PhysicAttackAvailable()) { continue; }
                         
                         switch (RandomAttack()) {
-                            case var atk when atk.Range == AttackRange.Broad: {
+                            case var atk when atk.Range == ActRange.Broad: {
                                 AttackTarget(atk);
                             } break;
-                            case var atk when atk.Range == AttackRange.Focused: {
+                            case var atk when atk.Range == ActRange.Focused: {
                                 AttackTarget(atk, RandomTarget());
                             } break;                                                                 
                         }
@@ -93,13 +93,13 @@ namespace GenericEnemy {
                         if (!MagicAttackAvailable()) { continue; }
                         
                         switch (RandomSpell()) {
-                            case var spl when spl.Range == EffectRange.Broad: {
+                            case var spl when spl.Range == ActRange.Broad: {
                                 CastSpell(spl);
                             } break;
-                            case var spl when spl.Range == EffectRange.Focused: {
+                            case var spl when spl.Range == ActRange.Focused: {
                                 CastSpell(spl, RandomTarget());
                             } break;
-                            case var spl when spl.Range == EffectRange.Self: {
+                            case var spl when spl.Range == ActRange.Self: {
                                 CastSpell(spl, this);
                             } break;
                         }

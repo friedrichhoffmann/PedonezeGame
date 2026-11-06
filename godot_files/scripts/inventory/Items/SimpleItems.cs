@@ -57,7 +57,7 @@ namespace SimpleItems
     public class WeaponDamage(
         int dieAmount,
         int dieFaces,
-        AttackRange attackRange,
+        ActRange attackRange,
         DamageKind damageKind
     )
     {
@@ -65,7 +65,7 @@ namespace SimpleItems
         private readonly int dieFaces = dieFaces;
 
         public string StringDice { get; set; } = $"{dieAmount}d{dieFaces}";
-        public AttackRange Range { get; set; } = attackRange;
+        public ActRange Range { get; set; } = attackRange;
         public DamageKind Kind { get; set; } = damageKind;
 
         public Func<int> RollDamage { get; set; } = () => Die.Roll(dieAmount, dieFaces);
@@ -117,11 +117,11 @@ namespace SimpleItems
     }
 
     public class Shield(
-        string name,
-        int id,
-        int maxDurability,
-        Effect defense
-    ) : Defense(name, id, maxDurability, defense) {}
+            string name,
+            int id,
+            int maxDurability,
+            Effect defense
+            ) : Defense(name, id, maxDurability, defense) {}
 
     public class Armour(
             string name,
@@ -129,6 +129,32 @@ namespace SimpleItems
             int maxDurability,
             Effect defense
             ) : Defense(name, id, maxDurability, defense) {}
+
+    public class Edible(
+            string name,
+            int id,
+            int maxDurability,
+            Effect healing
+            ) : Item(name, id, maxDurability, true)
+    {
+        private Effect healingRate = ValidateHealing(healing);
+
+        public Effect HealingRate
+        {
+            get => healingRate;
+            set => healingRate = ValidateHealing(value);
+        }
+
+        private static Effect ValidateHealing(Effect effect)
+        {
+            if (effect.Kind != EffectKind.Healing)
+                throw new ArgumentException(
+                        "Effect must be a healing effect.",
+                        nameof(effect));
+
+            return effect;
+        }
+    }
 
 }
 

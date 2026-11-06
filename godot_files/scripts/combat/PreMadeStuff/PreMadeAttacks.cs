@@ -1,12 +1,12 @@
 using Dice;
-using System;
+using MagicSystem;
 using PhyAttack;
 
 namespace PreMadeAttacks {
     public static class AttackLibrary {
 
-        const AttackRange FOCUSED = AttackRange.Focused;
-        const AttackRange BROAD = AttackRange.Broad;
+        const ActRange FOCUSED = ActRange.Focused;
+        const ActRange BROAD = ActRange.Broad;
 
         const DamageKind SLASHING = DamageKind.Slashing;
         const DamageKind PIERCING = DamageKind.Piercing;
