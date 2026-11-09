@@ -9,8 +9,8 @@
 
 <h2>Arts</h2>
 <ol>
-  <li> [ ] Lumperjack</li>
-  <li> [ ] Celtic Witch</li>
+  <li> [ ] Lumberjack</li>
+  <li> [x] Celtic Witch</li>
   <li> [ ] Cuphead-Like Store</li>
   <li> [ ] Structures</li>
   <li> [ ] Tree variants</li>
