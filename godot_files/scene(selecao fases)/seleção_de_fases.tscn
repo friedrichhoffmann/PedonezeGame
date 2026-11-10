@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b3f70nwcogkuc" path="res://scene(selecao fases)/imagem_fase_roma.png" id="2_tnefv"]
 [ext_resource type="Texture2D" uid="uid://c1yjl83lcg0vm" path="res://scene(menu)/botao.png" id="3_hqfi8"]
 [ext_resource type="FontFile" uid="uid://dcrfr3tb5o3v3" path="res://scene(menu)/PressStart2P-Regular.ttf" id="3_yqn6o"]
-[ext_resource type="Texture2D" uid="uid://bd8ktufy7o5v5" path="res://scene(menu)/botao(pressionadado).png" id="4_k5esp"]
-[ext_resource type="Texture2D" uid="uid://chfq3j3lqpe1v" path="res://scene(menu)/botao(clique).png" id="5_4bvcp"]
+[ext_resource type="Texture2D" uid="uid://bd8ktufy7o5v5" path="res://scene(menu)/botao(hover).png" id="4_k5esp"]
+[ext_resource type="Texture2D" uid="uid://chfq3j3lqpe1v" path="res://scene(menu)/botao(pressed).png" id="5_4bvcp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7obk3"]
 

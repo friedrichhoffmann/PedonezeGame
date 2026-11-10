@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1anxv0s1achh"
-path="res://.godot/imported/espada-titulo.png-c00a87eff7055413839171b7ac36f995.ctex"
+uid="uid://cbn6tyd02vgox"
+path="res://.godot/imported/the_sun37.png-b82f02fd4313c86c14aba0ee0bc65b6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scene(menu)/espada-titulo.png"
-dest_files=["res://.godot/imported/espada-titulo.png-c00a87eff7055413839171b7ac36f995.ctex"]
+source_file="res://scene(menu)/Frames do menu/the_sun37.png"
+dest_files=["res://.godot/imported/the_sun37.png-b82f02fd4313c86c14aba0ee0bc65b6a.ctex"]
 
 [params]
 

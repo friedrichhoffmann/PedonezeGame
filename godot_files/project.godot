@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-run/main_scene="uid://sjsl24pjwfrw"
+run/main_scene="uid://g2tqfpb5e70s"
 config/features=PackedStringArray("4.7", "C#")
 
 [display]

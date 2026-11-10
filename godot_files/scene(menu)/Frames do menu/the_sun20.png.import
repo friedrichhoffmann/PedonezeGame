@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd8ktufy7o5v5"
-path="res://.godot/imported/botao(pressionadado).png-e553c2139b39b542a4e8a390e8267e76.ctex"
+uid="uid://bgj7ljlf0f3pg"
+path="res://.godot/imported/the_sun20.png-24bf0ece063d6c069484ccf6ea4b1746.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scene(menu)/botao(pressionadado).png"
-dest_files=["res://.godot/imported/botao(pressionadado).png-e553c2139b39b542a4e8a390e8267e76.ctex"]
+source_file="res://scene(menu)/Frames do menu/the_sun20.png"
+dest_files=["res://.godot/imported/the_sun20.png-24bf0ece063d6c069484ccf6ea4b1746.ctex"]
 
 [params]
 

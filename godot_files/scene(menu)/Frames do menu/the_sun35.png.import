@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chfq3j3lqpe1v"
-path="res://.godot/imported/botao(clique).png-5bf507ed170f9149a038dc754a31024b.ctex"
+uid="uid://buatm240p4xpq"
+path="res://.godot/imported/the_sun35.png-ec606ac552da914a538eab5d9a38ef2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scene(menu)/botao(clique).png"
-dest_files=["res://.godot/imported/botao(clique).png-5bf507ed170f9149a038dc754a31024b.ctex"]
+source_file="res://scene(menu)/Frames do menu/the_sun35.png"
+dest_files=["res://.godot/imported/the_sun35.png-ec606ac552da914a538eab5d9a38ef2d.ctex"]
 
 [params]
 
