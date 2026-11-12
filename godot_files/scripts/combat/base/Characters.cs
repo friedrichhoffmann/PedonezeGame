@@ -1,3 +1,4 @@
+
 using Godot;
 using System;
 using System.Linq;
@@ -16,12 +17,17 @@ namespace CharacterFile
 {
     public abstract class Character2D
     {
+        private int healthmax;
         private int health;
         private int xp;
 
         public string Name { get; set; }
-        public int healthMax { get; protected set; }
         
+        public int healthMax {
+            get => healthmax;
+            protected set => healthmax = Math.Clamp(value, 0, int.MaxValue);
+        }
+
         public int Health {
             get => health;
             set => health = Math.Clamp(value, 0, healthMax);

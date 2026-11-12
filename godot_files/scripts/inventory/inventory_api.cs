@@ -1,3 +1,4 @@
+
 using Godot;
 using Tomlyn;
 using System.IO;
@@ -10,9 +11,9 @@ namespace InventoryAPIFile {
 		private Inventory inventory;
 		public static string InventoryFilePath = ProjectSettings.GlobalizePath("res://scripts/inventory/inventory.toml");
 
-        public void OpenInventory() => inventory = Inventory.LoadTOML(InventoryFilePath);
-        public void CloseInventory() => inventory.UpdateTOML(InventoryFilePath);
-        public List<Item> GetItemsAsList() => inventory.StoredItems;
+		public void OpenInventory() => inventory = Inventory.LoadTOML(InventoryFilePath);
+		public void CloseInventory() => inventory.UpdateTOML(InventoryFilePath);
+		public List<Item> GetItemsAsList() => inventory.StoredItems;
 
         public void Init() {
             Inventory.InitializeTOML(InventoryFilePath);
@@ -30,7 +31,7 @@ namespace InventoryAPIFile {
 		public void AddItemFromTOML(string itemPath) {
 			string toml = File.ReadAllText(itemPath);
 			Item toAddItem = TomlSerializer.Deserialize<Item>(toml, Inventory.TomlOptions);
-            
+			
 			int foundItemIndex = inventory.StoredItems.FindIndex(iterItem => iterItem.Id == toAddItem.Id);
 			if (foundItemIndex >= 0 && inventory.StoredItems[foundItemIndex].Stackable) { 
 				inventory.StoredItems[foundItemIndex].Quantity++; 

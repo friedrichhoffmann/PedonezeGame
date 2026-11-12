@@ -1,16 +1,17 @@
+
 using Dice;
 using MagicSystem;
 using PhyAttack;
 
 namespace PreMadeAttacks {
-    public static class AttackLibrary {
+	public static class AttackLibrary {
 
-        const ActRange FOCUSED = ActRange.Focused;
-        const ActRange BROAD = ActRange.Broad;
+		const ActRange FOCUSED = ActRange.Focused;
+		const ActRange BROAD = ActRange.Broad;
 
-        const DamageKind SLASHING = DamageKind.Slashing;
-        const DamageKind PIERCING = DamageKind.Piercing;
-        const DamageKind BLUDGEONING = DamageKind.Bludgeoning;
+		const DamageKind SLASHING = DamageKind.Slashing;
+		const DamageKind PIERCING = DamageKind.Piercing;
+		const DamageKind BLUDGEONING = DamageKind.Bludgeoning;
 
         public static Attack BanditScimitar()        => new Attack(Die.Roll(2, Die.d4),                       SLASHING,    FOCUSED);
         public static Attack BanditCrossbow()        => new Attack(Die.Roll(1, Die.d4) + Die.Roll(1, Die.d6), PIERCING,    FOCUSED);
@@ -33,4 +34,3 @@ namespace PreMadeAttacks {
         public static Attack UnicornHorn()           => new Attack(Die.Roll(1, Die.d12),                      PIERCING,    FOCUSED);
     }
 }
-
