@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using MainCharacterFile;
-using MagicSystem;
 using SimpleItems;
+using AllyFile;
 using System.IO;
 using Tomlyn;
 
@@ -10,24 +10,63 @@ namespace InventoryFile {
 	class Inventory {
 		public List<Item> StoredItems { get; set; }
         public List<MainCharacter> TeamStatus { get; set; }
-        public Dictionary<long, List<Spell>> PlayerSpellSet { get; set; }
+        public Dictionary<string, List<string>> PlayerSpellSet { get; set; }
 
         internal static readonly TomlSerializerOptions TomlOptions = new() {
-			PolymorphismOptions = new TomlPolymorphismOptions {
-				TypeDiscriminatorPropertyName = "kind",
-                DerivedTypeMappings = new Dictionary<Type, IReadOnlyList<TomlDerivedType>> {
+            PolymorphismOptions = new TomlPolymorphismOptions
+            {
+                TypeDiscriminatorPropertyName = "kind",
+                DerivedTypeMappings = new Dictionary<Type, IReadOnlyList<TomlDerivedType>>
+                {
                     [typeof(Item)] = [
                         new(typeof(Weapon), "Weapon"),
-                        new(typeof(Item), "StdItem"),
                         new(typeof(Shield), "Shield"),
-                        new(typeof(Armour), "Armour"),
-                        new(typeof(Spell), "Spell"),
-                        new(typeof(Effect), "Effect"),
-                        new(typeof(MainCharacter), "MainCharacter"),
+                        new(typeof(Armour), "Armour")
+                    ],
+                    [typeof(MainCharacter)] = [
+                        new(typeof(Archer), "Archer"),
+                        new(typeof(Wizard), "Wizard"),
+                        new(typeof(Cleric), "Cleric"),
+                        new(typeof(Gladiator), "Gladiator")
                     ]
                 }
-			}
+            }
 	    };
+
+        public static Inventory InitializeTOML(string path)
+        {
+            #nullable enable
+            Inventory? inv = null;
+            #nullable disable
+
+            if (File.Exists(path))
+            {
+                string toml = File.ReadAllText(path);
+
+                if (!string.IsNullOrWhiteSpace(toml))
+                {
+                    inv = TomlSerializer.Deserialize<Inventory>(toml, TomlOptions);
+                }
+            }
+
+            inv ??= new Inventory();
+
+            inv.StoredItems ??= new List<Item>();
+            inv.TeamStatus ??= new List<MainCharacter>();
+            inv.PlayerSpellSet ??= new Dictionary<string, List<string>>();
+
+            foreach (string key in new[] { "Archer", "Wizard", "Cleric", "Gladiator" })
+            {
+                inv.PlayerSpellSet.TryAdd(key, new List<string>());
+            }
+
+            // Write when the file is missing/empty, or when defaults or keys were added.
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
+            inv.UpdateTOML(path);
+
+            return inv;
+        }
+
 
         public static Inventory LoadTOML(string path)
         {

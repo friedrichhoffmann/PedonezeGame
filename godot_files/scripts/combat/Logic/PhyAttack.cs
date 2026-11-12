@@ -1,3 +1,4 @@
+using Godot;
 using CharacterFile;
 using System.Linq;
 using System;
@@ -25,10 +26,18 @@ namespace PhyAttack {
         }
 
         public void ApplyResistance(Combatant target) {
-            foreach (Effect eff in target.ActiveEffects)
-                if (eff is Resistance res)
-                    if (res.ResKind.Contains(this.Kind))
-                         this.Damage -= (int)res.Power();
+            GD.Print($"ApplyResistance called for {target.Name}");
+            GD.Print($"Effects: {target.ActiveEffects.Count}");
+            foreach (Effect eff in target.ActiveEffects) {
+                GD.Print("Entered the foreach");
+                if (eff is Resistance res) {
+                    GD.Print($"{eff} is Resistance");
+                    if (res.ResKind.Contains(this.Kind)) {
+                        GD.Print("Got to the inner if");
+                        this.Damage -= (int)res.Power();
+                    }
+                }
+            }
         }
 
         public void ApplyThorns(Combatant target, Combatant attacker) {

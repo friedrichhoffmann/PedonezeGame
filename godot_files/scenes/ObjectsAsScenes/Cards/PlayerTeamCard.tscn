@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://bxb43qi7t2e3s"]
+
+[ext_resource type="Theme" uid="uid://di073hlce4718" path="res://assets/ui/ui_base_theme.tres" id="1_msypm"]
+[ext_resource type="Script" uid="uid://dm4ywiahar4l5" path="res://scripts/combat/CardResources.cs" id="2_ujcbv"]
+[ext_resource type="FontFile" uid="uid://dcrfr3tb5o3v3" path="res://scene(menu)/PressStart2P-Regular.ttf" id="3_2qpt3"]
+[ext_resource type="FontFile" uid="uid://d5iyijedw6ef" path="res://assets/ui/fonts/PlayfairDisplay-MediumItalic.ttf" id="4_mpipy"]
+[ext_resource type="Texture2D" uid="uid://d105g56dg6wg6" path="res://assets/char/player_team/Archer/face_archer.png" id="5_5f25s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hur4u"]
+font = ExtResource("4_mpipy")
+font_size = 24
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1gq3l"]
+texture = ExtResource("5_5f25s")
+
+[node name="Control" type="Control" unique_id=382530304]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterCard" type="Control" parent="." unique_id=1507926038]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -956.0
+offset_bottom = -343.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+script = ExtResource("2_ujcbv")
+
+[node name="statsPanel" type="Panel" parent="CharacterCard" unique_id=1203431245]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.58000004
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 25.999985
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+
+[node name="name" type="Label" parent="CharacterCard/statsPanel" unique_id=1024574600]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.0
+offset_top = -14.900024
+offset_right = 97.0
+offset_bottom = 15.099976
+grow_horizontal = 2
+theme = ExtResource("1_msypm")
+theme_override_fonts/font = ExtResource("3_2qpt3")
+theme_override_font_sizes/font_size = 24
+text = "Archer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="values" type="Control" parent="CharacterCard/statsPanel" unique_id=1779740217]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+
+[node name="hpValue" type="Label" parent="CharacterCard/statsPanel/values" unique_id=146642487]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 78.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+text = "100/100"
+label_settings = SubResource("LabelSettings_hur4u")
+horizontal_alignment = 2
+
+[node name="manaValue" type="Label" parent="CharacterCard/statsPanel/values" unique_id=2081249973]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 77.0
+offset_top = 30.0
+offset_right = -15.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+text = "100/100"
+label_settings = SubResource("LabelSettings_hur4u")
+horizontal_alignment = 2
+
+[node name="labelHolder" type="Control" parent="CharacterCard/statsPanel" unique_id=1693104323]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+
+[node name="activeEffect" type="Label" parent="CharacterCard/statsPanel/labelHolder" unique_id=1875728652]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = 64.0
+offset_right = -35.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+text = "active effect"
+label_settings = SubResource("LabelSettings_hur4u")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="hpLabel" type="Label" parent="CharacterCard/statsPanel/labelHolder" unique_id=1402374372]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 14.0
+offset_right = -118.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+text = "hp"
+label_settings = SubResource("LabelSettings_hur4u")
+
+[node name="manaLabel" type="Label" parent="CharacterCard/statsPanel/labelHolder" unique_id=254461939]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 31.0
+offset_right = -98.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+text = "mana"
+label_settings = SubResource("LabelSettings_hur4u")
+
+[node name="Head" type="Panel" parent="CharacterCard" unique_id=678886214]
+texture_filter = 1
+propagate_maximum_size = true
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.564
+offset_bottom = 26.0
+grow_horizontal = 2
+theme = ExtResource("1_msypm")
+theme_override_styles/panel = SubResource("StyleBoxTexture_1gq3l")

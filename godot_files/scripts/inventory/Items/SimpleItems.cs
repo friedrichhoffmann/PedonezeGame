@@ -84,11 +84,11 @@ namespace SimpleItems
 
         public Attack ToAttack() {
             RestoreDiceDamage();
-            return new Attack {
-                Damage = RollDamage(),
-                Kind = Kind,
-                Range = Range,
-            };
+            return new Attack(
+                RollDamage(),
+                Kind,
+                Range
+            );
         }
     }
 

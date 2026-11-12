@@ -1,0 +1,277 @@
+[gd_scene format=3 uid="uid://dancaywjr0u3g"]
+
+[ext_resource type="Theme" uid="uid://di073hlce4718" path="res://assets/ui/ui_base_theme.tres" id="1_msypm"]
+[ext_resource type="Script" uid="uid://cr1a3ryqirc58" path="res://scripts/combat/MainCharacterCard.cs" id="2_msypm"]
+[ext_resource type="FontFile" uid="uid://dcrfr3tb5o3v3" path="res://scene(menu)/PressStart2P-Regular.ttf" id="3_2qpt3"]
+[ext_resource type="FontFile" uid="uid://d5iyijedw6ef" path="res://assets/ui/fonts/PlayfairDisplay-MediumItalic.ttf" id="4_mpipy"]
+[ext_resource type="Animation" uid="uid://d2va0naw4g8er" path="res://assets/ui/Animations/PlayerDamage.res" id="7_mpipy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1gq3l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hur4u"]
+font = ExtResource("4_mpipy")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_a12nh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_msypm"]
+font = ExtResource("3_2qpt3")
+font_size = 48
+font_color = Color(1, 0, 0.05490196, 0.6666667)
+outline_size = 8
+outline_color = Color(1, 0, 0.05490196, 0.6666667)
+
+[sub_resource type="Animation" id="Animation_ujcbv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterCard/head:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterCard/DamageLabel:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterCard/DamageLabel:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [90.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterCard/DamageLabel:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CharacterCard/head:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2qpt3"]
+_data = {
+&"PlayerDamage": ExtResource("7_mpipy"),
+&"RESET": SubResource("Animation_ujcbv")
+}
+
+[node name="Control" type="Control" unique_id=382530304]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterCard" type="Control" parent="." unique_id=1507926038]
+propagate_maximum_size = true
+layout_mode = 1
+anchor_left = 0.156
+anchor_right = 0.156
+offset_left = -179.712
+offset_right = 0.28799438
+offset_bottom = 250.0
+theme = ExtResource("1_msypm")
+script = ExtResource("2_msypm")
+
+[node name="head" type="Panel" parent="CharacterCard" unique_id=678886214]
+texture_filter = 1
+propagate_maximum_size = true
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.564
+offset_bottom = 26.0
+grow_horizontal = 2
+theme = ExtResource("1_msypm")
+theme_override_styles/panel = SubResource("StyleBoxTexture_1gq3l")
+
+[node name="statsPanel" type="Panel" parent="CharacterCard" unique_id=1203431245]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.657
+anchor_right = 1.0
+anchor_bottom = 0.99700004
+offset_left = 1.0
+offset_top = -0.1000061
+offset_bottom = -0.1000061
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+
+[node name="values" type="Control" parent="CharacterCard/statsPanel" unique_id=1779740217]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+
+[node name="hpValue" type="Label" parent="CharacterCard/statsPanel/values" unique_id=146642487]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 78.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+text = "100/100"
+label_settings = SubResource("LabelSettings_hur4u")
+horizontal_alignment = 2
+
+[node name="manaValue" type="Label" parent="CharacterCard/statsPanel/values" unique_id=2081249973]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 77.0
+offset_top = 30.0
+offset_right = -15.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+text = "100/100"
+label_settings = SubResource("LabelSettings_hur4u")
+horizontal_alignment = 2
+
+[node name="labelHolder" type="Control" parent="CharacterCard/statsPanel" unique_id=1693104323]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+
+[node name="hpLabel" type="Label" parent="CharacterCard/statsPanel/labelHolder" unique_id=1402374372]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 14.0
+offset_right = -118.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+text = "hp"
+label_settings = SubResource("LabelSettings_hur4u")
+
+[node name="manaLabel" type="Label" parent="CharacterCard/statsPanel/labelHolder" unique_id=254461939]
+propagate_maximum_size = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 31.0
+offset_right = -98.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_msypm")
+text = "mana"
+label_settings = SubResource("LabelSettings_hur4u")
+
+[node name="name" type="Label" parent="CharacterCard/statsPanel/labelHolder" unique_id=1024574600]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -89.5
+offset_top = -0.1499939
+offset_right = 88.5
+offset_bottom = 72.850006
+grow_horizontal = 2
+theme = ExtResource("1_msypm")
+theme_override_fonts/font = ExtResource("3_2qpt3")
+theme_override_font_sizes/font_size = 24
+text = "Archer"
+label_settings = SubResource("LabelSettings_a12nh")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="EffectContainer" type="VBoxContainer" parent="CharacterCard" unique_id=1424654102]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 133.0
+offset_right = -1.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DamageLabel" type="Label" parent="CharacterCard" unique_id=1835104542]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 90.0
+offset_right = 250.0
+offset_bottom = 165.00018
+text = "999"
+label_settings = SubResource("LabelSettings_msypm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterCard" unique_id=991816195]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_2qpt3")
+
+[node name="DamageLabel" type="Label" parent="." unique_id=1145976769]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 142.0
+offset_top = -500.0
+offset_right = 292.0
+offset_bottom = -424.99982
+text = "999"
+label_settings = SubResource("LabelSettings_msypm")

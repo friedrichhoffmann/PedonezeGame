@@ -6,16 +6,21 @@ using MainCharacterFile;
 using CharacterFile;
 using GenericEnemy;
 using EnemyFile;
+using AllyFile;
 
 using System;
 using System.Linq;
 
+using static PreMadeEnemies.Enemies;
+
 using CombatAPI;
 using SpellApiFile;
-
 using InventoryAPIFile;
+
 using MagicSystem;
 using SimpleItems;
+
+using SpawnCardsFile;
 
 namespace CombatManagerFile {
 
@@ -27,33 +32,26 @@ namespace CombatManagerFile {
 
         private const bool TWO_HANDED = true;
 
-        Battle battle = new Battle();
         public static ItemList menu;
+        public static AnimationPlayer animationManager;
+
         public static int? ActivatedOption;
         private static TaskCompletionSource<int> _clickSource;
     
-        private static long RandomDigits(long digitsAmount) {
-            long output = 0;
-
-            for (int i=0; i < digitsAmount; i++) {
-                int number = Random.Shared.Next(1, 10);
-                output += (long)(number * Math.Pow(10,i));
-            }
-
-            return output;
-        }
+        Battle battle = new Battle();
 
         private static void ListToItemList<T>(List<T> list) {
             menu.Clear();
             ActivatedOption = null;
             bool skipBack = false;
-
-            if (list.Last().ToString() == "SkipBack") { 
-                skipBack = true;
-                list.RemoveAt(list.Count -1);
-            }
-			foreach (T element in list) {
-                menu.AddItem(element.ToString(),null,true);
+            if (list.Count() != 0) {
+                if (list.Last().ToString() == "SkipBack") { 
+                    skipBack = true;
+                    list.RemoveAt(list.Count -1);
+                }
+                foreach (T element in list) {
+                    menu.AddItem(element.ToString(),null,true);
+                }
             }
             if (!skipBack) {
                 menu.AddItem("Back",null,true);
@@ -77,39 +75,89 @@ namespace CombatManagerFile {
             }
 		}
 
-        private static void GenerateSpellSetKey(List<Combatant> all) {
-            foreach (Combatant combatant in all) {
-                if (combatant is MainCharacter mainCharacter) {
-                    mainCharacter.SpellSetKey = RandomDigits(5);
-                }
-            }
-        }
-        
         // Called when the node enters the scene tree for the first time.
 		public override void _Ready() {
-            menu = GetNode<ItemList>("Menu/MenuBg/MenuList");
+            menu = GetNode<ItemList>("UI/Menu/MenuBg/MenuList");
+
+            menu.ItemActivated -= OnItemActivated;
+            menu.ItemActivated += OnItemActivated;
+
+            animationManager = GetNode<AnimationPlayer>("/root/Control/AnimationPlayer");
+            InventoryAPI inv = new();
+            inv.Init();
 
 		    // battle.HeroJoinBattle(Player.player);
-		    battle.EnemyJoinBattle(Bandit.banditOne);
+            
+            Combatant.All = new List<Combatant>();
 
-		    Combatant.All.AddRange(Combatant.Enemy);
-		    Combatant.All.AddRange(Combatant.Hero);
+            Combatant.All.Add(banditOne());
+            Combatant.All.Add(banditTwo());
+            Combatant.All.Add(Cleric.cleric);
+            Combatant.All.Add(Gladiator.gladiator);
+            Combatant.All.Add(Wizard.wizard);
+            Combatant.All.Add(Archer.archer);
+
 		    battle.InitiativeTest();
+
+            foreach (Combatant comb in Combatant.All) {
+                if (comb is Enemy enm) {
+                    switch (enm) {
+                        case Bandit        bandit:               bandit.SetAttacksUp(); break;
+                        case Plebeian      plebeian:           plebeian.SetAttacksUp(); break;
+                        case TribalWarrior tribalWarrior: tribalWarrior.SetAttacksUp(); break;
+                        case BanditCaptain banditCaptain: banditCaptain.SetAttacksUp(); break;
+                        case BigRat        bigRat:               bigRat.SetAttacksUp(); break;
+                        case Boar          boar:                   boar.SetAttacksUp(); break;
+                        case Deer          deer:                   deer.SetAttacksUp(); break;
+                        case ItalianWolf   italianWolf:     italianWolf.SetAttacksUp(); break;
+                        case BrownBear     brownBear:         brownBear.SetAttacksUp(); break;
+                        case BigBoar       bigBoar:             bigBoar.SetAttacksUp(); break;
+                        case BigDeer       bigDeer:             bigDeer.SetAttacksUp(); break;
+                        case Hippopotamus  hippopotamus:   hippopotamus.SetAttacksUp(); break;
+                        case Unicorn       unicorn:             unicorn.SetAttacksUp(); break;
+
+                        default:
+                            GD.PrintErr($"No attack setup is defined for {enm.GetType().Name} ({enm.Name}).");
+                            break;
+                    }
+                }
+                else if (comb is MainCharacter mainCharacter) {
+                    switch (mainCharacter) {
+                        case Gladiator gladiator: gladiator.SetSpellsUp(); break;
+                        case Cleric    cleric:       cleric.SetSpellsUp(); break;
+                        case Archer    archer:       archer.SetSpellsUp(); break;
+                        case Wizard    wizard:       wizard.SetSpellsUp(); break;
+
+                        default:
+                            GD.PrintErr($"No spell setup is defined for {mainCharacter.GetType().Name} ({mainCharacter.Name}).");
+                            break;
+                    }
+                }
+            }
+
+
+            SpawnCards.SpawnPlayerCards(
+                    Combatant.All.Where(comb => comb is MainCharacter)
+                    .Cast<MainCharacter>().ToArray()
+            );
+
+            SpawnCards.SpawnEnemyCards(
+                    Combatant.All.Where(comb => comb is Enemy)
+                    .Cast<Enemy>().ToArray()
+            );
 
             menu.ItemActivated += OnItemActivated;
 		    _ = battle.StartBattle();
         }
 
-        private static Task<int> WaitForActiveAsync()
-        {
+        private static Task<int> WaitForActiveAsync() {
             _clickSource = new TaskCompletionSource<int>(
-                TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCreationOptions.RunContinuationsAsynchronously);
 
             return _clickSource.Task;
         }
 
-        private void OnItemActivated(long index)
-        {
+        private void OnItemActivated(long index) {
             int selectedIndex = (int)index;
             string selectedText = menu.GetItemText(selectedIndex);
 
@@ -123,10 +171,7 @@ namespace CombatManagerFile {
         private static async Task equipWeapon(MainCharacter hero, Weapon toActOnItem) {
             ListToItemList(["Equip"]);
             int selectedEquipWeapon = await WaitForActiveAsync();
-            if (selectedEquipWeapon != 0) return; 
-
-            bool isTwoHanded = (toActOnItem.Hand == TWO_HANDED);
-
+            if (selectedEquipWeapon != 0) return; bool isTwoHanded = (toActOnItem.Hand == TWO_HANDED);
             if (isTwoHanded) {
                 if (hero.RightHandWeapon != null) hero.Unequip(MainCharacter.RIGHT_HAND_SLOT);
                 if (hero.LeftHandWeapon != null) hero.Unequip(MainCharacter.LEFT_HAND_SLOT);
@@ -167,92 +212,150 @@ namespace CombatManagerFile {
             hero.ActiveEffects.Add(edible.HealingRate);
         }
 
-        private static async Task inventoryOpt(MainCharacter hero) {
-            InventoryAPI _inventory = new InventoryAPI();
+        private static async Task<bool> inventoryOpt(MainCharacter hero) {
+            InventoryAPI inventory = new();
+            inventory.OpenInventory();
 
-            _inventory.OpenInventory();
+            try
+            {
+                List<Item> items = inventory.GetItemsAsList();
+                ListToItemList(items.Select(i => $"{i.Name}    {i.Quantity}x").ToList());
+                menu.GrabFocus();
 
-            List<Item> itemsInInventory = _inventory.GetItemsAsList();
-            ListToItemList(itemsInInventory.Select(i => $"{i.Name}    {i.Quantity}x").ToList());
+                int selected = await WaitForActiveAsync();
 
-            int selectedItem = await WaitForActiveAsync();
-            Item toActOnItem = itemsInInventory[selectedItem];
+                if (selected < 0 || selected >= items.Count)
+                    return false; // Back
 
-            if      (toActOnItem is Armour armour) await equipArmour(hero, armour);
-            else if (toActOnItem is Weapon weapon) await equipWeapon(hero, weapon);
-            else if (toActOnItem is Shield shield) await equipWeapon(hero, shield);
-            else if (toActOnItem is Edible edible) await consumeItem(hero, edible);
+                Item item = items[selected];
 
-            _inventory.CloseInventory();
+                if      (item is Armour armour) await equipArmour(hero, armour);
+                else if (item is Weapon weapon) await equipWeapon(hero, weapon);
+                else if (item is Shield shield) await equipWeapon(hero, shield);
+                else if (item is Edible edible) await consumeItem(hero, edible);
+
+                return true; // Item selected
+            }
+            finally
+            {
+                inventory.CloseInventory();
+            }
         }
+        private static async Task<bool> spellOpt(MainCharacter hero) {
+            GD.Print($"spellOpt started for {hero.Name}");
+            
+            string key = hero switch {
+                Cleric _ => typeof(Cleric).Name,
+                Archer _ => typeof(Archer).Name,
+                Wizard _ => typeof(Wizard).Name,
+                Gladiator _ => typeof(Gladiator).Name,
+                _ => "Unknown"
+            }; 
 
-        private static async Task spellOpt<T>(MainCharacter hero) {
             SpellApi spellApi = new();
             spellApi.OpenSpellInventory();
 
-            List<Spell> spellSet = spellApi.GetSpellsAsList(hero.SpellSetKey);
+            List<string> availableSpells = new();
+            foreach (string spellName in spellApi.GetSpellsAsList(key)) {
+                var spl = spellApi.GetSpellById(spellName);
+                if (spl.ManaCost <= hero.Mana)
+                    availableSpells.Add(spellName.Capitalize());
+            }
 
-
-            Func<Spell, bool> func = (t) => t.ManaCost <= hero.Mana;
-            ListToItemList(spellSet, func);
+            ListToItemList(availableSpells);
             menu.GrabFocus();
 
-            int opt = await WaitForActiveAsync();
-            Spell spell = spellSet[opt];
+            int selected = await WaitForActiveAsync();
+            if (selected >= availableSpells.Count) return false; // back
 
-            switch(spell.Range) {
+            var spellId = availableSpells[selected].ToUpper().Replace(' ', '_');
+            Spell spell = spellApi.GetSpellById(spellId);
+
+            spellApi.CloseSpellInventory();
+
+            switch (spell.Range) {
                 case ActRange.Self:
-                    hero.CastSpell(spell);
-                    break;
                 case ActRange.Broad:
                     hero.CastSpell(spell);
-                    break;
+                    return true;
+
                 case ActRange.Focused:
-                    var targets = Combatant.All .OfType<Enemy>() .Where(enemy => enemy.Health > 0) .ToList();
+                    var targets = Combatant.All
+                        .OfType<Enemy>()
+                        .Where(enemy => enemy.Health > 0)
+                        .ToList();
+
+                    if (targets.Count == 0)
+                        return true; // Spell selected, but there is no valid target.
 
                     ListToItemList(targets.Select(enemy => enemy.Name).ToList());
+                    menu.GrabFocus();
 
                     int targetIndex = await WaitForActiveAsync();
-                    var target = targets[targetIndex];
 
+                    // Back from target selection: return to the spell list.
+                    if (targetIndex < 0 || targetIndex >= targets.Count)
+                        return false;
 
-                    hero.CastSpell(spell, target);
-                    break;
+                    hero.CastSpell(spell, targets[targetIndex]);
+                    return true;
+
+                default:
+                    return true;
             }
-            return;
-        }    
+        }
 
-        private static async Task attackOpt(MainCharacter hero) {
+
+        private static async Task<bool> attackOpt(MainCharacter hero) {
             var targets = Combatant.All
                 .OfType<Enemy>()
                 .Where(enemy => enemy.Health > 0)
                 .ToList();
 
             ListToItemList(targets.Select(enemy => enemy.Name).ToList());
+            menu.GrabFocus();
 
             int targetIndex = await WaitForActiveAsync();
 
+            // Back was selected, or there are no targets.
+            if (targetIndex < 0 || targetIndex >= targets.Count)
+                return false;
+
             var target = targets[targetIndex];
-            var attack = hero.RightHandWeapon.WeaponDamage.ToAttack();
+            var attack = hero.RightHandWeapon != null
+                ? hero.RightHandWeapon.WeaponDamage.ToAttack()
+                : PreMadeItems.PreMadeWeapons.BareHands().WeaponDamage.ToAttack();
 
             hero.AttackTarget(attack, target);
-            return;
+            return true;
         }
 
         public static async Task TakeAction(MainCharacter hero) {
-            ListToItemList(["Attack", "Hability", "Inventory", "SkipBack"]);
-            menu.GrabFocus();
+            GD.Print("TakeAction started");
+            while (true) {
+                ListToItemList(["Attack", "Hability", "Inventory", "SkipBack"]);
+                menu.GrabFocus();
 
-            int opt = await WaitForActiveAsync();
-            switch (opt) {
-                case ATTACK_OPTION:
-                    await attackOpt(hero);
-                    break;
-                case SPELL_OPTION:
-                    break;
-                case INVENTORY_OPTION:
-                    await inventoryOpt(hero);
-                    break;
+                int opt = await WaitForActiveAsync();
+
+                switch (opt) {
+                    case ATTACK_OPTION:
+                        if (await attackOpt(hero))
+                            return; // Attack was made; finish this action.
+                        break;      // Back: show the main action menu again.
+                    case SPELL_OPTION:
+                        if (await spellOpt(hero))
+                            return;
+                        break; // Back: reopen main menu
+
+                    case INVENTORY_OPTION:
+                        if (await inventoryOpt(hero))
+                            return;
+                        break; // Back: reopen main menu
+
+                    default:
+                        return;
+                }
             }
         }
     }

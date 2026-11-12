@@ -10,6 +10,12 @@ using InventoryAPIFile;
 
 using MagicSystem;
 
+using CardFile;
+
+using static CombatManagerFile.CombatManager;
+using static EventSystem.EventHandler;
+using EventSystem;
+
 namespace MainCharacterFile {
     public abstract class MainCharacter : Combatant
     {
@@ -21,7 +27,7 @@ namespace MainCharacterFile {
         private int mana;
         private int characterLevel;
 
-        private int manaMax;
+        public int manaMax { get; protected set; }
 
         #nullable enable
         public Weapon? RightHandWeapon { get; set; }
@@ -29,8 +35,8 @@ namespace MainCharacterFile {
         public Armour? ArmourSlot { get; set; }
         #nullable disable
 
-        public long SpellSetKey { get; set; }
-        
+        public MainCharacterCard Card { get; set; }
+
         public int Level {
             get => characterLevel;
             set => characterLevel = Math.Clamp(value, 1, 11);
@@ -43,6 +49,16 @@ namespace MainCharacterFile {
 
         public bool CanPlay(Combatant combatant) {
             return combatant.Health > 0 || combatant.ActiveEffects.Any(effect => effect.Kind == EffectKind.Numbness);
+        }
+
+        private bool IsPreviousOneEnemy() {
+            var thisIndex = Combatant.All.IndexOf(this);
+            var previousIndex = thisIndex-1;
+            Combatant previousOne = (previousIndex < 0) ?
+                Combatant.All.Last() :
+                Combatant.All[previousIndex];
+
+            return previousOne is GenericEnemy.Enemy;
         }
 
         public async Task HeroTurn() {
@@ -138,27 +154,23 @@ namespace MainCharacterFile {
             inventoryAPI.CloseInventory();
         }
 
-        public MainCharacter(
-            int levelXp,
-            string name,
-            int health,
-            int resistanceBonus,
-            int damageBonus,
-            int armor,
-            int initiativeBonus,
-            int attackBonus,
-            int xp)
-            : base(
-                name,
-                health,
-                resistanceBonus,
-                damageBonus,
-                armor,
-                initiativeBonus,
-                attackBonus,
-                xp)
+       public MainCharacter(
+                int levelXp,
+                string name,
+                int healthMax,
+                int manaMax,
+                int health,
+                int mana,
+                int armor,
+                int initiativeBonus,
+                int xp)
+            : base(name, healthMax, armor, initiativeBonus, xp)
         {
+            this.manaMax = manaMax;
+            Health = health;
+            Mana = mana;
             Level = levelXp;
         }
+
     }
 }

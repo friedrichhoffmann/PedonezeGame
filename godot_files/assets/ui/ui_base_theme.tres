@@ -31,10 +31,8 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="SystemFont" id="SystemFont_jqr1o"]
-
 [resource]
-default_font = SubResource("SystemFont_jqr1o")
+default_font = ExtResource("1_nryf0")
 Button/fonts/font = ExtResource("1_nryf0")
 ItemList/colors/font_color = Color(1, 1, 1, 1)
 ItemList/colors/font_hovered_color = Color(0.95, 0.95, 0.95, 1)

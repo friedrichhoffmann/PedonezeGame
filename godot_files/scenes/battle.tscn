@@ -2,34 +2,140 @@
 
 [ext_resource type="Script" uid="uid://fbe13jw8c763" path="res://scripts/combat/CombatManager.cs" id="1_dn72j"]
 [ext_resource type="Theme" uid="uid://di073hlce4718" path="res://assets/ui/ui_base_theme.tres" id="1_p1qf1"]
-[ext_resource type="FontFile" uid="uid://d5iyijedw6ef" path="res://assets/ui/fonts/PlayfairDisplay-MediumItalic.ttf" id="3_a12nh"]
-[ext_resource type="Texture2D" uid="uid://dqa2jyhm8385" path="res://assets/char/face_archer.png" id="4_a12nh"]
+[ext_resource type="Script" uid="uid://cvj6g8fyal83w" path="res://scripts/combat/SpawnCards.cs" id="2_p1qf1"]
+[ext_resource type="Script" uid="uid://c86m2nnjt82n4" path="res://scripts/EventSystem/EventHandler.cs" id="3_a12nh"]
+[ext_resource type="Texture2D" uid="uid://dgxgy4p5y6qc" path="res://assets/ui/BattleBackgrounds/bg-floresta.png" id="5_lpir7"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_e0cq4"]
-font = ExtResource("3_a12nh")
-font_size = 24
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e0cq4"]
+texture = ExtResource("5_lpir7")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a12nh"]
-texture = ExtResource("4_a12nh")
-
-[sub_resource type="Animation" id="Animation_a12nh"]
-resource_name = "popup_menu"
+[sub_resource type="Animation" id="Animation_yahae"]
+resource_name = "FadeIn UI"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CombatManager/Menu:size:x")
-tracks/0/interp = 2
+tracks/0/path = NodePath("CombatManager/UI:modulate:a")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.25000024, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_6vh42"]
+resource_name = "FadeOut UI"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CombatManager/UI:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.24999963, 0.25000024),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4k1nj"]
+resource_name = "MenuSlideIn"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CombatManager/UI/Menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.25000027, 1),
+"update": 0,
+"values": [Vector2(1200, 380), Vector2(780, 380)]
+}
+
+[sub_resource type="Animation" id="Animation_v7i3o"]
+resource_name = "MenuSlideOut"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CombatManager/UI/Menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.25000027, 1.0000014),
+"update": 0,
+"values": [Vector2(780, 380), Vector2(1200, 380)]
+}
+
+[sub_resource type="Animation" id="Animation_lpir7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CombatManager/UI:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": []
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CombatManager/UI/Menu:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1200, 380)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CombatManager/UI/PlayerCardsRoot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 750)]
+}
+
+[sub_resource type="Animation" id="Animation_f4pi3"]
+resource_name = "SlideUpCharacters"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CombatManager/UI/PlayerCardsRoot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.10153175, 1),
+"update": 0,
+"values": [Vector2(0, 750), Vector2(0, 385)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lpir7"]
 _data = {
-&"popup_menu": SubResource("Animation_a12nh")
+&"FadeIn UI": SubResource("Animation_yahae"),
+&"FadeOut UI": SubResource("Animation_6vh42"),
+&"MenuSlideIn": SubResource("Animation_4k1nj"),
+&"MenuSlideOut": SubResource("Animation_v7i3o"),
+&"RESET": SubResource("Animation_lpir7"),
+&"SlideUpCharacters": SubResource("Animation_f4pi3")
 }
 
 [node name="Control" type="Control" unique_id=1829440430]
@@ -53,23 +159,74 @@ grow_vertical = 2
 theme = ExtResource("1_p1qf1")
 script = ExtResource("1_dn72j")
 
-[node name="Menu" type="Control" parent="CombatManager" unique_id=775708827]
+[node name="EventHandler" type="Control" parent="CombatManager" unique_id=413226580]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_a12nh")
+
+[node name="CardSpawnerBeholder" type="Control" parent="CombatManager" unique_id=167087618]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_p1qf1")
+
+[node name="Background" type="Panel" parent="CombatManager" unique_id=1164677470]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_e0cq4")
+
+[node name="UI" type="Control" parent="CombatManager" unique_id=726326135]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EnemyFieldRoot" type="Control" parent="CombatManager/UI" unique_id=1208794462]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -348.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerCardsRoot" type="Control" parent="CombatManager/UI" unique_id=658285905]
+modulate = Color(1, 1, 1, 0.88235295)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 750.0
+offset_right = -402.0
+offset_bottom = 351.99976
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="Control" parent="CombatManager/UI" unique_id=775708827]
 propagate_maximum_size = true
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 775.0
-offset_top = 384.0
-offset_right = -5.3779297
-offset_bottom = -12.834473
+offset_left = 1200.0
+offset_top = 380.0
+offset_right = 398.00012
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.9848716, 0.9993411)
 theme = ExtResource("1_p1qf1")
 
-[node name="MenuBg" type="Panel" parent="CombatManager/Menu" unique_id=1280751684]
+[node name="MenuBg" type="Panel" parent="CombatManager/UI/Menu" unique_id=1280751684]
 propagate_maximum_size = true
 layout_mode = 1
 anchors_preset = 15
@@ -80,7 +237,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_p1qf1")
 
-[node name="MenuList" type="ItemList" parent="CombatManager/Menu/MenuBg" unique_id=9303913]
+[node name="MenuList" type="ItemList" parent="CombatManager/UI/Menu/MenuBg" unique_id=9303913]
 propagate_maximum_size = true
 layout_mode = 1
 anchors_preset = 15
@@ -99,7 +256,7 @@ allow_search = false
 item_count = 1
 item_0/text = "Test"
 
-[node name="Panel" type="Panel" parent="CombatManager/Menu" unique_id=821288276]
+[node name="menuTitlePanel" type="Panel" parent="CombatManager/UI/Menu" unique_id=821288276]
 propagate_maximum_size = true
 layout_mode = 1
 anchors_preset = 10
@@ -107,8 +264,7 @@ anchor_right = 1.0
 offset_bottom = 43.02835
 grow_horizontal = 2
 
-[node name="Hud" type="Control" parent="CombatManager" unique_id=310697764]
-propagate_maximum_size = true
+[node name="menuTitle" type="Label" parent="CombatManager/UI/Menu/menuTitlePanel" unique_id=977443566]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,150 +272,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_p1qf1")
-
-[node name="Character2" type="Control" parent="CombatManager/Hud" unique_id=1873630720]
-propagate_maximum_size = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 569.0
-offset_top = 331.0
-offset_right = -387.0
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p1qf1")
-
-[node name="stats_panel" type="Panel" parent="CombatManager/Hud/Character2" unique_id=1807451055]
-propagate_maximum_size = true
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.58000004
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 25.999985
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p1qf1")
-
-[node name="values" type="Control" parent="CombatManager/Hud/Character2/stats_panel" unique_id=279312897]
-propagate_maximum_size = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p1qf1")
-
-[node name="hp_value" type="Label" parent="CombatManager/Hud/Character2/stats_panel/values" unique_id=1366021707]
-propagate_maximum_size = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 78.0
-offset_top = 14.0
-offset_right = -14.0
-offset_bottom = -68.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p1qf1")
-text = "100/100"
-label_settings = SubResource("LabelSettings_e0cq4")
-horizontal_alignment = 2
-
-[node name="mana_value" type="Label" parent="CombatManager/Hud/Character2/stats_panel/values" unique_id=648029023]
-propagate_maximum_size = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 77.0
-offset_top = 30.0
-offset_right = -15.0
-offset_bottom = -52.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p1qf1")
-text = "100/100"
-label_settings = SubResource("LabelSettings_e0cq4")
-horizontal_alignment = 2
-
-[node name="label_holder" type="Control" parent="CombatManager/Hud/Character2/stats_panel" unique_id=1880970557]
-propagate_maximum_size = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p1qf1")
-
-[node name="active_effect" type="Label" parent="CombatManager/Hud/Character2/stats_panel/label_holder" unique_id=1535068889]
-propagate_maximum_size = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 31.0
-offset_top = 64.0
-offset_right = -35.0
-offset_bottom = -18.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p1qf1")
-text = "active effect"
-label_settings = SubResource("LabelSettings_e0cq4")
+theme_override_font_sizes/font_size = 26
+text = "ASDKML"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 
-[node name="hp_label" type="Label" parent="CombatManager/Hud/Character2/stats_panel/label_holder" unique_id=2007627792]
-propagate_maximum_size = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 13.0
-offset_top = 14.0
-offset_right = -118.0
-offset_bottom = -68.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p1qf1")
-text = "hp"
-label_settings = SubResource("LabelSettings_e0cq4")
-
-[node name="mana_label" type="Label" parent="CombatManager/Hud/Character2/stats_panel/label_holder" unique_id=502290124]
-propagate_maximum_size = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = 31.0
-offset_right = -98.0
-offset_bottom = -51.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_p1qf1")
-text = "mana"
-label_settings = SubResource("LabelSettings_e0cq4")
-
-[node name="head" type="Panel" parent="CombatManager/Hud/Character2" unique_id=1581415933]
-texture_filter = 1
-propagate_maximum_size = true
-clip_contents = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.564
-offset_bottom = 26.0
-grow_horizontal = 2
-theme = ExtResource("1_p1qf1")
-theme_override_styles/panel = SubResource("StyleBoxTexture_a12nh")
+[node name="AttackSets" type="Control" parent="CombatManager" unique_id=305801627]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2048540045]
 libraries/ = SubResource("AnimationLibrary_lpir7")
-autoplay = &"popup_menu"
+autoplay = &"SlideUpCharacters"

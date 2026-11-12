@@ -26,6 +26,8 @@ namespace PreMadeItems {
 
                                                         //  Name            id     dur  Hands          Damage  Dice    Range     Kind
 
+        public static Weapon BareHands()     => new Weapon("Bare Hands",    001,   999, SINGLE_HANDED, DAMAGE( "1d02", FOCUSED , BLUDGEONING));
+
         public static Weapon Club()          => new Weapon("Club",          100,   045, SINGLE_HANDED, DAMAGE( "1d04", FOCUSED , BLUDGEONING));
         public static Weapon Dagger()        => new Weapon("Dagger",        101,   090, SINGLE_HANDED, DAMAGE( "1d04", FOCUSED , PIERCING));
         public static Weapon Greatclub()     => new Weapon("Greatclub",     102,   030, DOUBLE_HANDED, DAMAGE( "1d08", FOCUSED , BLUDGEONING));

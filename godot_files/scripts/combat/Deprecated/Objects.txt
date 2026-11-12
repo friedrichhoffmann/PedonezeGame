@@ -1,0 +1,58 @@
+using PlayerFile;
+using AllyFile;
+
+namespace ObjectFile
+{
+    public class Objects
+    {
+        // Player and Allies
+        public Player player = new(
+            levelXp: 1,
+            name: "Jogador",
+            health: 10,
+            resistanceBonus: 0,
+            damageBonus: 0,
+            armor: 10,
+            initiativeBonus: 0,
+            attackBonus: 0,
+            xp: 10
+        );
+
+        public Cleric cleric = new(
+            levelXp: 1,
+            name: "Clérigo",
+            health: 8,
+            resistanceBonus: 0,
+            damageBonus: 0,
+            armor: 13,
+            initiativeBonus: 1,
+            attackBonus: 13,
+            xp: 0
+        );
+
+        public Archer archer = new(
+            levelXp: 1,
+            name: "Arqueiro",
+            health: 8,
+            resistanceBonus: 0,
+            damageBonus: 0,
+            armor: 12,
+            initiativeBonus: 2,
+            attackBonus: 12,
+            xp: 0
+        );
+
+        public Wizard wizard = new(
+            levelXp: 1,
+            name: "Mago",
+            health: 6,
+            resistanceBonus: 0,
+            damageBonus: 0,
+            armor: 10,
+            initiativeBonus: 0,
+            attackBonus: 10,
+            xp: 0
+        );
+    }
+}
+

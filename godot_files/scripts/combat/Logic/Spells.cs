@@ -159,31 +159,27 @@ namespace MagicSystem {
         public Effect[] HarmlessEffects { get; set; } = eff;
     }
 
-
     public class Spell {
-        public Effect[] SpellEffect { get; set; }
+        public Effect[] SpellEffect { get; set; } = [];
         public ActRange Range { get; set; }
         public int RequiredLevel { get; set; }
         public int ManaCost { get; set; }
 
-        public Spell(
-            Effect[] spellEffect,
-            ActRange range,
-            int requiredLevel,
-            int manaCost
-        ) {
-             SpellEffect = spellEffect;
-             Range = range;
-             RequiredLevel = requiredLevel;
-             ManaCost = manaCost;
+        public Spell() { }
+
+        public Spell(Effect[] spellEffect, ActRange range, int requiredLevel, int manaCost) {
+            SpellEffect = spellEffect;
+            Range = range;
+            RequiredLevel = requiredLevel;
+            ManaCost = manaCost;
         }
 
-        public Spell( 
-            Effect[] spellEffect,
-            int requiredLevel, 
-            int manaCost) 
-        {
-            var atk = spellEffect[1] as MagicAttack;
+        public Spell(Effect[] spellEffect, int requiredLevel, int manaCost) {
+            var atk = spellEffect.OfType<MagicAttack>().FirstOrDefault()
+                ?? throw new ArgumentException(
+                        "The spell must contain a MagicAttack effect to determine its range.",
+                        nameof(spellEffect));
+
             SpellEffect = spellEffect;
             Range = atk.attack().Range;
             RequiredLevel = requiredLevel;
