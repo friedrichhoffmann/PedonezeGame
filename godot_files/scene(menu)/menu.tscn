@@ -51,6 +51,7 @@
 [ext_resource type="Texture2D" uid="uid://bd8ktufy7o5v5" path="res://scene(menu)/botao(hover).png" id="48_7drnm"]
 [ext_resource type="FontFile" uid="uid://dcrfr3tb5o3v3" path="res://scene(menu)/PressStart2P-Regular.ttf" id="49_i5ggq"]
 [ext_resource type="Script" uid="uid://5e8h3gxfl1hd" path="res://scene(menu)/mudança_de_cena_menu.cs" id="51_sqf1t"]
+[ext_resource type="Texture2D" uid="uid://dq7wbedobwlsq" path="res://scene(menu)/selector.png" id="52_sqf1t"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jio4w"]
 animations = [{
@@ -196,18 +197,21 @@ animations = [{
 }]
 
 [node name="Node2D" type="Node2D" unique_id=1522833155]
-position = Vector2(243, 123)
+position = Vector2(242, 123)
 
 [node name="fundo_menu" type="AnimatedSprite2D" parent="." unique_id=1383925634]
+position = Vector2(334.00006, 200.99998)
+scale = Vector2(2.4, 2.7)
 sprite_frames = SubResource("SpriteFrames_jio4w")
 frame_progress = 0.84814185
 script = ExtResource("46_grwfa")
 
 [node name="Label" type="Label" parent="fundo_menu" unique_id=1095200785]
-offset_left = -198.0
-offset_top = 2.0
-offset_right = -54.0
-offset_bottom = 37.0
+texture_filter = 1
+offset_left = -213.61256
+offset_top = 18.046513
+offset_right = -69.612564
+offset_bottom = 53.046513
 theme_override_colors/font_color = Color(1, 1, 0.21568628, 1)
 theme_override_fonts/font = ExtResource("49_i5ggq")
 text = "Pedoneze 
@@ -217,9 +221,9 @@ metadata/_edit_use_anchors_ = true
 [node name="mudar_cena" type="TextureButton" parent="." unique_id=1900141566]
 texture_filter = 1
 offset_left = -177.0
-offset_top = 33.0
-offset_right = -95.0
-offset_bottom = 97.0
+offset_top = 354.0
+offset_right = 120.0
+offset_bottom = 496.0
 texture_normal = ExtResource("46_njo6b")
 texture_pressed = ExtResource("47_bsn7g")
 texture_hover = ExtResource("48_7drnm")
@@ -229,13 +233,28 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="mudar_cena" unique_id=55272514]
 texture_filter = 1
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24242425
+anchor_top = 0.23255815
+anchor_right = 0.44444445
+anchor_bottom = 0.23255815
 offset_left = 19.0
 offset_top = 27.0
 offset_right = 69.0
 offset_bottom = 50.0
 theme_override_colors/font_color = Color(1, 1, 0.21568628, 1)
 theme_override_fonts/font = ExtResource("49_i5ggq")
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 22
 text = "Jogar"
 metadata/_edit_use_anchors_ = true
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1776766408]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=1939489692]
+visible = false
+texture_filter = 1
+position = Vector2(-286.00003, 314)
+scale = Vector2(-1.2058749, 0.9520297)
+texture = ExtResource("52_sqf1t")

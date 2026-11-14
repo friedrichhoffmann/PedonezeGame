@@ -15,9 +15,9 @@ namespace InventoryAPIFile {
 		public void CloseInventory() => inventory.UpdateTOML(InventoryFilePath);
 		public List<Item> GetItemsAsList() => inventory.StoredItems;
 
-        public void Init() {
-            Inventory.InitializeTOML(InventoryFilePath);
-        }
+		public void Init() {
+			Inventory.InitializeTOML(InventoryFilePath);
+		}
 
 		public void AddItem(Item toAddItem) {
 			int foundItemIndex = inventory.StoredItems.FindIndex(iterItem => iterItem.Id == toAddItem.Id);
