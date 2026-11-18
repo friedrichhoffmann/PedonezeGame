@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yg4rsoa1chkr"
-path="res://.godot/imported/formigas pretas.png-bbc0238fd98909f3063a9ab1d6266027.ctex"
+uid="uid://b8sy7yesv6acs"
+path="res://.godot/imported/jeter_rolling_balls.png-770d518c9ffb968efb8b8a024af4e39c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://construções(mapa1)/formigas pretas.png"
-dest_files=["res://.godot/imported/formigas pretas.png-bbc0238fd98909f3063a9ab1d6266027.ctex"]
+source_file="res://jeter_rolling_balls.png"
+dest_files=["res://.godot/imported/jeter_rolling_balls.png-770d518c9ffb968efb8b8a024af4e39c.ctex"]
 
 [params]
 

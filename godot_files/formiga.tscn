@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://fttjgwr5n2bw"]
+
+[ext_resource type="Texture2D" uid="uid://b150inc8lhrdb" path="res://formigas pretas.png" id="1_gag3s"]
+[ext_resource type="Script" uid="uid://bjvwmm1witmyf" path="res://npc_path.cs" id="1_oyvov"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyvov"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqeb0"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4a2k"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vj6ga"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66p70"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djgs0"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obrcv"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyki1"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhv76"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmskd"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x6d4"]
+atlas = ExtResource("1_gag3s")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3016y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyvov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqeb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4a2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vj6ga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66p70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djgs0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obrcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyki1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhv76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmskd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1x6d4")
+}],
+"loop": 1,
+"name": &"Front",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1363031908]
+script = ExtResource("1_oyvov")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=405036785]
+sprite_frames = SubResource("SpriteFrames_3016y")
+animation = &"Front"

@@ -17,7 +17,6 @@ public partial class jester_script : CharacterBody2D
 
 	private int _currentMessageIndex = 0;
 	private bool _playerInside = false;
-	private bool _dialogueActive = false;
 
 	public override void _Ready()
 	{
@@ -25,11 +24,6 @@ public partial class jester_script : CharacterBody2D
 		_dialogueBubble = GetNode<Node2D>("DialogueBubble");
 		_dialogueLabel = GetNode<RichTextLabel>("DialogueBubble/Sprite2D2/RichTextLabel");
 		_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
-		SpriteFrames frames = _animatedSprite.SpriteFrames;
-
-		if (frames.HasAnimation("Rolling"))
-			frames.SetAnimationLoop("Rolling", true);
 
 		_dialogueTimer = new Timer();
 		AddChild(_dialogueTimer);
@@ -44,6 +38,9 @@ public partial class jester_script : CharacterBody2D
 		_detectionArea.BodyExited += OnBodyExited;
 
 		_animatedSprite.AnimationFinished += OnAnimationFinished;
+
+		_animatedSprite.SpriteFrames.SetAnimationLoop("Start", false);
+		_animatedSprite.SpriteFrames.SetAnimationLoop("Rolling", true);
 
 		_animatedSprite.Play("Front");
 	}
@@ -68,20 +65,15 @@ public partial class jester_script : CharacterBody2D
 
 	private void StartDialogue()
 	{
-		if (DialogueMessages.Count == 0)
-			return;
-
-		_dialogueActive = true;
 		_currentMessageIndex = 0;
 
 		_dialogueBubble.Show();
+		_animatedSprite.Play("Start");
+
+		if (DialogueMessages.Count == 0)
+			return;
+
 		ShowCurrentMessage();
-
-		if (_animatedSprite.SpriteFrames.HasAnimation("Shine"))
-			_animatedSprite.Play("Shine");
-		else
-			_animatedSprite.Play("Rolling");
-
 		_dialogueTimer.Start();
 	}
 
@@ -91,7 +83,8 @@ public partial class jester_script : CharacterBody2D
 
 		if (_currentMessageIndex >= DialogueMessages.Count)
 		{
-			EndDialogue();
+			_dialogueTimer.Stop();
+			_dialogueBubble.Hide();
 			return;
 		}
 
@@ -105,10 +98,6 @@ public partial class jester_script : CharacterBody2D
 
 	private void EndDialogue()
 	{
-		if (!_dialogueActive)
-			return;
-
-		_dialogueActive = false;
 		_dialogueTimer.Stop();
 		_dialogueBubble.Hide();
 
@@ -119,7 +108,7 @@ public partial class jester_script : CharacterBody2D
 
 	private void OnAnimationFinished()
 	{
-		if (_animatedSprite.Animation == "Shine" && _dialogueActive)
+		if (_animatedSprite.Animation == "Start" && _playerInside)
 			_animatedSprite.Play("Rolling");
 	}
 }

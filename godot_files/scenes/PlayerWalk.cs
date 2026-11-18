@@ -59,7 +59,7 @@ public partial class PlayerWalk : CharacterBody2D
 		MoveAndSlide();
 
 		// Don't restart the animation every physics frame.
-        if (animSprite.Animation != animation)
-            animSprite.Play(animation);
-    }
+		if (animSprite.Animation != animation)
+			animSprite.Play(animation);
+	}
 }

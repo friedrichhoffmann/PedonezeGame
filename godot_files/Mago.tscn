@@ -333,7 +333,7 @@ position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_5xhsl")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=715334623]
-navigation_layers = 128
+navigation_layers = 16
 avoidance_enabled = true
 radius = 20.0
 neighbor_distance = 50.0

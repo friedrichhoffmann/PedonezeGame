@@ -9,7 +9,9 @@ public partial class npc_script : CharacterBody2D
 		Left,
 		Right,
 		Back,
-		Working
+		Shine,
+		Working,
+		Idle
 	}
 
 	[Export]
@@ -130,7 +132,6 @@ public partial class npc_script : CharacterBody2D
 
 	private void PlayFacingAnimation()
 	{
-		// Reseta o flip antes de escolher a animação.
 		_animatedSprite.FlipH = false;
 
 		switch (Direction)
@@ -148,12 +149,20 @@ public partial class npc_script : CharacterBody2D
 				_animatedSprite.Play("Left");
 				break;
 
+			case FacingDirection.Shine:
+				_animatedSprite.Play("Shine");
+				break;
+
 			case FacingDirection.Back:
 				_animatedSprite.Play("Back");
 				break;
 
 			case FacingDirection.Working:
 				_animatedSprite.Play("Working");
+				break;
+
+			case FacingDirection.Idle:
+				_animatedSprite.Play("Idle");
 				break;
 		}
 	}
