@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://h33ufch7bcqs"]
+
+[ext_resource type="Script" uid="uid://cs8otf3ijajqu" path="res://Camera3d.cs" id="1_f37s4"]
+[ext_resource type="Texture2D" uid="uid://cb6uvaagf7qv2" path="res://star_wars.jpg" id="1_oqkmi"]
+[ext_resource type="Script" uid="uid://6ma31ypa0npg" path="res://Introduction.cs" id="1_qebxn"]
+
+[sub_resource type="FontVariation" id="FontVariation_lba0c"]
+spacing_space = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vrpp"]
+shading_mode = 0
+albedo_texture = ExtResource("1_oqkmi")
+
+[sub_resource type="QuadMesh" id="QuadMesh_7olc6"]
+material = SubResource("StandardMaterial3D_1vrpp")
+size = Vector2(20, 12)
+
+[node name="Node3D" type="Node3D" unique_id=630937993]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=723893429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+current = true
+fov = 40.0
+script = ExtResource("1_f37s4")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=153362612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 0.010037482, 1.7881393e-05)
+modulate = Color(1, 1, 0.24313726, 1)
+font = SubResource("FontVariation_lba0c")
+font_size = 48
+outline_size = 0
+vertical_alignment = 0
+line_spacing = 1.0
+autowrap_mode = 2
+width = 1000.0
+script = ExtResource("1_qebxn")
+Speed = 0.25
+EndPosition = 19.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1815479463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+mesh = SubResource("QuadMesh_7olc6")
