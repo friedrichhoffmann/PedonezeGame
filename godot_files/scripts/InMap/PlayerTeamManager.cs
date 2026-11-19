@@ -1,15 +1,12 @@
 using Godot;
 using GenericTeammateFile;
+using MainCharacterFile;
+using AllyFile;
 
 namespace PlayerTeamManagerFile;
 
 public partial class PlayerTeamManager : Node2D
 {
-    private const TeammateClass ARCHER   = TeammateClass.Archer;
-    private const TeammateClass WIZARD   = TeammateClass.Wizard;
-    private const TeammateClass CLERIC   = TeammateClass.Cleric;
-    private const TeammateClass GADIATOR = TeammateClass.Gladiator;
-    
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready() {
         string _objectPathPrefix = "scenes/ObjectsAsScenes/Characters";
@@ -24,11 +21,11 @@ public partial class PlayerTeamManager : Node2D
             _genericTeammate,
         ];
 
-        TeammateClass[] _playerTeamClasses = [
-            ARCHER,
-            WIZARD,
-            CLERIC,
-            GADIATOR,
+        MainCharacter[] _playerTeamClasses = [
+            Archer.archer,
+            Cleric.cleric,
+            Gladiator.gladiator,
+            Wizard.wizard
         ];
 
         // Spread the team out in a horizontal line, 32 px apart, centred on the manager.
@@ -44,8 +41,8 @@ public partial class PlayerTeamManager : Node2D
         for (int i = 0; i < _playerTeamScenes.Length; i++) {
             var _teammateNode = _playerTeamScenes[i].Instantiate<GenericTeammate>();
 
-            _teammateNode.MateClass = _playerTeamClasses[i];
-            _teammateNode.Torch = _teammateNode.MateClass == TeammateClass.Cleric;
+            _teammateNode.CharacterClass = _playerTeamClasses[i];
+            _teammateNode.Torch = _teammateNode.CharacterClass is Cleric;
             _teammateNode.Position = _spawnOffsets[i]; // set before AddChild so it is applied on entry
 
             AddChild(_teammateNode);

@@ -3,30 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using ClockFile;
+using MainCharacterFile;
 
 namespace GenericTeammateFile;
 
-public enum TeammateClass {
-    Archer,
-    Cleric,
-    Gladiator,
-    Wizard
-}
-
 public partial class GenericTeammate : CharacterBody2D {
-
-
     private bool torch;
-
     private string objectSenePrefix = "scenes/ObjectsAsScenes/Characters";
 
 
     [Export] public float Speed = 300.0f;
     [Export] public float Acceleration = 1500.0f; // how fast it reaches full speed
     [Export] public float Deceleration = 1800.0f; // how fast it stops (was 100, which caused the glide)
+    
+    public bool InBattle = false;
+    public MainCharacter CharacterClass { get; set; } 
 
-
-    public TeammateClass MateClass { get; set; }
     public bool Torch {
         get => torch;
         set {
@@ -57,6 +49,8 @@ public partial class GenericTeammate : CharacterBody2D {
     public override void _Ready() {
         try {
             var shape = GetNodeOrNull<CollisionShape2D>("Collision");
+            GD.Print(CharacterClass?.GetType().FullName);
+
             SetAnimatedSprite2D();
             if (!Torch) SetNavigation();
         }
@@ -207,27 +201,36 @@ public partial class GenericTeammate {
 public partial class GenericTeammate {
 
     private string GetAnimatedSpriteScenePath() {
-        return MateClass switch {
-            TeammateClass.Archer    => $"res://{objectSenePrefix}/AnimatedSprites/Archer.tscn",
-            TeammateClass.Cleric    => $"res://{objectSenePrefix}/AnimatedSprites/Cleric.tscn",
-            TeammateClass.Gladiator => $"res://{objectSenePrefix}/AnimatedSprites/Gladiator.tscn",
-            TeammateClass.Wizard    => $"res://{objectSenePrefix}/AnimatedSprites/Wizard.tscn",
+        return CharacterClass switch {
+            AllyFile.Archer    => $"res://{objectSenePrefix}/AnimatedSprites/Archer.tscn",
+            AllyFile.Cleric    => $"res://{objectSenePrefix}/AnimatedSprites/Cleric.tscn",
+            AllyFile.Gladiator => $"res://{objectSenePrefix}/AnimatedSprites/Gladiator.tscn",
+            AllyFile.Wizard    => $"res://{objectSenePrefix}/AnimatedSprites/Wizard.tscn",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
 
     private void SetAnimatedSprite2D() {
-        if (GetNodeOrNull("Spr/AnimatedSprite2D") != null)
+        var spr = GetNodeOrNull<Node2D>("Spr");
+        if (spr == null) {
+            GD.PrintErr($"{Name}: missing Spr; path={GetPath()}");
             return;
+        }
 
         string path = GetAnimatedSpriteScenePath();
+        GD.Print($"For {CharacterClass?.GetType().Name}: {path}");
 
-        Node2D animationRoot = GetNode<Node2D>("Spr");
-        PackedScene packedAnimationScene = ResourceLoader.Load<PackedScene>(path);
+        var packed = ResourceLoader.Load<PackedScene>(path);
+        if (packed == null) {
+            GD.PrintErr($"{Name}: could not load animation scene: {path}");
+            return;
+        }
 
-        AnimatedSprite2D animationNode = packedAnimationScene.Instantiate<AnimatedSprite2D>();
+        var animationNode = packed.Instantiate();
         animationNode.Name = "AnimatedSprite2D";
-        animationRoot.AddChild(animationNode);
+        spr.AddChild(animationNode);
+
+        GD.Print($"{Name}: added {animationNode.GetPath()} ({animationNode.GetClass()})");
     }
 
     private string GetAnimation(Vector2 direction) {

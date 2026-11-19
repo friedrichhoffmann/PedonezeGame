@@ -7,10 +7,13 @@ using static EventSystem.EventHandler;
 public partial class CameraCanvasManager : Node
 {
     [Export] public NodePath BookPath { get; set; } = "CanvasLayer/UI/Book";
+    [Export] public NodePath CombatPath { get; set; } = "CanvasLayer/UI/Combat";
 
+    public  Control Combat = null!;
     private Control Book = null!;
-    private AnimationPlayer BookPageAnim = null!;
-    private AnimationPlayer BookHelpAnim = null!;
+    private AnimationPlayer localAnimationPlayer = null!;
+    private AnimationPlayer bookPageAnim = null!;
+    private AnimationPlayer bookHelpAnim = null!;
 
     private static readonly Func<Node, Event> ToggleVis = ctrl => new Event(
         "Visibility Toggle",
@@ -32,11 +35,25 @@ public partial class CameraCanvasManager : Node
             EventBody.Animation(anim, name)
         );
 
+    public Event FadeIn;
+    public Event FadeOut;
+
     public override void _Ready()
     {
         Book = GetNode<Control>(BookPath);
-        BookPageAnim = Book.GetNode<AnimationPlayer>("AnimationPlayer");
-        BookHelpAnim = Book.GetNode<AnimationPlayer>("HelpMenuPlayer");
+        bookPageAnim = Book.GetNode<AnimationPlayer>("AnimationPlayer");
+        bookHelpAnim = Book.GetNode<AnimationPlayer>("HelpMenuPlayer");
+
+        localAnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        FadeIn = new Event( "Play animation", EventKind.Animation,
+            EventBody.Animation(localAnimationPlayer, "FadeIn")
+        );
+        FadeOut = new Event( "Play animation", EventKind.Animation,
+            EventBody.Animation(localAnimationPlayer, "FadeOut")
+        );
+
+        Combat = GetNode<Control>(CombatPath);
 
         _ = PrepareBookLayout();
     }
@@ -83,13 +100,13 @@ public partial class CameraCanvasManager : Node
     {
         if (!Book.Visible)
         {
-            ThrowEvent(PlayAnimMS(BookPageAnim, "OpenBook", 0));
-            ThrowEvent(PlayAnimMS(BookHelpAnim, "InThenOutHelpMenu", 0));
+            ThrowEvent(PlayAnimMS(bookPageAnim, "OpenBook", 0));
+            ThrowEvent(PlayAnimMS(bookHelpAnim, "InThenOutHelpMenu", 0));
             ThrowEvent(ToggleVis(Book));
         }
         else
         {
-            ThrowEvent(PlayAnim(BookPageAnim, "CloseBook"));
+            ThrowEvent(PlayAnim(bookPageAnim, "CloseBook"));
             ThrowEvent(ToggleVis(Book));
         }
     }

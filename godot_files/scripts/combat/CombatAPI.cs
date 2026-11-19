@@ -20,7 +20,7 @@ namespace CombatAPI {
 	    Inventory,    		
 	}
 
-	class Battle {
+	public class Battle {
 	    private int OrganizeList(Combatant one, Combatant two) {
 	        return two.InitiativeBonus.CompareTo(one.InitiativeBonus);
 	    }

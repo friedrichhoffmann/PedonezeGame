@@ -1,4 +1,8 @@
+using CombatStarterFile;
+using GenericTeammateFile;
 using Godot;
+
+using static PreMadeEnemies.Enemies;
 
 public partial class enemy_script : CharacterBody2D
 {
@@ -32,7 +36,7 @@ public partial class enemy_script : CharacterBody2D
 
 	private void OnBodyEntered(Node2D body)
 	{
-		if (!body.IsInGroup("player"))
+		if (!body.IsInGroup("PlayerTeam"))
 			return;
 
 		if (_state != EnemyState.Idle)
@@ -95,14 +99,10 @@ public partial class enemy_script : CharacterBody2D
 
 	private void ChangeToBattle()
 	{
-		Error error = GetTree().ChangeSceneToFile(
-            "res://scenes/battle.tscn"
-		);
-
-		if (error != Error.Ok)
-		{
-			GD.PrintErr($"Erro ao carregar a cena de combate: {error}");
-		}
+        Node _combatStarterNode = GetTree().Root.FindChild("CombatStarter");
+        CombatStarter _combatStarter = _combatStarterNode.GetNode<CombatStarter>("CombatStarter");
+        GenericTeammate _targetTeammate = _player.GetNode<GenericTeammate>("GenericTeammate");
+        _combatStarter.Start([banditOne()], _targetTeammate);
 	}
 
 	private void UpdateAnimation(Vector2 direction)

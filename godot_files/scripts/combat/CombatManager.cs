@@ -85,77 +85,72 @@ namespace CombatManagerFile {
             }
 		}
 
-        // Called when the node enters the scene tree for the first time.
-		// public override void _Ready() {
-		//           menu = GetNode<ItemList>("UI/Menu/MenuBg/MenuList");
-		//
-		//           animationManager = GetNode<AnimationPlayer>("/root/Control/AnimationPlayer");
-		//           InventoryAPI inv = new();
-		//           inv.Init();
-		//
-		//     // battle.HeroJoinBattle(Player.player);
-		//
-		//           Combatant.All = new List<Combatant>();
-		//
-		//           Combatant.All.Add(banditOne());
-		//           Combatant.All.Add(banditTwo());
-		//           Combatant.All.Add(Cleric.cleric);
-		//           Combatant.All.Add(Gladiator.gladiator);
-		//           Combatant.All.Add(Wizard.wizard);
-		//           Combatant.All.Add(Archer.archer);
-		//
-		//     battle.InitiativeTest();
-		//
-		//           foreach (Combatant comb in Combatant.All) {
-		//               if (comb is Enemy enm) {
-		//                   switch (enm) {
-		//                       case Bandit        bandit:               bandit.SetAttacksUp(); break;
-		//                       case Plebeian      plebeian:           plebeian.SetAttacksUp(); break;
-		//                       case TribalWarrior tribalWarrior: tribalWarrior.SetAttacksUp(); break;
-		//                       case BanditCaptain banditCaptain: banditCaptain.SetAttacksUp(); break;
-		//                       case BigRat        bigRat:               bigRat.SetAttacksUp(); break;
-		//                       case Boar          boar:                   boar.SetAttacksUp(); break;
-		//                       case Deer          deer:                   deer.SetAttacksUp(); break;
-		//                       case ItalianWolf   italianWolf:     italianWolf.SetAttacksUp(); break;
-		//                       case BrownBear     brownBear:         brownBear.SetAttacksUp(); break;
-		//                       case BigBoar       bigBoar:             bigBoar.SetAttacksUp(); break;
-		//                       case BigDeer       bigDeer:             bigDeer.SetAttacksUp(); break;
-		//                       case Hippopotamus  hippopotamus:   hippopotamus.SetAttacksUp(); break;
-		//                       case Unicorn       unicorn:             unicorn.SetAttacksUp(); break;
-		//
-		//                       default:
-		//                           GD.PrintErr($"No attack setup is defined for {enm.GetType().Name} ({enm.Name}).");
-		//                           break;
-		//                   }
-		//               }
-		//               else if (comb is MainCharacter mainCharacter) {
-		//                   switch (mainCharacter) {
-		//                       case Gladiator gladiator: gladiator.SetSpellsUp(); break;
-		//                       case Cleric    cleric:       cleric.SetSpellsUp(); break;
-		//                       case Archer    archer:       archer.SetSpellsUp(); break;
-		//                       case Wizard    wizard:       wizard.SetSpellsUp(); break;
-		//
-		//                       default:
-		//                           GD.PrintErr($"No spell setup is defined for {mainCharacter.GetType().Name} ({mainCharacter.Name}).");
-		//                           break;
-		//                   }
-		//               }
-		//           }
-		//
-		//
-		//           SpawnCards.SpawnPlayerCards(
-		//                   Combatant.All.Where(comb => comb is MainCharacter)
-		//                   .Cast<MainCharacter>().ToArray()
-		//           );
-		//
-		//           SpawnCards.SpawnEnemyCards(
-		//                   Combatant.All.Where(comb => comb is Enemy)
-		//                   .Cast<Enemy>().ToArray()
-		//           );
-		//
-		//           menu.ItemActivated += OnItemActivated;
-		//     _ = battle.StartBattle();
-		//       }
+        public override void _Ready() {
+            menu = GetNode<ItemList>("UI/Menu/MenuBg/MenuList");
+            animationManager = GetNode<AnimationPlayer>("/root/Control/AnimationPlayer");
+            InventoryAPI inv = new();
+            Combatant.All = new();
+            inv.Init();
+        }
+
+        private static void SetUpCombatants() {
+            foreach (Combatant comb in Combatant.All) {
+                if (comb is Enemy enm) {
+                    switch (enm) {
+                        case Bandit        bandit:               bandit.SetAttacksUp(); break;
+                        case Plebeian      plebeian:           plebeian.SetAttacksUp(); break;
+                        case TribalWarrior tribalWarrior: tribalWarrior.SetAttacksUp(); break;
+                        case BanditCaptain banditCaptain: banditCaptain.SetAttacksUp(); break;
+                        case BigRat        bigRat:               bigRat.SetAttacksUp(); break;
+                        case Boar          boar:                   boar.SetAttacksUp(); break;
+                        case Deer          deer:                   deer.SetAttacksUp(); break;
+                        case ItalianWolf   italianWolf:     italianWolf.SetAttacksUp(); break;
+                        case BrownBear     brownBear:         brownBear.SetAttacksUp(); break;
+                        case BigBoar       bigBoar:             bigBoar.SetAttacksUp(); break;
+                        case BigDeer       bigDeer:             bigDeer.SetAttacksUp(); break;
+                        case Hippopotamus  hippopotamus:   hippopotamus.SetAttacksUp(); break;
+                        case Unicorn       unicorn:             unicorn.SetAttacksUp(); break;
+
+                        default:
+                            GD.PrintErr($"No attack setup is defined for {enm.GetType().Name} ({enm.Name}).");
+                            break;
+                    }
+                }
+                else if (comb is MainCharacter mainCharacter) {
+                    switch (mainCharacter) {
+                        case Gladiator gladiator: gladiator.SetSpellsUp(); break;
+                        case Cleric    cleric:       cleric.SetSpellsUp(); break;
+                        case Archer    archer:       archer.SetSpellsUp(); break;
+                        case Wizard    wizard:       wizard.SetSpellsUp(); break;
+
+                        default:
+                            GD.PrintErr($"No spell setup is defined for {mainCharacter.GetType().Name} ({mainCharacter.Name}).");
+                            break;
+                    }
+                }
+            }
+        }
+
+        public void SpawnCombatantCards() {
+            SpawnCards.SpawnPlayerCards(
+                Combatant.All.Where(comb => comb is MainCharacter)
+                .Cast<MainCharacter>().ToArray()
+            );
+            SpawnCards.SpawnEnemyCards(
+                Combatant.All.Where(comb => comb is Enemy)
+                .Cast<Enemy>().ToArray()
+            );
+        }
+
+		public Battle Start(Combatant[] combatants) {
+		    Combatant.All.AddRange(combatants);
+		    battle.InitiativeTest();
+            SetUpCombatants();
+            SpawnCombatantCards();
+
+            menu.ItemActivated += OnItemActivated;
+            return battle;
+        }
 
         private static Task<int> WaitForActiveAsync() {
             _clickSource = new TaskCompletionSource<int>(
