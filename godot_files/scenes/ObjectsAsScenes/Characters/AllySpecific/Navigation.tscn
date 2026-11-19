@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bgoqbaa1nxflb"]
 
 [node name="Navigation" type="NavigationAgent2D" unique_id=1318931836]
-navigation_layers = 128
+navigation_layers = 16
 avoidance_enabled = true
 radius = 20.0
 neighbor_distance = 50.0

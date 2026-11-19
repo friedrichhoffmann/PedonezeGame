@@ -7,6 +7,7 @@ using GenericEnemy;
 using EventSystem;
 using MagicSystem;
 using Dice;
+using GenericTeammateFile;
 
 
 using static CombatManagerFile.CombatManager;
@@ -92,6 +93,14 @@ namespace CombatAPI {
                             mainComb.Card.UpdateValues(mainComb);
 
                         if (comb.Health <= 0) {
+                            if (comb is MainCharacter deadMainChar) {
+                                var teammateNode = animationManager.GetTree()
+                                    .GetNodesInGroup("teammates")
+                                    .OfType<GenericTeammate>()
+                                    .FirstOrDefault(teammate => teammate.CharacterClass == deadMainChar);
+
+                                teammateNode?.QueueFree();
+                            }
                             Combatant.All.Remove(comb);
                             continue;
                         }

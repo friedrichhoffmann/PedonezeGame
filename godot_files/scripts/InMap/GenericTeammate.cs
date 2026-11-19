@@ -11,13 +11,12 @@ public partial class GenericTeammate : CharacterBody2D {
     private bool torch;
     private string objectSenePrefix = "scenes/ObjectsAsScenes/Characters";
 
-
     [Export] public float Speed = 300.0f;
     [Export] public float Acceleration = 1500.0f; // how fast it reaches full speed
-    [Export] public float Deceleration = 1800.0f; // how fast it stops (was 100, which caused the glide)
-    
+    [Export] public float Deceleration = 1800.0f; // how fast it stops
+
     public bool InBattle = false;
-    public MainCharacter CharacterClass { get; set; } 
+    public MainCharacter CharacterClass { get; set; }
 
     public bool Torch {
         get => torch;
@@ -29,6 +28,7 @@ public partial class GenericTeammate : CharacterBody2D {
                 if (current != null && current != this)
                     current.torch = false;
             }
+
             torch = value;
         }
     }
@@ -43,10 +43,13 @@ public partial class GenericTeammate : CharacterBody2D {
     }
 
 #nullable enable
-    public GenericTeammate? GetTorchHolder() => GetTeam().FirstOrDefault(tm => tm.Torch);
+    public GenericTeammate? GetTorchHolder() =>
+        GetTeam().FirstOrDefault(tm => tm.Torch);
 #nullable disable
 
     public override void _Ready() {
+        AddToGroup("teammates");
+
         try {
             var shape = GetNodeOrNull<CollisionShape2D>("Collision");
             GD.Print(CharacterClass?.GetType().FullName);
@@ -59,9 +62,26 @@ public partial class GenericTeammate : CharacterBody2D {
         }
     }
 
+    public override void _ExitTree() {
+        // If this teammate is leaving while holding the torch,
+        // give it to another teammate before this node is removed.
+        if (!Torch)
+            return;
+
+        GenericTeammate nextHolder = GetTeam()
+            .FirstOrDefault(tm => tm != this && !tm.IsQueuedForDeletion());
+
+        if (nextHolder != null) {
+            nextHolder.Torch = true;
+            GD.Print($"{Name}: passed the torch to {nextHolder.Name}");
+        }
+    }
+
     public override void _PhysicsProcess(double delta) {
-        if (Torch) Move(delta, PlayerMovementInput());
-        else Move(delta, FollowTorch(delta));
+        if (Torch)
+            Move(delta, PlayerMovementInput());
+        else
+            Move(delta, FollowTorch(delta));
     }
 
     public void Move(double delta, Vector2 direction) {
@@ -90,9 +110,11 @@ public partial class GenericTeammate : CharacterBody2D {
 // Player Only Methods
 public partial class GenericTeammate {
     private void SetCamera() {
-        string cameraScenePath = $"res://scenes/ObjectsAsScenes/Others/InMapCamera.tscn";
+        string cameraScenePath =
+            "res://scenes/ObjectsAsScenes/Others/InMapCamera.tscn";
 
-        PackedScene packedCameraScene = ResourceLoader.Load<PackedScene>(cameraScenePath);
+        PackedScene packedCameraScene =
+            ResourceLoader.Load<PackedScene>(cameraScenePath);
 
         Camera2D cameraNode = packedCameraScene.Instantiate<Camera2D>();
         AddChild(cameraNode);
@@ -107,8 +129,6 @@ public partial class GenericTeammate {
 
 // Ally Only Methods
 public partial class GenericTeammate {
-
-
     private const int FOLLOWING = 1;
     private const int WAITING = 0;
 
@@ -120,19 +140,24 @@ public partial class GenericTeammate {
     [Export] public float StopDistance = 4.0f;
 
 #nullable enable
-    private NavigationAgent2D GetNavigation() => GetNode<NavigationAgent2D>("Nav/Navigation");
+    private NavigationAgent2D GetNavigation() =>
+        GetNode<NavigationAgent2D>("Nav/Navigation");
 #nullable disable
 
     private void SetNavigation() {
         if (GetNodeOrNull("Nav/Navigation") != null)
             return;
 
-        string navigationScenePath = $"res://{objectSenePrefix}/AllySpecific/Navigation.tscn";
+        string navigationScenePath =
+            $"res://{objectSenePrefix}/AllySpecific/Navigation.tscn";
 
         Node2D navigationRoot = GetNode<Node2D>("Nav");
-        PackedScene packedNavigationScene = ResourceLoader.Load<PackedScene>(navigationScenePath);
+        PackedScene packedNavigationScene =
+            ResourceLoader.Load<PackedScene>(navigationScenePath);
 
-        NavigationAgent2D navigationNode = packedNavigationScene.Instantiate<NavigationAgent2D>();
+        NavigationAgent2D navigationNode =
+            packedNavigationScene.Instantiate<NavigationAgent2D>();
+
         navigationNode.Name = "Navigation";
         navigationRoot.AddChild(navigationNode);
     }
@@ -147,9 +172,6 @@ public partial class GenericTeammate {
             return Vector2.Zero;
         }
 
-        if (holder == null)
-            return Vector2.Zero;
-
         UpdatePlayerTail();
 
         var followers = GetTeam()
@@ -159,7 +181,8 @@ public partial class GenericTeammate {
         int slot = Array.IndexOf(followers, this);
         Vector2 side = new Vector2(-playerTail.Y, playerTail.X);
         float spacing = 36.0f;
-        float lateralOffset = (slot - (followers.Length - 1) / 2.0f) * spacing;
+        float lateralOffset =
+            (slot - (followers.Length - 1) / 2.0f) * spacing;
 
         Vector2 targetPosition =
             holder.GlobalPosition
@@ -173,7 +196,7 @@ public partial class GenericTeammate {
 
         float distance = GlobalPosition.DistanceTo(targetPosition);
 
-        // Hysteresis: stop when close, only resume once the holder has pulled far enough away.
+        // Stop when close; resume only once the holder has pulled farther away.
         if (state == FOLLOWING && distance <= StopDistance)
             state = WAITING;
         else if (state == WAITING && distance > ResumeDistance)
@@ -183,7 +206,9 @@ public partial class GenericTeammate {
             return Vector2.Zero;
 
         // Use the navmesh path if one exists, otherwise walk straight at the target.
-        Vector2 nextPosition = nav.IsNavigationFinished() ? targetPosition : nav.GetNextPathPosition();
+        Vector2 nextPosition =
+            nav.IsNavigationFinished() ? targetPosition : nav.GetNextPathPosition();
+
         return GlobalPosition.DirectionTo(nextPosition);
     }
 
@@ -191,21 +216,24 @@ public partial class GenericTeammate {
 #nullable enable
         GenericTeammate? holder = GetTorchHolder();
 #nullable disable
+
         if (holder != null && holder.Velocity.Length() > 5.0f)
             playerTail = holder.Velocity.Normalized();
     }
 }
 
-
 // Animation Related Methods
 public partial class GenericTeammate {
-
     private string GetAnimatedSpriteScenePath() {
         return CharacterClass switch {
-            AllyFile.Archer    => $"res://{objectSenePrefix}/AnimatedSprites/Archer.tscn",
-            AllyFile.Cleric    => $"res://{objectSenePrefix}/AnimatedSprites/Cleric.tscn",
-            AllyFile.Gladiator => $"res://{objectSenePrefix}/AnimatedSprites/Gladiator.tscn",
-            AllyFile.Wizard    => $"res://{objectSenePrefix}/AnimatedSprites/Wizard.tscn",
+            AllyFile.Archer =>
+                $"res://{objectSenePrefix}/AnimatedSprites/Archer.tscn",
+            AllyFile.Cleric =>
+                $"res://{objectSenePrefix}/AnimatedSprites/Cleric.tscn",
+            AllyFile.Gladiator =>
+                $"res://{objectSenePrefix}/AnimatedSprites/Gladiator.tscn",
+            AllyFile.Wizard =>
+                $"res://{objectSenePrefix}/AnimatedSprites/Wizard.tscn",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -234,27 +262,34 @@ public partial class GenericTeammate {
     }
 
     private string GetAnimation(Vector2 direction) {
-        if (direction == Vector2.Zero) return "Idle";
+        if (direction == Vector2.Zero)
+            return "Idle";
 
-        int[] AxisDirection = (Mathf.Abs(direction.X) > Mathf.Abs(direction.Y)) ?
-            [Mathf.Sign(direction.X),0] : [0,Mathf.Sign(direction.Y)];
+        int[] AxisDirection =
+            (Mathf.Abs(direction.X) > Mathf.Abs(direction.Y))
+                ? [Mathf.Sign(direction.X), 0]
+                : [0, Mathf.Sign(direction.Y)];
 
         return AxisDirection switch {
             [1, 0] => "Right",
-            [-1,0] => "Left",
+            [-1, 0] => "Left",
             [0, 1] => "Front",
             [0, -1] => "Back",
             _ => "Idle"
         };
     }
+
     private void Animate(Vector2 direction) {
 #nullable enable
-        AnimatedSprite2D? anim = GetNodeOrNull<AnimatedSprite2D>("Spr/AnimatedSprite2D");
+        AnimatedSprite2D? anim =
+            GetNodeOrNull<AnimatedSprite2D>("Spr/AnimatedSprite2D");
 #nullable disable
+
         if (anim == null) {
             GD.PrintErr($"{Name}: no AnimatedSprite2D found under Spr");
             return;
         }
+
         if (anim.SpriteFrames == null) {
             GD.PrintErr($"{Name}: AnimatedSprite2D has no SpriteFrames");
             return;
@@ -263,16 +298,19 @@ public partial class GenericTeammate {
         string animation = GetAnimation(direction);
 
         anim.FlipH = animation == "Right";
-        if (anim.FlipH) animation = "Left";
+        if (anim.FlipH)
+            animation = "Left";
 
         if (!anim.SpriteFrames.HasAnimation(animation)) {
-            GD.PrintErr($"{Name}: animation '{animation}' not in SpriteFrames. Available: {string.Join(", ", anim.SpriteFrames.GetAnimationNames())}");
+            GD.PrintErr(
+                $"{Name}: animation '{animation}' not in SpriteFrames. " +
+                $"Available: {string.Join(", ", anim.SpriteFrames.GetAnimationNames())}"
+            );
             return;
         }
 
         if (anim.Animation != animation || !anim.IsPlaying())
             anim.Play(animation);
     }
-
 }
 

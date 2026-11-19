@@ -119,20 +119,27 @@ public partial class CameraCanvasManager : Node
 			ThrowEvent(ToggleVis(Book));
 		}
 	}
-
-	public async Task ShowCombat(Battle _bat)
-	{
+    public async Task ShowCombat(Battle battle, Node invokingEnemy) {
         Book.Hide();
         ThrowEvent(FadeIn);
-		ThrowEvent(ToggleVis(Combat));
+
+        foreach (Node node in invokingEnemy.GetParent().GetChildren())
+            node.QueueFree();
+
+        Combat.Show();
         ThrowEvent(FadeOut);
-        if(await _bat.StartBattle()) {
-            ThrowEvent(FadeIn);
-            ThrowEvent(ToggleVis(Combat));
-            ThrowEvent(FadeOut);
-        } else {
-            // to do: game over
+
+        bool heroesWon = await battle.StartBattle();
+
+        ThrowEvent(FadeIn);
+        Combat.Hide();
+        ThrowEvent(FadeOut);
+
+        if (!heroesWon)
+        {
+            // TODO: game over
             return;
         }
-	}
+    }
+
 }

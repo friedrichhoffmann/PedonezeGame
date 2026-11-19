@@ -4,6 +4,7 @@ using GenericTeammateFile;
 using CombatStarterFile;
 
 using static PreMadeEnemies.Enemies;
+using System.Collections.Generic;
 
 public partial class enemy_script : CharacterBody2D
 {
@@ -126,9 +127,15 @@ public partial class enemy_script : CharacterBody2D
             return;
         }
 
-        var battle = combatStarter.Start([banditOne()], _player);
-        cameraManager.ShowCombat(battle);
 
+        List<GenericEnemy.Enemy> enemyTeam = new();
+        foreach (CharacterBody2D enemy in GetParent().GetChildren()) {
+            if (enemy.Name.ToString().Contains("Bear"))        enemyTeam.Add(BROWNBEAR());
+            else if (enemy.Name.ToString().Contains("Bandit")) enemyTeam.Add(banditOne());
+        }
+
+        var battle = combatStarter.Start([.. enemyTeam], _player);
+        _ = cameraManager.ShowCombat(battle, this);
 	}
 
 	private void UpdateAnimation(Vector2 direction)

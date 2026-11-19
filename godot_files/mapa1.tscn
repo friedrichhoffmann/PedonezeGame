@@ -5804,22 +5804,63 @@ Direction = 5
 [node name="Enemy NPC" type="TileMapLayer" parent="tilemap" unique_id=1337173216]
 position = Vector2(0, -3)
 
-[node name="Bandit" parent="tilemap/Enemy NPC" unique_id=1202860110 instance=ExtResource("8_kdyq4")]
+[node name="Bear" type="Node2D" parent="tilemap/Enemy NPC" unique_id=87228492]
+
+[node name="Bear" parent="tilemap/Enemy NPC/Bear" unique_id=384171377 instance=ExtResource("18_4oo3c")]
+z_index = 1
+position = Vector2(6959, 2749)
+scale = Vector2(3, 3)
+
+[node name="Bear2" type="Node2D" parent="tilemap/Enemy NPC" unique_id=1504100253]
+
+[node name="Bear" parent="tilemap/Enemy NPC/Bear2" unique_id=1363561156 instance=ExtResource("18_4oo3c")]
+z_index = 1
+position = Vector2(3102, 4775)
+scale = Vector2(3, 3)
+
+[node name="BanditPair3" type="Node2D" parent="tilemap/Enemy NPC" unique_id=1270839366]
+position = Vector2(-31, 2903)
+
+[node name="Bandit" parent="tilemap/Enemy NPC/BanditPair3" unique_id=2000299977 instance=ExtResource("8_kdyq4")]
 z_index = 1500
 position = Vector2(3692, 1208)
 script = ExtResource("17_y0tra")
 Speed = 90.0
 
-[node name="Bandit2" parent="tilemap/Enemy NPC" unique_id=682121013 instance=ExtResource("8_kdyq4")]
+[node name="Bandit2" parent="tilemap/Enemy NPC/BanditPair3" unique_id=1453594219 instance=ExtResource("8_kdyq4")]
+z_index = 1500
+position = Vector2(3888, 933)
+script = ExtResource("17_y0tra")
+Speed = 90.0
+
+[node name="BanditPair2" type="Node2D" parent="tilemap/Enemy NPC" unique_id=1962123348]
+position = Vector2(-1427, -1235)
+
+[node name="Bandit" parent="tilemap/Enemy NPC/BanditPair2" unique_id=813751573 instance=ExtResource("8_kdyq4")]
+z_index = 1500
+position = Vector2(3692, 1208)
+script = ExtResource("17_y0tra")
+Speed = 90.0
+
+[node name="Bandit2" parent="tilemap/Enemy NPC/BanditPair2" unique_id=945147907 instance=ExtResource("8_kdyq4")]
 z_index = 1500
 position = Vector2(3744, 1208)
 script = ExtResource("17_y0tra")
 Speed = 90.0
 
-[node name="Bear" parent="tilemap/Enemy NPC" unique_id=384171377 instance=ExtResource("18_4oo3c")]
-z_index = 1
-position = Vector2(6959, 2749)
-scale = Vector2(3, 3)
+[node name="BanditPair" type="Node2D" parent="tilemap/Enemy NPC" unique_id=407776195]
+
+[node name="Bandit" parent="tilemap/Enemy NPC/BanditPair" unique_id=1202860110 instance=ExtResource("8_kdyq4")]
+z_index = 1500
+position = Vector2(3692, 1208)
+script = ExtResource("17_y0tra")
+Speed = 90.0
+
+[node name="Bandit2" parent="tilemap/Enemy NPC/BanditPair" unique_id=682121013 instance=ExtResource("8_kdyq4")]
+z_index = 1500
+position = Vector2(3744, 1208)
+script = ExtResource("17_y0tra")
+Speed = 90.0
 
 [node name="folhas" type="TileMapLayer" parent="tilemap" unique_id=907662371]
 light_mask = 512
