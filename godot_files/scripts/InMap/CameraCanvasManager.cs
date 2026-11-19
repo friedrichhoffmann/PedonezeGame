@@ -126,19 +126,19 @@ public partial class CameraCanvasManager : Node
         foreach (Node node in invokingEnemy.GetParent().GetChildren())
             node.QueueFree();
 
-        Combat.Show();
+        ThrowEvent(ToggleVis(Combat));
         ThrowEvent(FadeOut);
 
         bool heroesWon = await battle.StartBattle();
 
         ThrowEvent(FadeIn);
-        Combat.Hide();
+        ThrowEvent(ToggleVis(Combat));
         ThrowEvent(FadeOut);
 
         if (!heroesWon)
         {
-            // TODO: game over
-            return;
+            string pathToGameOverScene = "res://game_over.tscn";
+            GetTree().ChangeSceneToFile(pathToGameOverScene);
         }
     }
 
