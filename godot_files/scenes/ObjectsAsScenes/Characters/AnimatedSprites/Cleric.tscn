@@ -184,5 +184,22 @@ z_index = 100
 texture_filter = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_bkp3o")
+<<<<<<< HEAD:godot_files/scenes/ObjectsAsScenes/Characters/AnimatedSprites/Cleric.tscn
 animation = &"Back"
 frame_progress = 0.88629776
+=======
+animation = &"Right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1673891875]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_62t01")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=28487220]
+navigation_layers = 16
+avoidance_enabled = true
+radius = 20.0
+neighbor_distance = 50.0
+max_speed = 110.0
+avoidance_layers = 128
+avoidance_mask = 128
+>>>>>>> refs/remotes/origin/main:godot_files/cleric.tscn

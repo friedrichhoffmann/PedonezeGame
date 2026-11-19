@@ -296,4 +296,21 @@ z_index = 100
 texture_filter = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_knv3h")
+<<<<<<< HEAD:godot_files/scenes/ObjectsAsScenes/Characters/AnimatedSprites/Archer.tscn
 animation = &"Back"
+=======
+animation = &"Right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=312789850]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_nsyys")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1747101457]
+navigation_layers = 16
+avoidance_enabled = true
+radius = 20.0
+neighbor_distance = 50.0
+max_speed = 110.0
+avoidance_layers = 128
+avoidance_mask = 128
+>>>>>>> refs/remotes/origin/main:godot_files/archer.tscn

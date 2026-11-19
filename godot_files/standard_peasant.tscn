@@ -207,7 +207,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"Back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -233,7 +233,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"Front",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -250,7 +250,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"Left",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -403,9 +403,9 @@ offset_bottom = 55.714294
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 65
 bbcode_enabled = true
-text = "Placeholder
-"
+text = "Placeholder"
 autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=719489482]
 light_mask = 512
@@ -413,4 +413,4 @@ visibility_layer = 512
 z_index = 100
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_g7rda")
-animation = &"Front"
+animation = &"Back"

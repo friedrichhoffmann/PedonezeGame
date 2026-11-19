@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://kkpt3718k4bw"]
 
-[ext_resource type="Script" uid="uid://be60k5u2ct5w3" path="res://enemy_script.cs" id="1_7n4ts"]
+[ext_resource type="Script" uid="uid://byvb4yswet0cr" path="res://npc_script.cs" id="1_7n4ts"]
 [ext_resource type="Texture2D" uid="uid://bofgxrp8ywllr" path="res://bandido all animations in map.png" id="2_7n4ts"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ac4fm"]
@@ -305,9 +305,7 @@ script = ExtResource("1_7n4ts")
 texture_filter = 1
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_xgbcb")
-animation = &"fight"
-frame = 8
-frame_progress = 1.0
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=994021765]
 position = Vector2(-0.50000024, -0.49999958)
