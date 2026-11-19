@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cqfexy3yy3tbr"]
+
+[ext_resource type="Texture2D" uid="uid://bii6efrfnexfc" path="res://WhatsApp Image 2026-11-19 at 17.16.20.jpeg" id="1_y26ei"]
+[ext_resource type="Script" uid="uid://dag17kjnagrny" path="res://GameOver.cs" id="1_yxx3c"]
+[ext_resource type="Script" uid="uid://22ac56kskgbu" path="res://Button1.cs" id="3_ccer4"]
+[ext_resource type="Script" uid="uid://bcqy4ummxfxdb" path="res://Button2.cs" id="4_8u835"]
+
+[node name="Node2D2" type="Node2D" unique_id=1139391974]
+script = ExtResource("1_yxx3c")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1354153661]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=708006376]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control" unique_id=101999975]
+position = Vector2(576, 324.75)
+scale = Vector2(0.72, 0.830779)
+texture = ExtResource("1_y26ei")
+
+[node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=1276653065]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 5.5000005
+anchor_top = 12.650001
+anchor_right = 23.325
+anchor_bottom = 15.050001
+offset_left = -1.5258789e-05
+offset_top = -3.0517578e-05
+offset_bottom = -6.1035156e-05
+script = ExtResource("3_ccer4")
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control" unique_id=65651594]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 387.0
+offset_right = 934.0
+offset_bottom = 479.0
+script = ExtResource("4_8u835")
