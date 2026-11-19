@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using EventSystem;
 using static EventSystem.EventHandler;
+using CombatAPI;
 
 public partial class CameraCanvasManager : Node
 {
@@ -119,9 +120,19 @@ public partial class CameraCanvasManager : Node
 		}
 	}
 
-	public void ShowCombat()
+	public async Task ShowCombat(Battle _bat)
 	{
-		Book.Hide();
-		Combat.Show();
+        Book.Hide();
+        ThrowEvent(FadeIn);
+		ThrowEvent(ToggleVis(Combat));
+        ThrowEvent(FadeOut);
+        if(await _bat.StartBattle()) {
+            ThrowEvent(FadeIn);
+            ThrowEvent(ToggleVis(Combat));
+            ThrowEvent(FadeOut);
+        } else {
+            // to do: game over
+            return;
+        }
 	}
 }

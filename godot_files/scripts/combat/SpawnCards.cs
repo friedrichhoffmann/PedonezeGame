@@ -19,13 +19,13 @@ namespace SpawnCardsFile
         public override void _Ready()
         {
             PlayerRowRootNode = GetNode<Control>(
-                "/root/Control/CombatManager/UI/PlayerCardsRoot");
+                "../UI/PlayerCardsRoot");
             
             EnemyFieldRootNode = GetNode<Control>(
-                "/root/Control/CombatManager/UI/EnemyFieldRoot");
+                "../UI/EnemyFieldRoot");
 
             AttackSetsRootNode = GetNode<Control>(
-                "/root/Control/CombatManager/AttackSets");
+                "../AttackSets");
 
             GenericPlayerTeamCardScene =
                GD.Load<PackedScene>(ProjectSettings.GlobalizePath("res://scenes/ObjectsAsScenes/Cards/PlayerTeamCard.tscn"));

@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cvqj854e5m0mv"]
 
+[ext_resource type="Script" uid="uid://gni2csy0sbp8" path="res://scripts/InMap/CombatStarter.cs" id="1_bpgq5"]
 [ext_resource type="Texture2D" uid="uid://boxgyysy45gus" path="res://ponte.png" id="1_uye4f"]
 [ext_resource type="TileSet" uid="uid://caby05453lb0f" path="res://new_tile_set_copy.tres" id="2_e0tkw"]
 [ext_resource type="Texture2D" uid="uid://c8jtwrgir5vj0" path="res://dirt.png" id="2_w6gnv"]
@@ -5077,6 +5078,12 @@ animations = [{
 metadata/_edit_horizontal_guides_ = [-2175.0]
 metadata/_edit_lock_ = true
 
+[node name="CombatStarter" type="Node2D" parent="." unique_id=458013685]
+script = ExtResource("1_bpgq5")
+
+[node name="Camera2D" parent="." unique_id=1691618875 instance=ExtResource("32_bpgq5")]
+position = Vector2(726, 744)
+
 [node name="NavigationRegion2Df" type="NavigationRegion2D" parent="." unique_id=923002660]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_sucfc")
@@ -5963,8 +5970,7 @@ sprite_frames = SubResource("SpriteFrames_bkp3o")
 frame_progress = 0.11302376
 
 [node name="PlayerTeam" type="Node2D" parent="." unique_id=934386643]
+position = Vector2(736, 748)
 script = ExtResource("31_4oo3c")
-
-[node name="camera2D" parent="." unique_id=1691618875 instance=ExtResource("32_bpgq5")]
 
 [editable path="tilemap/Walker NPC/Path2D7/PathFollow2D/Bandit"]

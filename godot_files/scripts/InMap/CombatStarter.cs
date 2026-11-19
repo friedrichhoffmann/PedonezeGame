@@ -18,23 +18,29 @@ using static EventSystem.EventHandler;
 namespace CombatStarterFile;
 
 public partial class CombatStarter : Node2D {
-	public void Start(Combatant[] enemies, GenericTeammate contactingTeamMate) {
-		Start([.. enemies, .. GetPlayerTeam(contactingTeamMate)]);
+	public Battle Start(Combatant[] enemies, GenericTeammate contactingTeamMate) {
+        GD.Print("Ran start");
+		return Start([.. enemies, .. GetPlayerTeam(contactingTeamMate)]);
 	}
 
-	private void Start(Combatant[] combatants) {
-		Node canvasManagerNode = GetTree().Root.FindChild("Camera2D");
-		CameraCanvasManager canvasManager = 
-			canvasManagerNode.GetNode<CameraCanvasManager>("CameraCanvasManager");
-		CombatManager combatManager =    
-			canvasManager.Combat.GetNode<CombatManager>("CombatManager");
+    private Battle Start(Combatant[] combatants) {
+        var cameraManagerNode = GetTree().Root.FindChild("Camera2D", true, false);
+        GD.Print("Camera2D found: ", cameraManagerNode != null);
 
-		ThrowEvent(canvasManager.FadeIn);
-		Battle battle = combatManager.Start(combatants);
-		ThrowEvent(canvasManager.FadeOut);
-		_ = battle.StartBattle();
+        var canvasManagerNode = cameraManagerNode?.GetNodeOrNull<CameraCanvasManager>("CameraCanvasManager");
+        GD.Print("CanvasCanvasManager found: ", canvasManagerNode != null);
 
-	}
+        var combatNode = canvasManagerNode?.Combat;
+        GD.Print("Combat control assigned: ", combatNode != null);
+
+        var combatManager = combatNode?.GetNodeOrNull<CombatManager>("CombatManager");
+        GD.Print("CombatManager found: ", combatManager != null);
+
+        if (combatManager == null)
+            throw new InvalidOperationException("Could not find the CombatManager node.");
+
+        return combatManager.Start(combatants);
+    }
 
 	private static MainCharacter[] GetPlayerTeam(GenericTeammate teammate) {
 		List<MainCharacter> PlayerTeam = [];

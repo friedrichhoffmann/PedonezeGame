@@ -1,6 +1,9 @@
 
 using Godot;
 using GenericTeammateFile;
+using CombatStarterFile;
+
+using static PreMadeEnemies.Enemies;
 
 public partial class enemy_script : CharacterBody2D
 {
@@ -112,8 +115,20 @@ public partial class enemy_script : CharacterBody2D
 			GD.PushError("CameraCanvasManager não encontrado.");
 			return;
 		}
+        var combatStarterNode = GetTree().Root.FindChild(
+                "CombatStarter",
+                recursive: true,
+                owned: false
+                );
 
-		cameraManager.ShowCombat();
+        if (combatStarterNode is not CombatStarter combatStarter) {
+            GD.PushError("CombatStarter node not found or doesn't have the CombatStarter script.");
+            return;
+        }
+
+        var battle = combatStarter.Start([banditOne()], _player);
+        cameraManager.ShowCombat(battle);
+
 	}
 
 	private void UpdateAnimation(Vector2 direction)

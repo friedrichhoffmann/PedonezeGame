@@ -87,7 +87,8 @@ namespace CombatManagerFile {
 
         public override void _Ready() {
             menu = GetNode<ItemList>("UI/Menu/MenuBg/MenuList");
-            animationManager = GetNode<AnimationPlayer>("/root/Control/AnimationPlayer");
+            animationManager = GetNode<AnimationPlayer>("AnimationPlayer");
+
             InventoryAPI inv = new();
             Combatant.All = new();
             inv.Init();
@@ -133,12 +134,12 @@ namespace CombatManagerFile {
 
         public void SpawnCombatantCards() {
             SpawnCards.SpawnPlayerCards(
-                Combatant.All.Where(comb => comb is MainCharacter)
-                .Cast<MainCharacter>().ToArray()
+                [.. Combatant.All.Where(comb => comb is MainCharacter)
+                .Cast<MainCharacter>()]
             );
             SpawnCards.SpawnEnemyCards(
-                Combatant.All.Where(comb => comb is Enemy)
-                .Cast<Enemy>().ToArray()
+                [.. Combatant.All.Where(comb => comb is Enemy)
+                .Cast<Enemy>()]
             );
         }
 

@@ -14,24 +14,24 @@ using static System.Diagnostics.Debug;
 using static EventSystem.EventHandler;
 
 namespace CombatAPI {
-	enum Actions {
-	    PhyAttack,
-	    MgcAttack,
-	    Inventory,    		
-	}
+    enum Actions {
+        PhyAttack,
+        MgcAttack,
+        Inventory,    		
+    }
 
-	public class Battle {
-	    private int OrganizeList(Combatant one, Combatant two) {
-	        return two.InitiativeBonus.CompareTo(one.InitiativeBonus);
-	    }
+    public class Battle {
+        private int OrganizeList(Combatant one, Combatant two) {
+            return two.InitiativeBonus.CompareTo(one.InitiativeBonus);
+        }
 
-	    public void InitiativeTest() {
-	        foreach (Combatant element in Combatant.All) {
-	            element.InitiativeBonus += Die.Roll(1, Die.d20);
-	        }
+        public void InitiativeTest() {
+            foreach (Combatant element in Combatant.All) {
+                element.InitiativeBonus += Die.Roll(1, Die.d20);
+            }
 
-	        Combatant.All.Sort(OrganizeList);
-	    }
+            Combatant.All.Sort(OrganizeList);
+        }
 
         public bool IsPreviousAdversary(Combatant comb) {
             var currentIndex = Combatant.All.IndexOf(comb);
@@ -46,42 +46,50 @@ namespace CombatAPI {
             else Assert(false); return false; // this line never runs 
         }
 
-        public async Task StartBattle() {
-            bool isFirstRound = true;
+        public async Task<bool> StartBattle() {
+            bool menuVisible = false;
+
             while (
-                    Combatant.All.Where(comb => comb is MainCharacter).Count() > 0 && 
-                    Combatant.All.Where(comb => comb is Enemy).Count() > 0
-            )   {
+                    Combatant.All.Any(comb => comb is MainCharacter) &&
+                    Combatant.All.Any(comb => comb is Enemy)
+                  ) {
                 foreach (Combatant element in Combatant.All.ToList()) {
-                    // i could have used or, but i really did not wish to make this only one gigantic if statement
-                    if (Combatant.All.Where(comb => comb is Enemy).Count() == 0)         break;
-                    if (Combatant.All.Where(comb => comb is MainCharacter).Count() == 0) break;
+                    if (!Combatant.All.Any(comb => comb is Enemy)) break;
+                    if (!Combatant.All.Any(comb => comb is MainCharacter)) break;
+
+                    // The combatant may have been removed earlier in this round.
+                    if (!Combatant.All.Contains(element)) continue;
 
                     GD.Print($"Turn Of {element.Name}");
+
                     if (!element.ValidTurn()) continue;
 
                     if (element is MainCharacter mainCharacter) {
-                        if (IsPreviousAdversary(mainCharacter) || isFirstRound)
+                        if (!menuVisible) {
                             ThrowEvent(new Event("Slides Menu In", EventKind.Animation,
-                                EventBody.Animation(animationManager, "MenuSlideIn")));
+                                        EventBody.Animation(animationManager, "MenuSlideIn")));
+                            menuVisible = true;
+                        }
+
                         await mainCharacter.HeroTurn();
                     }
-
-                    if (Combatant.All.Where(comb => comb is Enemy).Count() == 0)         break;
-                    if (Combatant.All.Where(comb => comb is MainCharacter).Count() == 0) break;
-
                     else if (element is Enemy enemy) {
-                        if (IsPreviousAdversary(enemy))
+                        if (menuVisible) {
                             ThrowEvent(new Event("Slides Menu Out", EventKind.Animation,
-                                EventBody.Animation(animationManager, "MenuSlideOut")));
+                                        EventBody.Animation(animationManager, "MenuSlideOut")));
+                            menuVisible = false;
+                        }
+
                         enemy.EnemyTurn();
                     }
 
                     foreach (Combatant comb in Combatant.All.ToList()) {
-                        if (comb is Enemy enemy)
-                            enemy.Card.UpdateValues(enemy);
-                        else if (comb is MainCharacter main)
-                            main.Card.UpdateValues(main);
+                        if (!Combatant.All.Contains(comb)) continue;
+
+                        if (comb is Enemy enemyComb)
+                            enemyComb.Card.UpdateValues(enemyComb);
+                        else if (comb is MainCharacter mainComb)
+                            mainComb.Card.UpdateValues(mainComb);
 
                         if (comb.Health <= 0) {
                             Combatant.All.Remove(comb);
@@ -91,23 +99,20 @@ namespace CombatAPI {
                         foreach (Effect effect in comb.ActiveEffects.ToList()) {
                             if (effect.Lasting <= 0) {
                                 comb.ActiveEffects.Remove(effect);
-                            } else {
+                            }
+                            else {
                                 effect.ApplyEffect(comb);
                                 effect.Lasting--;
                             }
                         }
                     }
-                    
-                    if (Combatant.All.Where(comb => comb is Enemy).Count() == 0)         break;
-                    if (Combatant.All.Where(comb => comb is MainCharacter).Count() == 0) break;
 
-                    isFirstRound = false;
+                    if (!Combatant.All.Any(comb => comb is Enemy)) break;
+                    if (!Combatant.All.Any(comb => comb is MainCharacter)) break;
                 }
             }
 
-            GD.Print(Combatant.All.Where(comb => comb is MainCharacter).Count() == 0
-                ? "Os heróis foram derrotados."
-                : "Os inimigos foram derrotados.");
+            return Combatant.All.Any(comb => comb is MainCharacter);
         }
     }
 }
