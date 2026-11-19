@@ -1,3 +1,4 @@
+
 using Godot;
 using System;
 using System.Threading.Tasks;
@@ -6,109 +7,121 @@ using static EventSystem.EventHandler;
 
 public partial class CameraCanvasManager : Node
 {
-    [Export] public NodePath BookPath { get; set; } = "CanvasLayer/UI/Book";
-    [Export] public NodePath CombatPath { get; set; } = "CanvasLayer/UI/Combat";
+	[Export] public NodePath BookPath { get; set; } = "CanvasLayer/UI/Book";
+	[Export] public NodePath CombatPath { get; set; } = "CanvasLayer/UI/Battle";
 
-    public  Control Combat = null!;
-    private Control Book = null!;
-    private AnimationPlayer localAnimationPlayer = null!;
-    private AnimationPlayer bookPageAnim = null!;
-    private AnimationPlayer bookHelpAnim = null!;
+	public Control Combat = null!;
+	private Control Book = null!;
+	private AnimationPlayer localAnimationPlayer = null!;
+	private AnimationPlayer bookPageAnim = null!;
+	private AnimationPlayer bookHelpAnim = null!;
 
-    private static readonly Func<Node, Event> ToggleVis = ctrl => new Event(
-        "Visibility Toggle",
-        EventKind.ToggleVisibility,
-        EventBody.ToggleVisibility(ctrl)
-    );
+	private static readonly Func<Node, Event> ToggleVis = ctrl => new Event(
+		"Visibility Toggle",
+		EventKind.ToggleVisibility,
+		EventBody.ToggleVisibility(ctrl)
+	);
 
-    private static readonly Func<AnimationPlayer, string, int, Event> PlayAnimMS =
-        (anim, name, ms) => new Event(
-            "Play animation",
-            EventKind.Animation,
-            EventBody.Animation(anim, name, ms)
-        );
+	private static readonly Func<AnimationPlayer, string, int, Event> PlayAnimMS =
+		(anim, name, ms) => new Event(
+			"Play animation",
+			EventKind.Animation,
+			EventBody.Animation(anim, name, ms)
+		);
 
-    private static readonly Func<AnimationPlayer, string, Event> PlayAnim =
-        (anim, name) => new Event(
-            "Play animation",
-            EventKind.Animation,
-            EventBody.Animation(anim, name)
-        );
+	private static readonly Func<AnimationPlayer, string, Event> PlayAnim =
+		(anim, name) => new Event(
+			"Play animation",
+			EventKind.Animation,
+			EventBody.Animation(anim, name)
+		);
 
-    public Event FadeIn;
-    public Event FadeOut;
+	public Event FadeIn;
+	public Event FadeOut;
 
-    public override void _Ready()
-    {
-        Book = GetNode<Control>(BookPath);
-        bookPageAnim = Book.GetNode<AnimationPlayer>("AnimationPlayer");
-        bookHelpAnim = Book.GetNode<AnimationPlayer>("HelpMenuPlayer");
+	public override void _Ready()
+	{
+		Book = GetNode<Control>(BookPath);
+		bookPageAnim = Book.GetNode<AnimationPlayer>("AnimationPlayer");
+		bookHelpAnim = Book.GetNode<AnimationPlayer>("HelpMenuPlayer");
 
-        localAnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		localAnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
-        FadeIn = new Event( "Play animation", EventKind.Animation,
-            EventBody.Animation(localAnimationPlayer, "FadeIn")
-        );
-        FadeOut = new Event( "Play animation", EventKind.Animation,
-            EventBody.Animation(localAnimationPlayer, "FadeOut")
-        );
+		FadeIn = new Event(
+			"Play animation",
+			EventKind.Animation,
+			EventBody.Animation(localAnimationPlayer, "FadeIn")
+		);
 
-        Combat = GetNode<Control>(CombatPath);
+		FadeOut = new Event(
+			"Play animation",
+			EventKind.Animation,
+			EventBody.Animation(localAnimationPlayer, "FadeOut")
+		);
 
-        _ = PrepareBookLayout();
-    }
+		Combat = GetNode<Control>(CombatPath);
+		Combat.Hide();
 
-    public override void _Input(InputEvent @event) {
-        if (@event is not InputEventKey keyEvent ||
-                !keyEvent.Pressed ||
-                keyEvent.Echo)
-        {
-            return;
-        }
+		_ = PrepareBookLayout();
+	}
 
-        bool shouldToggle =
-            (!Book.Visible && keyEvent.Keycode == Key.Q) ||
-            (Book.Visible && keyEvent.Keycode == Key.Escape);
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is not InputEventKey keyEvent ||
+			!keyEvent.Pressed ||
+			keyEvent.Echo)
+		{
+			return;
+		}
 
-        if (!shouldToggle)
-            return;
+		bool shouldToggle =
+			(!Book.Visible && keyEvent.Keycode == Key.Q) ||
+			(Book.Visible && keyEvent.Keycode == Key.Escape);
 
-        ToggleBook();
-        GetViewport().SetInputAsHandled();
-    }
+		if (!shouldToggle)
+			return;
 
-    private async Task PrepareBookLayout()
-    {
-        Color originalModulate = Book.Modulate;
+		ToggleBook();
+		GetViewport().SetInputAsHandled();
+	}
 
-        Book.Visible = true;
-        Book.Modulate = new Color(
-            originalModulate.R,
-            originalModulate.G,
-            originalModulate.B,
-            0f
-        );
+	private async Task PrepareBookLayout()
+	{
+		Color originalModulate = Book.Modulate;
 
-        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+		Book.Visible = true;
+		Book.Modulate = new Color(
+			originalModulate.R,
+			originalModulate.G,
+			originalModulate.B,
+			0f
+		);
 
-        Book.Visible = false;
-        Book.Modulate = originalModulate;
-    }
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
-    private void ToggleBook()
-    {
-        if (!Book.Visible)
-        {
-            ThrowEvent(PlayAnimMS(bookPageAnim, "OpenBook", 0));
-            ThrowEvent(PlayAnimMS(bookHelpAnim, "InThenOutHelpMenu", 0));
-            ThrowEvent(ToggleVis(Book));
-        }
-        else
-        {
-            ThrowEvent(PlayAnim(bookPageAnim, "CloseBook"));
-            ThrowEvent(ToggleVis(Book));
-        }
-    }
+		Book.Visible = false;
+		Book.Modulate = originalModulate;
+	}
+
+	private void ToggleBook()
+	{
+		if (!Book.Visible)
+		{
+			ThrowEvent(PlayAnimMS(bookPageAnim, "OpenBook", 0));
+			ThrowEvent(PlayAnimMS(bookHelpAnim, "InThenOutHelpMenu", 0));
+			ThrowEvent(ToggleVis(Book));
+		}
+		else
+		{
+			ThrowEvent(PlayAnim(bookPageAnim, "CloseBook"));
+			ThrowEvent(ToggleVis(Book));
+		}
+	}
+
+	public void ShowCombat()
+	{
+		Book.Hide();
+		Combat.Show();
+	}
 }
-

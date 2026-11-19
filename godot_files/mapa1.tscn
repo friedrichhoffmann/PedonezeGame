@@ -5469,7 +5469,6 @@ DialogueMessages = Array[String](["Esse do lado tem tanta fome...", "Só não co
 z_index = 500
 texture_filter = 1
 position = Vector2(-1278.1667, -1723)
-DialogueMessages = Array[String]([""])
 
 [node name="Static NPC3" parent="tilemap/Static NPC" unique_id=1025356797 instance=ExtResource("26_tbndf")]
 z_index = 500
@@ -5616,6 +5615,7 @@ DialogueMessages = Array[String](["Já rezou hoje, rapaz?", "Se não, pelo seu b
 z_index = 500
 texture_filter = 1
 position = Vector2(-1262.1666, -1714)
+DialogueMessages = Array[String](["Só jogando conversa fora."])
 Direction = 1
 
 [node name="Static NPC25" parent="tilemap/Static NPC" unique_id=169604273 instance=ExtResource("26_tbndf")]
@@ -5793,16 +5793,6 @@ z_index = 1
 position = Vector2(-1676.1666, -996.99994)
 DialogueMessages = Array[String](["Que vergonha, hem.", "Até minhs vó corria mais."])
 Direction = 5
-
-[node name="Static Bird" parent="tilemap/Static NPC" unique_id=439733515 instance=ExtResource("16_bpgq5")]
-z_index = 500
-position = Vector2(-1542.1666, -1470)
-scale = Vector2(2, 2)
-
-[node name="Static Bird2" parent="tilemap/Static NPC" unique_id=1584618749 instance=ExtResource("16_bpgq5")]
-z_index = 1000
-position = Vector2(363.8334, -1367.3334)
-scale = Vector2(2, 2)
 
 [node name="Enemy NPC" type="TileMapLayer" parent="tilemap" unique_id=1337173216]
 position = Vector2(0, -3)

@@ -49,6 +49,11 @@ region = Rect2(320, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3016y"]
 animations = [{
+"frames": [],
+"loop": 1,
+"name": &"Back",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oyvov")
@@ -86,6 +91,16 @@ animations = [{
 "loop": 1,
 "name": &"Front",
 "speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Right",
+"speed": 5.0
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1363031908]
@@ -93,4 +108,4 @@ script = ExtResource("1_oyvov")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=405036785]
 sprite_frames = SubResource("SpriteFrames_3016y")
-animation = &"Front"
+animation = &"Right"

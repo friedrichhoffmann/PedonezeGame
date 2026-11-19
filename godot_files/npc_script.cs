@@ -1,5 +1,6 @@
-
 using Godot;
+using GenericTeammateFile;
+using System.Collections.Generic;
 
 public partial class npc_script : CharacterBody2D
 {
@@ -27,20 +28,24 @@ public partial class npc_script : CharacterBody2D
 	private Node2D _dialogueBubble;
 	private RichTextLabel _dialogueLabel;
 	private AnimatedSprite2D _animatedSprite;
-
 	private Timer _dialogueTimer;
 
 	private int _currentMessageIndex = 0;
-	private bool _playerInside = false;
+
+	// Tracks every teammate currently inside the detection area.
+	private readonly HashSet<ulong> _teammatesInside = new();
 
 	public override void _Ready()
 	{
 		_detectionArea = GetNode<Area2D>("DetectionArea");
 		_dialogueBubble = GetNode<Node2D>("DialogueBubble");
-
-		_dialogueLabel = GetNode<RichTextLabel>("DialogueBubble/Sprite2D2/RichTextLabel");
-
+		_dialogueLabel = GetNode<RichTextLabel>(
+            "DialogueBubble/Sprite2D2/RichTextLabel"
+		);
 		_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+		// GenericTeammate uses collision layer 128.
+		_detectionArea.CollisionMask = 128;
 
 		_dialogueTimer = new Timer();
 		AddChild(_dialogueTimer);
@@ -61,23 +66,26 @@ public partial class npc_script : CharacterBody2D
 
 	private void OnBodyEntered(Node2D body)
 	{
-		if (!body.IsInGroup("player"))
+		if (body is not GenericTeammate teammate)
 			return;
 
-		if (_playerInside)
-			return;
+		bool wasEmpty = _teammatesInside.Count == 0;
 
-		_playerInside = true;
-		StartDialogue();
+		_teammatesInside.Add(teammate.GetInstanceId());
+
+		if (wasEmpty && _teammatesInside.Count > 0)
+			StartDialogue();
 	}
 
 	private void OnBodyExited(Node2D body)
 	{
-		if (!body.IsInGroup("player"))
+		if (body is not GenericTeammate teammate)
 			return;
 
-		_playerInside = false;
-		EndDialogue();
+		_teammatesInside.Remove(teammate.GetInstanceId());
+
+		if (_teammatesInside.Count == 0)
+			EndDialogue();
 	}
 
 	private void StartDialogue()
@@ -126,8 +134,11 @@ public partial class npc_script : CharacterBody2D
 
 	private void OnAnimationFinished()
 	{
-		if (_animatedSprite.Animation == "Shine" && _playerInside)
+		if (_animatedSprite.Animation == "Shine"
+			&& _teammatesInside.Count > 0)
+		{
 			PlayFacingAnimation();
+		}
 	}
 
 	private void PlayFacingAnimation()

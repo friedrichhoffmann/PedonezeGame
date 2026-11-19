@@ -1,8 +1,6 @@
-using CombatStarterFile;
-using GenericTeammateFile;
-using Godot;
 
-using static PreMadeEnemies.Enemies;
+using Godot;
+using GenericTeammateFile;
 
 public partial class enemy_script : CharacterBody2D
 {
@@ -18,14 +16,18 @@ public partial class enemy_script : CharacterBody2D
 
 	private Area2D _detectionArea;
 	private AnimatedSprite2D _sprite;
-	private CharacterBody2D _player;
+	private GenericTeammate _player;
 
 	private EnemyState _state = EnemyState.Idle;
 	private string _currentAnimation = "";
 
-	public override void _Ready() {
+	public override void _Ready()
+	{
 		_detectionArea = GetNode<Area2D>("DetectionArea");
 		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+		_detectionArea.CollisionMask |= 128;
+		CollisionMask |= 128;
 
 		_detectionArea.BodyEntered += OnBodyEntered;
 		_sprite.AnimationFinished += OnAnimationFinished;
@@ -33,40 +35,47 @@ public partial class enemy_script : CharacterBody2D
 		PlayAnimation("Idle");
 	}
 
-	private void OnBodyEntered(Node2D body) {
-		if (!body.IsInGroup("PlayerTeam"))
+	private void OnBodyEntered(Node2D body)
+	{
+		if (body is not GenericTeammate player)
 			return;
 
 		if (_state != EnemyState.Idle)
 			return;
 
-		if (body is not CharacterBody2D player)
-			return;
-
 		_player = player;
+
 		_player.SetPhysicsProcess(false);
 
 		_state = EnemyState.Chasing;
 	}
 
-	public override void _PhysicsProcess(double delta) {
+	public override void _PhysicsProcess(double delta)
+	{
 		if (_state == EnemyState.Idle ||
 			_state == EnemyState.Fighting ||
-			_player == null) {
+			_player == null)
+		{
 			return;
 		}
+
+		if (!GodotObject.IsInstanceValid(_player))
+			return;
 
 		Vector2 direction = GlobalPosition.DirectionTo(
 			_player.GlobalPosition
 		);
 
 		Velocity = direction * Speed;
+
 		MoveAndSlide();
 
-		for (int i = 0; i < GetSlideCollisionCount(); i++) {
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
 			var collision = GetSlideCollision(i);
 
-			if (collision.GetCollider() == _player) {
+			if (collision.GetCollider() == _player)
+			{
 				StartFight();
 				return;
 			}
@@ -75,30 +84,44 @@ public partial class enemy_script : CharacterBody2D
 		UpdateAnimation(direction);
 	}
 
-	private void StartFight() {
+	private void StartFight()
+	{
 		_state = EnemyState.Fighting;
+
 		Velocity = Vector2.Zero;
 
 		PlayAnimation("fight");
 	}
 
-	private void OnAnimationFinished() {
-		if (_currentAnimation == "fight") {
+	private void OnAnimationFinished()
+	{
+		if (_currentAnimation == "fight")
 			ChangeToBattle();
+	}
+
+	private void ChangeToBattle()
+	{
+		Node managerNode = GetTree().Root.FindChild(
+			"CameraCanvasManager",
+			true,
+			false
+		);
+
+		if (managerNode is not CameraCanvasManager cameraManager)
+		{
+			GD.PushError("CameraCanvasManager não encontrado.");
+			return;
 		}
+
+		cameraManager.ShowCombat();
 	}
 
-	private void ChangeToBattle() {
-        Node _combatStarterNode = GetTree().Root.FindChild("CombatStarter");
-        CombatStarter _combatStarter = _combatStarterNode.GetNode<CombatStarter>("CombatStarter");
-        GenericTeammate _targetTeammate = _player.GetNode<GenericTeammate>("GenericTeammate");
-        _combatStarter.Start([banditOne()], _targetTeammate);
-	}
-
-	private void UpdateAnimation(Vector2 direction) {
+	private void UpdateAnimation(Vector2 direction)
+	{
 		string animation;
 
-		if (Mathf.Abs(direction.X) > Mathf.Abs(direction.Y)) {
+		if (Mathf.Abs(direction.X) > Mathf.Abs(direction.Y))
+		{
 			animation = direction.X < 0 ? "Left" : "Right";
 		}
 		else
@@ -109,11 +132,13 @@ public partial class enemy_script : CharacterBody2D
 		PlayAnimation(animation);
 	}
 
-	private void PlayAnimation(string animation) {
+	private void PlayAnimation(string animation)
+	{
 		if (_currentAnimation == animation)
 			return;
 
 		_currentAnimation = animation;
+
 		_sprite.Play(animation);
 	}
 }

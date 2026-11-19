@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://3ripdnkcxdh5" path="res://scenes/battle.tscn" id="2_ibjbw"]
 [ext_resource type="Script" uid="uid://12givy3im2p5" path="res://scripts/InMap/CameraCanvasManager.cs" id="2_rbjal"]
 [ext_resource type="PackedScene" uid="uid://cajsi43emobyb" path="res://scenes/ObjectsAsScenes/Book/Book.tscn" id="3_dct8h"]
+[ext_resource type="Script" uid="uid://gni2csy0sbp8" path="res://scripts/InMap/CombatStarter.cs" id="6_rbjal"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0cq4"]
 bg_color = Color(0, 0, 0, 1)
@@ -111,3 +112,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_e0cq4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraCanvasManager" unique_id=480455937]
 libraries/ = SubResource("AnimationLibrary_xuvkq")
+
+[node name="CombatStarter" type="Node2D" parent="." unique_id=168710879]
+script = ExtResource("6_rbjal")
