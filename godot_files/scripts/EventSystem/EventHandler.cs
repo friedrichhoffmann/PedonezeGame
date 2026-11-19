@@ -116,6 +116,9 @@ namespace EventSystem {
             else if (node is Node2D node2d) {
                 body.funcs = [ () => Task.FromResult(toggleVisibility(node2d))];
             }
+            else if (node is CanvasLayer canvas) {
+                body.funcs = [ () => Task.FromResult(toggleVisibility(canvas))];
+            }
             else {
                 GD.PushError("ToggleVisibility: node must be a Node2D or Cotrol");
                 body.funcs = [ () => Task.FromResult(1)];
@@ -164,6 +167,12 @@ namespace EventSystem {
         }
 
         private static int toggleVisibility(Control node) {
+            node.Visible = !node.Visible;
+            GD.Print("visiblility set");
+            return 0;
+        }
+        
+        private static int toggleVisibility(CanvasLayer node) {
             node.Visible = !node.Visible;
             GD.Print("visiblility set");
             return 0;

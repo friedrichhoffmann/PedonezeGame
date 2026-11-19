@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://t8qtm8hmqfkp"]
+
+[ext_resource type="Script" uid="uid://cytil2461q5fu" path="res://scripts/InMap/CameraMove.cs" id="1_wwgak"]
+[ext_resource type="Script" uid="uid://c86m2nnjt82n4" path="res://scripts/EventSystem/EventHandler.cs" id="2_dct8h"]
+[ext_resource type="PackedScene" uid="uid://3ripdnkcxdh5" path="res://scenes/battle.tscn" id="2_ibjbw"]
+[ext_resource type="Script" uid="uid://12givy3im2p5" path="res://scripts/InMap/CameraCanvasManager.cs" id="2_rbjal"]
+[ext_resource type="PackedScene" uid="uid://cajsi43emobyb" path="res://scenes/ObjectsAsScenes/Book/Book.tscn" id="3_dct8h"]
+
+[node name="camera2D" type="Camera2D" unique_id=1691618875]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("1_wwgak")
+
+[node name="CameraCanvasManager" type="Control" parent="." unique_id=125496119]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_rbjal")
+
+[node name="EventHandler" type="Control" parent="CameraCanvasManager" unique_id=230736847]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_dct8h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CameraCanvasManager" unique_id=710484841]
+
+[node name="UI" type="Control" parent="CameraCanvasManager/CanvasLayer" unique_id=1810559116]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Battle" parent="CameraCanvasManager/CanvasLayer/UI" unique_id=1829440430 instance=ExtResource("2_ibjbw")]
+visible = false
+layout_mode = 1
+
+[node name="Book" parent="CameraCanvasManager/CanvasLayer/UI" unique_id=203813573 instance=ExtResource("3_dct8h")]
+layout_mode = 1

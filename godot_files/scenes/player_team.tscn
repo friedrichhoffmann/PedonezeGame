@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://0v8ck4lnna3s"]
+
+[ext_resource type="Script" uid="uid://d3cyj5akvowei" path="res://scripts/InMap/PlayerTeamManager.cs" id="1_fqqoo"]
+[ext_resource type="PackedScene" uid="uid://t8qtm8hmqfkp" path="res://scenes/ObjectsAsScenes/Others/InMapCamera.tscn" id="2_of10r"]
+
+[node name="PlayerTeam" type="Node2D" unique_id=56606047]
+script = ExtResource("1_fqqoo")
+
+[node name="camera2D" parent="." unique_id=1691618875 instance=ExtResource("2_of10r")]

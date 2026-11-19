@@ -41,7 +41,6 @@ public partial class LayoutManager : HBoxContainer
         _leftClip.ClipContents = true;
         _rightClip.ClipContents = true;
 
-        Style = GetNode<BookStyle>("/root/Control/BookStyle");
         CallDeferred(nameof(LoadPaginateAndRender));
     }
 

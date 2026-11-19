@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cajsi43emobyb"]
 
-[ext_resource type="Script" uid="uid://c86m2nnjt82n4" path="res://scripts/EventSystem/EventHandler.cs" id="1_0oem2"]
 [ext_resource type="Theme" uid="uid://di073hlce4718" path="res://assets/ui/ui_base_theme.tres" id="1_3aavs"]
 [ext_resource type="Script" uid="uid://du0olfch17uje" path="res://scripts/NotesSystem/BookStyle.cs" id="1_jcfy1"]
 [ext_resource type="Texture2D" uid="uid://c148eb5cwadl3" path="res://assets/ui/Others/Book.png" id="2_jcfy1"]
@@ -175,12 +174,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EventHandler" type="Control" parent="." unique_id=121012950]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_0oem2")
-
 [node name="BookStyle" type="Control" parent="." unique_id=921191945 node_paths=PackedStringArray("AnimationPlayer")]
 anchors_preset = 0
 offset_right = 40.0
@@ -204,14 +197,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 125.0
 offset_top = 23.0
-offset_right = -127.00122
-offset_bottom = -25.0
+offset_right = -123.0
+offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_3aavs")
 theme_override_styles/panel = SubResource("StyleBoxTexture_e0cq4")
 
-[node name="Codex" type="HBoxContainer" parent="BookBase" unique_id=439958405]
+[node name="Codex" type="HBoxContainer" parent="BookBase" unique_id=439958405 node_paths=PackedStringArray("Style")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -224,6 +217,7 @@ offset_bottom = -118.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_tnqrm")
+Style = NodePath("../../BookStyle")
 
 [node name="CodexManager" type="Control" parent="BookBase/Codex" unique_id=1516707781]
 layout_mode = 2
@@ -249,8 +243,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1200.0
 offset_top = 100.0
-offset_right = 298.0
-offset_bottom = -373.0
+offset_right = 295.0
+offset_bottom = -377.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_3aavs")
@@ -299,6 +293,7 @@ autowrap_mode = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1471900025]
 libraries/ = SubResource("AnimationLibrary_uxmdi")
+autoplay = &"RESET"
 
 [node name="HelpMenuPlayer" type="AnimationPlayer" parent="." unique_id=625403373]
 root_node = NodePath("../AnimationPlayer")

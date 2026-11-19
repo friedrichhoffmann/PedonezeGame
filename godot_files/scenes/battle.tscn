@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://fbe13jw8c763" path="res://scripts/combat/CombatManager.cs" id="1_dn72j"]
 [ext_resource type="Theme" uid="uid://di073hlce4718" path="res://assets/ui/ui_base_theme.tres" id="1_p1qf1"]
 [ext_resource type="Script" uid="uid://cvj6g8fyal83w" path="res://scripts/combat/SpawnCards.cs" id="2_p1qf1"]
-[ext_resource type="Script" uid="uid://c86m2nnjt82n4" path="res://scripts/EventSystem/EventHandler.cs" id="3_a12nh"]
 [ext_resource type="Texture2D" uid="uid://dgxgy4p5y6qc" path="res://assets/ui/BattleBackgrounds/bg-floresta.png" id="5_lpir7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e0cq4"]
@@ -158,12 +157,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_p1qf1")
 script = ExtResource("1_dn72j")
-
-[node name="EventHandler" type="Control" parent="CombatManager" unique_id=413226580]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("3_a12nh")
 
 [node name="CardSpawnerBeholder" type="Control" parent="CombatManager" unique_id=167087618]
 anchors_preset = 0

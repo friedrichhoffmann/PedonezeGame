@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://8fqntdmv1gyn"]
+
+[ext_resource type="Script" uid="uid://v5355tht0r0l" path="res://scripts/InMap/GenericTeammate.cs" id="1_yw354"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tn4i0"]
+radius = 22.85
+height = 68.0
+
+[node name="GenericTeammate" type="CharacterBody2D" unique_id=209433009]
+position = Vector2(0, -2)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_yw354")
+
+[node name="Nav" type="Node2D" parent="." unique_id=506203378]
+
+[node name="Spr" type="Node2D" parent="." unique_id=130499545]
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=312789850]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_tn4i0")
